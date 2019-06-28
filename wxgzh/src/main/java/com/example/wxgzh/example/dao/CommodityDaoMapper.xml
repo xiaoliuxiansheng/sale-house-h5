@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenfangxu.smv.commodity.dao.CommodityDao">
+	<resultMap type="CommodityEntity" id="result">
+		<id column="commodity_id" property="commodityId"/>
+		<result column="commodity_name" property="commodityName"/>
+		<result column="price" property="price"/>
+		<result column="agio" property="agio"/>
+		<result column="sign" property="sign"/>
+		<result column="ct_create" property="ctCreate"/>
+		<result column="ct_modified" property="ctModified"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		insert into commodity (commodity_id,commodity_name,price,agio,sign,ct_create,ct_modified)
+		values(#{commodityId},#{commodityName},#{price},#{agio},#{sign},#{ctCreate},#{ctModified})
+	</insert>
+	
+	<update id="update">
+		update commodity
+		<trim prefix="set" suffixOverrides=",">
+			<if test="map.commodityName != null">
+				commodity_name = #{map.commodityName},
+			</if>
+			<if test="map.price != null">
+				price = #{map.price},
+			</if>
+			<if test="map.agio != null">
+				agio = #{map.agio},
+			</if>
+			<if test="map.gmtModified != null">
+				ct_modified = #{map.ctModified}
+			</if>
+		</trim>
+		where commodity_id = #{id}
+	</update>
+	
+	<update id="delete">
+		update commodity set sign=1 where commodity_id = #{id}
+	</update>
+	
+	<!-- 查询一条商品 -->
+	<select id="select" resultMap="result">
+		select * from commodity where ${column} = #{value}
+	</select>
+	<select id="selectMaxId" resultType="Integer">
+		select max(commodity_id) from commodity 
+	</select>
+	
+	<!-- 通过id查询一条商品 -->
+	<select id="selectById" resultMap="result">
+		select * from commodity where commodity_id = #{id}
+	</select>
+	
+	<!-- 是否存在商品 -->
+	<select id="exists" resultType="Boolean">
+		select count(*)>0 from commodity 
+		where ${column} = #{value}
+	</select>
+	
+	<!-- 模糊分页查询 -->
+	<select id="selectByKey" resultMap="result" useCache="false">
+		select * from commodity 
+			<!-- <if test="key != null">
+				and commodity_name like #{key}
+				or price like #{key}
+				or agio like #{key}
+			</if> -->
+		<where>
+			<if test=" key != null ">
+				sign = 0			
+			</if>
+			<if test="key !=null">
+				and (commodity_name like #{key}
+				or price like #{key}
+				or agio like #{key})
+			</if>
+			 
+		</where>
+		order by ct_create desc
+	</select>
+	
+	<!-- 模糊分页查询 -->
+	<select id="selectByKeyTo" resultMap="result" useCache="false">
+		select * from commodity 
+			<!-- <if test="key != null">
+				and commodity_name like #{key}
+				or price like #{key}
+				or agio like #{key}
+			</if> -->
+		<where>
+			<if test=" key != null ">
+				sign = 0			
+			</if>
+			<if test="key !=null">
+				and (commodity_name like #{key}
+				or price like #{key}
+				or agio like #{key})
+			</if>
+			 
+		</where>
+		order by ct_create desc
+	</select>
+
+</mapper>
