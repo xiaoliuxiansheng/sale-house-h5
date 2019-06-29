@@ -13,7 +13,7 @@ public interface TemplateDao<T,ID> {
 	
 	T select(@Param("column") String uniqueColumn, @Param("value") Object value)throws Exception;
 	
-	boolean exists(@Param("column") String uniqueColumn, @Param("value") Object value)throws Exception;
+	int exists(@Param("column") String uniqueColumn, @Param("value") Object value)throws Exception;
 	
 	T selectById(ID id)throws Exception;
 	void delete(@Param("id") ID id)throws Exception;

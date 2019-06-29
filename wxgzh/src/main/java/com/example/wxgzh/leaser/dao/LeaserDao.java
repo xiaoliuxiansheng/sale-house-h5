@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LeaserDao extends TemplateDao<LeaserEntity, String> {
+
+    void modify(LeaserEntity entity)throws Exception;
 }

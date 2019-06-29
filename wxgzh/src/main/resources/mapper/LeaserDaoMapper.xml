@@ -7,4 +7,19 @@
 		insert into wx_leaser(pk_leaser,name,phone,password)
 		values(#{pk_leaser},#{name},#{phone},#{password})
 	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete wx_leaser where pk_leaser = #{id}
+	</delete>
+
+	<!-- 是否存在数据 -->
+	<select id="exists" resultType="int">
+		select count(${column}) from wx_leaser
+		where ${column} = #{value}
+	</select>
+
+	<update id="modify" parameterType="com.example.wxgzh.entity.LeaserEntity">
+		update wx_leaser set name = #{name},phone = #{phone},password = #{password}
+		where pk_leaser = #{pk_leaser}
+	</update>
 </mapper>
