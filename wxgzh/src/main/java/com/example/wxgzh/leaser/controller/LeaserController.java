@@ -2,11 +2,10 @@ package com.example.wxgzh.leaser.controller;
 
 import com.example.wxgzh.common.dto.JSONResponse;
 import com.example.wxgzh.entity.LeaserEntity;
-import com.example.wxgzh.leaser.ao.LeaserAO;
 import com.example.wxgzh.leaser.service.LeaserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LeaserController {
 	@Autowired
 	LeaserService service;
-	@PostMapping("/add")
+	@GetMapping("/add")
 	@ResponseBody
-	public JSONResponse addLeaser(LeaserAO ao) throws Exception{
-		LeaserEntity e = service.addLeaser(ao);
+	public JSONResponse addLeaser(LeaserEntity entity) throws Exception{
+		LeaserEntity e = service.addLeaser(entity);
 		return JSONResponse.ok(e);
 	}
 }

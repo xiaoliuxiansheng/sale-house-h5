@@ -6,11 +6,8 @@ package com.example.wxgzh.leaser.service;
 import com.example.wxgzh.common.util.MD5;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.LeaserEntity;
-import com.example.wxgzh.leaser.ao.LeaserAO;
 import com.example.wxgzh.leaser.dao.LeaserDao;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class LeaserServiceImpl implements LeaserService {
@@ -22,16 +19,16 @@ public class LeaserServiceImpl implements LeaserService {
 
 
 	@Override
-	public LeaserEntity addLeaser(LeaserAO ao) throws Exception {
+	public LeaserEntity addLeaser(LeaserEntity entity) throws Exception {
 		String id = UUID.random32();
-		String name = ao.getName();
-		String phone = ao.getPhone();
-		String password = MD5.encode(ao.getPassword());
+		String name = entity.getName();
+		String phone = entity.getPhone();
+		String password = MD5.encode(entity.getPassword());
 		LeaserEntity e = new LeaserEntity();
 		e.setName(name);
 		e.setPassword(password);
 		e.setPhone(phone);
-		e.setPkLeaser(id);
+		e.setPk_leaser(id);
 		dao.insert(e);
 		return e;
 	}
@@ -39,10 +36,12 @@ public class LeaserServiceImpl implements LeaserService {
 	@Override
 	public void delLeaser(String id) throws Exception {
 
+		dao.delete(id);
+
 	}
 
 	@Override
-	public LeaserEntity modLeaser(String id, LeaserAO ao) throws Exception {
+	public LeaserEntity modLeaser(String id, LeaserEntity entity) throws Exception {
 		return null;
 	}
 

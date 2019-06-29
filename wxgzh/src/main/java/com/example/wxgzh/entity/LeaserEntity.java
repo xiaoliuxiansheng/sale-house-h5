@@ -1,20 +1,17 @@
 package com.example.wxgzh.entity;
 
-import lombok.Data;
-
-@Data
 public class LeaserEntity {
-    private String pkLeaser;//招商经理主键
+    private String pk_leaser;//招商经理主键
     private String name;//招商经理名称
     private String phone;//招商经理电话
     private String password;//招商经理电话
 
-    public String getPkLeaser() {
-        return pkLeaser;
+    public String getPk_leaser() {
+        return pk_leaser;
     }
 
-    public void setPkLeaser(String pkLeaser) {
-        this.pkLeaser = pkLeaser;
+    public void setPk_leaser(String pk_leaser) {
+        this.pk_leaser = pk_leaser;
     }
 
     public String getName() {

@@ -5,6 +5,6 @@
 <mapper namespace="com.example.wxgzh.leaser.dao.LeaserDao">
 	<insert id="insert" parameterType="com.example.wxgzh.entity.LeaserEntity">
 		insert into wx_leaser(pk_leaser,name,phone,password)
-		values(#{pkLeaser},#{name},#{phone},#{password})
+		values(#{pk_leaser},#{name},#{phone},#{password})
 	</insert>
 </mapper>
