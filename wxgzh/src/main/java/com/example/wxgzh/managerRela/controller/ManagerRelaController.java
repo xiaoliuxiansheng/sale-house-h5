@@ -1,9 +1,9 @@
-package com.example.wxgzh.manager.controller;
+package com.example.wxgzh.managerRela.controller;
 
+import com.example.wxgzh.managerRela.ao.ManagerRelaAO;
+import com.example.wxgzh.managerRela.service.ManagerRelaService;
 import com.example.wxgzh.common.dto.JSONResponse;
 import com.example.wxgzh.entity.ManagerEntity;
-import com.example.wxgzh.manager.ao.ManagerAO;
-import com.example.wxgzh.manager.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/api/manager")
-public class ManagerController {
+@RequestMapping("/api/managerRela")
+public class ManagerRelaController {
 	@Autowired
-	ManagerService service;
+	ManagerRelaService service;
 	@PostMapping("/add")
 	@ResponseBody
-	public JSONResponse addManager(ManagerAO ao) throws Exception{
-		ManagerEntity e = service.addManager(ao);
-		return JSONResponse.ok(e);
+	public JSONResponse addManagerRela(ManagerRelaAO ao) throws Exception{
+
+		return JSONResponse.ok();
 	}
 	@PostMapping("/del")
 	@ResponseBody
-	public JSONResponse delManager(String id) throws Exception{
+	public JSONResponse delManagerRela(String id) throws Exception{
 
 		return JSONResponse.ok();
 	}
 	@PostMapping("/mod")
 	@ResponseBody
-	public JSONResponse modManager(String id, ManagerAO ao) throws Exception{
+	public JSONResponse modManagerRela(String id, ManagerRelaAO ao) throws Exception{
 		return JSONResponse.ok();
 	}
 	@GetMapping("/query")
 	@ResponseBody
-	public JSONResponse queryManager(String id) throws Exception{
+	public JSONResponse queryManagerRela(String id) throws Exception{
 
 		return JSONResponse.ok();
 	}

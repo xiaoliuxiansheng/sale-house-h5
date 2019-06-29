@@ -6,8 +6,7 @@ import java.util.Date;
 
 @Data
 public class ManagerEntity {
-   private String pkManage;
-   private String account;
-   private String password;
-   private Date ts;
+   private String pkManage;//管理员主键
+   private String account;//账号
+   private String password;//密码
 }

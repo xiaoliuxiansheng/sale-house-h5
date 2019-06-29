@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wxgzh.managerRela.dao.ManagerRelaDao">
+	<resultMap type="ManagerRelaEntity" id="result">
+		<id column="PK_LEASER_RELA" property="pkLeaserRela"/>
+		<result column="PK_LEASER" property="pkLeaser"/>
+		<result column="PK_HOUSE" property="pkHouse"/>
+		<result column="ALLOCDATE" property="allocdate"/>
+		<result column="TS" property="ts"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		insert into WX_LEASER_RELA (PK_LEASER_RELA,PK_LEASER,PK_HOUSE,ALLOCDATE，TS)
+		values(#{pkLeaserRela},#{pkLeaser},#{pkHouse},#{allocdate},#{ts})
+	</insert>
+	
+	<update id="update">
+		update WX_LEASER_RELA
+		<trim prefix="set" suffixOverrides=",">
+			<if test="map.pkLeaser != null">
+				PK_LEASER = #{map.pkLeaser},
+			</if>
+			<if test="map.pkHouse != null">
+				PK_HOUSE = #{map.pkHouse},
+			</if>
+			<if test="map.allocdate != null">
+				ALLOCDATE = #{map.allocdate},
+			</if>
+			<if test="map.ts != null">
+				TS = #{map.ts}
+			</if>
+		</trim>
+		where PK_LEASER_RELA = #{pkLeaserRela}
+	</update>
+
+	<!--<update id="delete">-->
+		<!--update WX_LEASER_RELA set sign=1 where commodity_id = #{id}-->
+	<!--</update>-->
+	<delete id="delete">
+		delete from WX_LEASER_RELA where PK_LEASER_RELA = #{id}
+	</delete>
+
+	<!-- 查询一条数据 -->
+	<select id="select" resultMap="result">
+		select * from WX_LEASER_RELA where ${column} = #{value}
+	</select>
+
+	<!-- 通过id查询数据 -->
+	<select id="selectById" resultMap="result">
+		select * from WX_LEASER_RELA where PK_LEASER_RELA = #{id}
+	</select>
+
+	<!-- 是否存在数据 -->
+	<select id="exists" resultType="Boolean">
+		select count(*)>0 from WX_LEASER_RELA
+		where ${column} = #{value}
+	</select>
+
+	<!--&lt;!&ndash; 模糊分页查询 &ndash;&gt;-->
+	<!--<select id="selectByKey" resultMap="result" useCache="false">-->
+		<!--select * from commodity-->
+			<!--&lt;!&ndash; <if test="key != null">-->
+				<!--and commodity_name like #{key}-->
+				<!--or price like #{key}-->
+				<!--or agio like #{key}-->
+			<!--</if> &ndash;&gt;-->
+		<!--<where>-->
+			<!--<if test=" key != null ">-->
+				<!--sign = 0-->
+			<!--</if>-->
+			<!--<if test="key !=null">-->
+				<!--and (commodity_name like #{key}-->
+				<!--or price like #{key}-->
+				<!--or agio like #{key})-->
+			<!--</if>-->
+
+		<!--</where>-->
+		<!--order by ct_create desc-->
+	<!--</select>-->
+
+</mapper>

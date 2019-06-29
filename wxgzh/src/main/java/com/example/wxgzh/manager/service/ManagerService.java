@@ -1,8 +1,6 @@
 package com.example.wxgzh.manager.service;
 
 
-import com.example.wxgzh.common.dto.QueryResult;
-import com.example.wxgzh.entity.CommodityEntity;
 import com.example.wxgzh.entity.ManagerEntity;
 import com.example.wxgzh.manager.ao.ManagerAO;
 
