@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wxgzh.building.dao.BuildingDao">
+	<resultMap type="BuildingEntity" id="result">
+		<id column="pk_builiding" property="pkBuiliding"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="city" property="city"/>
+		<result column="region" property="region"/>
+		<result column="address" property="address"/>
+		<result column="daddress" property="daddress"/>
+		<result column="managecost" property="managecost"/>
+		<result column="floors" property="floors"/>
+		<result column="height" property="height"/>
+		<result column="parkspace" property="parkspace"/>
+		<result column="elevatorbrand" property="elevatorbrand"/>
+		<result column="elevatorcount" property="elevatorcount"/>
+		<result column="area" property="area"/>
+		<result column="airconditioning" property="airconditioning"/>
+		<result column="developer" property="developer"/>
+		<result column="company" property="company"/>
+		<result column="introduce" property="introduce"/>
+		<result column="typeimg" property="typeimg"/>
+		<result column="buildingimg" property="buildingimg"/>
+		<result column="lon" property="lon"/>
+		<result column="lat" property="lat"/>
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into wx_builiding(pk_builiding,name,city,region,address,daddress,managecost,floors,height,parkspace,elevatorbrand,elevatorcount,area,airconditioning,developer,company,introduce,typeimg,buildingimg,lon,lat)
+		values('${pkBuiliding}','${name}','${city}','${region}','${address}','${daddress}','${managecost}','${floors}','${height}','${parkspace}','${elevatorbrand}','${elevatorcount}','${area}','${airconditioning}','${developer}','${company}','${introduce}','${typeimg}','${buildingimg}',${lon},${lat})
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from wx_builiding where pk_builiding = #{id}
+	</delete>
+
+	<!-- 是否存在数据 -->
+	<select id="exists" resultType="int">
+		select count(${column}) from wx_builiding
+		where ${column} = #{value}
+	</select>
+
+	<!--根据id查询-->
+	<select id="selectById" parameterType="String" resultMap="result">
+		select * from wx_builiding
+		where pk_builiding = #{id}
+	</select>
+
+	<update id="modify" parameterType="com.example.wxgzh.entity.BuildingEntity">
+		update wx_builiding set name = ${name},phone = ${phone},password = ${password}
+		where pk_builiding = ${pk_builiding}
+	</update>
+</mapper>
