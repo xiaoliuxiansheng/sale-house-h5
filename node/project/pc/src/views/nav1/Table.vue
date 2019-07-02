@@ -16,21 +16,20 @@
     </el-col>
 
     <!--列表-->
-    <el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
-              style="width: 100%;">
-      <el-table-column type="selection" width="55">
+    <el-table :data="users" highlight-current-row v-loading="listLoading" style="width: 100%;">
+      <el-table-column prop="name" label="姓名" width="auto" >
       </el-table-column>
-      <el-table-column type="index" width="60">
+      <el-table-column prop="sex" label="性别" width="auto" :formatter="formatSex" >
       </el-table-column>
-      <el-table-column prop="name" label="姓名" width="120" sortable>
+      <el-table-column prop="age" label="年龄" width="auto" >
       </el-table-column>
-      <el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
+      <el-table-column prop="birth" label="联系电话" width="auto" >
       </el-table-column>
-      <el-table-column prop="age" label="年龄" width="100" sortable>
+      <el-table-column prop="birth" label="头像" width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="生日" width="120" sortable>
+      <el-table-column prop="addr" label="账号" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="地址" min-width="180" sortable>
+      <el-table-column prop="addr" label="密码" min-width="auto" >
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template scope="scope">
@@ -42,33 +41,52 @@
 
     <!--工具条-->
     <el-col :span="24" class="toolbar">
-      <el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-      <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total"
+<!--      <el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>-->
+      <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total"
                      style="float:right;">
       </el-pagination>
     </el-col>
 
     <!--编辑界面-->
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
-      <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="editForm.name" auto-complete="off"></el-input>
+      <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+        <el-row>
+          <el-col :span="10">
+            <el-form-item label="姓名" prop="name">
+              <el-input v-model="addForm.name" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="电话"  prop="phone">
+              <el-input placeholder="请输入电话" v-model="addForm.phone" clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="头像">
+          <el-upload
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-form-item>
-        <el-form-item label="性别">
-          <el-radio-group v-model="editForm.sex">
-            <el-radio class="radio" :label="1">男</el-radio>
-            <el-radio class="radio" :label="0">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="年龄">
-          <el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
-        </el-form-item>
-        <el-form-item label="生日">
-          <el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="地址">
-          <el-input type="textarea" v-model="editForm.addr"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-col :span="10">
+            <el-form-item label="账号" prop="num">
+              <el-input placeholder="请输入账号" v-model="addForm.num" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="密码" prop="pwd">
+              <el-input placeholder="请输入密码" v-model="addForm.pwd" clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="editFormVisible = false">取消</el-button>
@@ -77,26 +95,45 @@
     </el-dialog>
 
     <!--新增界面-->
-    <el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
+    <el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false"  width="40%" >
       <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="addForm.name" auto-complete="off"></el-input>
+        <el-row>
+          <el-col :span="10">
+            <el-form-item label="姓名" prop="name">
+              <el-input v-model="addForm.name" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="电话"  prop="phone">
+              <el-input placeholder="请输入电话" v-model="addForm.phone" clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="头像">
+          <el-upload
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-form-item>
-        <el-form-item label="性别">
-          <el-radio-group v-model="addForm.sex">
-            <el-radio class="radio" :label="1">男</el-radio>
-            <el-radio class="radio" :label="0">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="年龄">
-          <el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
-        </el-form-item>
-        <el-form-item label="生日">
-          <el-date-picker type="date" placeholder="选择日期" v-model="addForm.birth"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="地址">
-          <el-input type="textarea" v-model="addForm.addr"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-col :span="10">
+            <el-form-item label="账号" prop="num">
+              <el-input placeholder="请输入账号" v-model="addForm.num" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+          <el-form-item label="密码" prop="pwd">
+            <el-input placeholder="请输入密码" v-model="addForm.pwd" clearable></el-input>
+          </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="addFormVisible = false">取消</el-button>
@@ -135,15 +172,31 @@ export default {
         name: '',
         sex: -1,
         age: 0,
-        birth: '',
-        addr: ''
-      },
-
+        num: null,
+        phone: null,
+        pwd: null
+     },
       addFormVisible: false, // 新增界面是否显示
       addLoading: false,
       addFormRules: {
         name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' }
+          { required: true, message: '请输入姓名', trigger: 'blur' },
+          { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+        ],
+        region: [
+          { required: true, message: '请选择性别', trigger: 'change' }
+        ],
+        age: [
+          { required: true, message: '输入年龄', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '请输入联系方式', trigger: 'blur' }
+        ],
+        num: [
+          { required: true, message: '请输入账号', trigger: 'blur' }
+        ],
+        pwd: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       },
       // 新增界面数据
@@ -153,11 +206,49 @@ export default {
         age: 0,
         birth: '',
         addr: ''
+      },
+      imageUrl: '',
+      input: '',
+      ruleForm: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
       }
-
-    }
-  },
+    } } ,
   methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw)
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
+    },
     // 性别显示转换
     formatSex: function (row, column) {
       return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知'
@@ -291,6 +382,28 @@ export default {
 
 </script>
 
-<style scoped>
-
+<style >
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

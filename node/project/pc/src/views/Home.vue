@@ -90,7 +90,7 @@
 export default {
   data () {
     return {
-      sysName: 'VUEADMIN',
+      sysName: '欢迎登录！',
       collapsed: false,
       sysUserName: '',
       sysUserAvatar: '',
