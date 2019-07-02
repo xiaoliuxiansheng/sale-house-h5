@@ -3,14 +3,19 @@ package com.example.wxgzh.building.service;
  * 楼盘信息
  */
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.example.wxgzh.building.dao.BuildingDao;
 import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.CoordinatesUtil;
 import com.example.wxgzh.common.util.PictureUtil;
+import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.BuildingEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,17 +51,17 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public void delBuilding(String id, String path) throws Exception {
         BuildingEntity b = dao.selectById(id);
-        if (b != null) {
-            dao.delete(id);
-            String str = path + "/" + id;
-            //删除图片
-            PictureUtil.deleteDir(str);
+        if(b == null) {
+            throw new WxgzhException("楼盘不存在或已被删除！");
         }
-
+        dao.delete(id);
+        String str = path + "/" + id;
+        //删除图片
+        PictureUtil.deleteDir(str);
     }
 
     @Override
-    public BuildingEntity modBuilding(BuildingEntity entity, String path, MultipartFile[] files, List<String> imgIds) throws Exception {
+    public BuildingEntity modBuilding(BuildingEntity entity, String path, MultipartFile[] files, List<String> imgs) throws Exception {
         //验证参数
         if (entity == null) {
             throw new WxgzhException("非法操作！");
@@ -80,7 +85,6 @@ public class BuildingServiceImpl implements BuildingService {
         String company = entity.getCompany();
         String introduce = entity.getIntroduce();
         String typeimg = entity.getTypeimg();
-        String buildingimg = entity.getBuildingimg();
         BuildingEntity old = dao.selectById(id);
         if (old == null) {
             throw new WxgzhException("修改楼盘不存在！");
@@ -181,20 +185,56 @@ public class BuildingServiceImpl implements BuildingService {
                 old.setTypeimg(typeimg);
             }
         }
-//        String buildingimg = old.getBuildingimg()
-//        //是否修改图片
-//        if(imgIds.size() > 0) {
-//            for (String img: imgIds) {
-//                String id =
-//            }
-//        }
-
-
-
+        String buildingimgOld = old.getBuildingimg();
+        List<String> list = new ArrayList<>();
+        if(buildingimgOld.length()>0) {
+            buildingimgOld = buildingimgOld.replaceAll("&",",");
+             list = JSONArray.parseArray(buildingimgOld, String.class);
+            //是否修改图片
+            if(imgs.size() > 0) {
+                for (String img: imgs) {
+                    list.remove(path.substring(path.indexOf(":") + 1) + "/" + id + "/" + img);
+                }
+            }
+        }
+        if (files != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                // 判断文件是否为空
+                if (!file.isEmpty()) {
+                    String uuid = UUID.random32();
+                    String unit = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+                    String filePath = path + "/" + id + "/" + uuid + unit;
+                    list.add(path.substring(path.indexOf(":") + 1) + "/" + id + "/" + uuid + unit);
+                    File saveDir = new File(filePath);
+                    if (!saveDir.getParentFile().exists()) {
+                        saveDir.getParentFile().mkdirs();
+                    }
+                    // 转存文件
+                    file.transferTo(saveDir);
+                }
+            }
+        }
+        //json数组把，转换为&
+        String buildingimg = JSON.toJSONString(list).replace(",", "&");
+        if (buildingimg != null) {
+            if (!buildingimg.equals(old.getBuildingimg())) {
+                needUpdateMap.put("buildingimg", buildingimg);
+                old.setBuildingimg(buildingimg);
+            }
+        }
         if (!needUpdateMap.isEmpty()) {
             dao.update(id, needUpdateMap);
         }
-
+        //删除本地文件
+        for (String img: imgs) {
+            //获取文件路径
+            String filePath = path + "/" + id + "/" + img;
+            File file = new File(filePath);
+            if(file.exists()){
+                file.delete();
+            }
+        }
         return old;
     }
 

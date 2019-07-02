@@ -50,8 +50,75 @@
 		where pk_builiding = #{id}
 	</select>
 
-	<update id="modify" parameterType="com.example.wxgzh.entity.BuildingEntity">
-		update wx_builiding set name = ${name},phone = ${phone},password = ${password}
-		where pk_builiding = ${pk_builiding}
+	<update id="update">
+		update wx_builiding
+		<trim prefix="set" suffixOverrides=",">
+			<if test="map.name != null">
+				name = #{map.name},
+			</if>
+			<if test="map.city != null">
+				city = #{map.city},
+			</if>
+			<if test="map.region != null">
+				region = #{map.region},
+			</if>
+			<if test="map.address != null">
+				address = #{map.address},
+			</if>
+			<if test="map.daddress != null">
+				daddress = #{map.daddress},
+			</if>
+			<if test="map.managecost != null">
+				managecost = #{map.managecost},
+			</if>
+			<if test="map.floors != null">
+				floors = #{map.floors},
+			</if>
+			<if test="map.height != null">
+				height = #{map.height},
+			</if>
+			<if test="map.parkspace != null">
+				parkspace = #{map.parkspace},
+			</if>
+			<if test="map.elevatorbrand != null">
+				elevatorbrand = #{map.elevatorbrand},
+			</if>
+			<if test="map.elevatorcount != null">
+				elevatorcount = #{map.elevatorcount},
+			</if>
+			<if test="map.elevatorcount != null">
+				elevatorcount = #{map.elevatorcount},
+			</if>
+			<if test="map.area != null">
+				area = #{map.area},
+			</if>
+			<if test="map.airconditioning != null">
+				airconditioning = #{map.airconditioning},
+			</if>
+			<if test="map.developer != null">
+				developer = #{map.developer},
+			</if>
+			<if test="map.company != null">
+				company = #{map.company},
+			</if>
+			<if test="map.introduce != null">
+				introduce = #{map.introduce},
+			</if>
+			<if test="map.typeimg != null">
+				typeimg = #{map.typeimg},
+			</if>
+			<if test="map.buildingimg != null">
+				buildingimg = #{map.buildingimg},
+			</if>
+			<if test="map.lon != null">
+				lon = #{map.lon},
+			</if>
+			<if test="map.lat != null">
+				lat = #{map.lat},
+			</if>
+		</trim>
+		where pk_builiding = #{id}
 	</update>
+
+
 </mapper>
