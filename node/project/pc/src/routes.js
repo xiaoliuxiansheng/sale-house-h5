@@ -20,42 +20,42 @@ export default new Router({
     {
       path: '/',
       component: () => import('./views/Home.vue'),
-      name: '导航一',
+      name: '招商经理信息管理',
       iconCls: 'el-icon-message', // 图标样式class
       children: [
         { path: '/main', component: () => import('./views/Main.vue'), name: '主页', hidden: true },
-        { path: '/table', component: () => import('./views/nav1/Table.vue'), name: 'Table' },
-        { path: '/form', component: () => import('./views/nav1/Form.vue'), name: 'Form' },
-        { path: '/user', component: () => import('./views/nav1/user.vue'), name: '列表' }
+        { path: '/table', component: () => import('./views/nav1/Table.vue'), name: '列表' },
+        // { path: '/form', component: () => import('./views/nav1/Form.vue'), name: '新增' }
       ]
     },
     {
       path: '/',
       component: () => import('./views/Home.vue'),
-      name: '导航二',
+      name: '房屋出售出售',
       iconCls: 'fa fa-id-card-o',
       children: [
-        { path: '/page4', component: () => import('./views/nav2/Page4.vue'), name: '页面4' },
-        { path: '/page5', component: () => import('./views/nav2/Page5.vue'), name: '页面5' }
+        { path: '/page4', component: () => import('./views/nav2/Page4.vue'), name: '新增房屋资源' },
+        { path: '/page6', component: () => import('./views/nav2/Page6.vue'), name: '房屋出租资源' },
+        { path: '/page5', component: () => import('./views/nav2/Page5.vue'), name: '房屋出售资源' }
       ]
     },
     {
       path: '/',
       component: () => import('./views/Home.vue'),
-      name: '',
-      iconCls: 'fa fa-address-card',
-      leaf: true,
+      name: '商业楼盘信息',
+      iconCls: 'fa fa-id-card-o',
       children: [
-        { path: '/page6', component: () => import('./views/nav3/Page6.vue'), name: '导航三' }
+        { path: '/page7', component: () => import('./views/nav4/Page7.vue'), name: '新增楼盘信息' },
+        { path: '/page8', component: () => import('./views/nav4/Page8.vue'), name: '楼盘信息列表' }
       ]
     },
     {
       path: '/',
       component: () => import('./views/Home.vue'),
-      name: 'Charts',
+      name: '新房源信息',
       iconCls: 'fa fa-bar-chart',
       children: [
-        { path: '/echarts', component: () => import('./views/charts/echarts.vue'), name: 'echarts' }
+        { path: '/echarts', component: () => import('./views/charts/echarts.vue'), name: '新房源信息' }
       ]
     },
     {

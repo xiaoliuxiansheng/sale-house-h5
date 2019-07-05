@@ -1,35 +1,80 @@
 <template>
   <el-form ref="form" :model="form" label-width="130px" @submit.prevent="onSubmit"
            style="margin:20px;width:600px;">
-    <el-form-item label="方式"  prop="region">
-      <el-radio-group v-model="parms.options">
-        <el-radio class="radio" :label="1">出租</el-radio>
-        <el-radio class="radio" :label="0">出售</el-radio>
-      </el-radio-group>
+    <el-form-item label="选择区域">
+      <el-select v-model="parms.plot" placeholder="请选择所属区域">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </el-form-item>
-    <el-form-item label="选择小区">
-    <el-select v-model="parms.plot" placeholder="请选择所属小区">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
+    <el-form-item label="楼盘名称">
+      <el-input v-model="parms.name" placeholder="请输入楼盘名称"></el-input>
     </el-form-item>
     <el-row>
       <el-col :span="12">
-        <el-form-item label="房屋面积（m²)" prop="name">
+        <el-form-item label="楼层" prop="name">
           <el-input v-model="parms.area"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
-      <el-form-item label="租金/售价（m²)" prop="name">
-        <el-input v-model="parms.price"></el-input>
-      </el-form-item>
+        <el-form-item label="物管费（元/m²）" prop="name">
+          <el-input v-model="parms.price"></el-input>
+        </el-form-item>
       </el-col>
     </el-row>
-    <el-form-item label="房源标签">
+    <el-row>
+      <el-col :span="12">
+        <el-form-item label="层高" prop="name">
+          <el-input v-model="parms.area"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="停车位（个）" prop="name">
+          <el-input v-model="parms.price"></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="12">
+        <el-form-item label="空调" prop="name">
+          <el-input v-model="parms.area"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="标准层面积（m²）" prop="name">
+          <el-input v-model="parms.price"></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="12">
+        <el-form-item label="电梯" prop="name">
+          <el-input v-model="parms.area"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="地址" prop="name">
+          <el-input v-model="parms.price"></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="12">
+        <el-form-item label="开发商" prop="name">
+          <el-input v-model="parms.area"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="物管公司" prop="name">
+          <el-input v-model="parms.price"></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-form-item label="区位交通">
       <el-tag
         :key="tag"
         v-for="tag in dynamicTags"
@@ -50,35 +95,13 @@
       </el-input>
       <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     </el-form-item>
-    <el-form-item label="房源描述"  prop="region">
+    <el-form-item label="大楼介绍"  prop="region">
       <el-input v-model="parms.text"
                 type="textarea"
                 autosize
                 placeholder="请输入房源描述">
       </el-input>
     </el-form-item>
-    <el-form-item label="上传房屋图片资源">
-      <el-upload
-        class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :file-list="fileList2"
-        list-type="picture">
-        <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-      </el-upload>
-    </el-form-item >
-    <el-form-item label="分配招商经理">
-    <el-select v-model="parms.Manager" placeholder="分配所属招商经理">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
-    </el-form-item >
     <el-form-item>
       <el-button type="primary">立即创建</el-button>
       <el-button @click.native.prevent>取消</el-button>
@@ -119,6 +142,7 @@
         }],
         value: '',
         parms:{
+          name:null,
           plot:null,
           area:null,
           price:null,

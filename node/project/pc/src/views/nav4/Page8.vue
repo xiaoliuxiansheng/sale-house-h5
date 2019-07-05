@@ -4,11 +4,20 @@
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
       <el-form :inline="true" :model="filters">
         <el-form-item>
-<!--          <el-button type="primary" v-on:click="getUsers">出租</el-button>-->
-          <div class="btn">
-            <div class="link">出租</div>
-            <div>出售</div>
-          </div>
+          <el-input v-model="filters.name" placeholder="楼盘名称"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-select v-model="value" placeholder="选择区域">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" v-on:click="getUsers">查询</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -424,23 +433,7 @@
 
 </script>
 
-<style lang="scss">
-  .btn{
-    width: 160px;
-    height: 50px;
-    border-radius: 15px;
-    div{
-      display: inline-block;
-      width: 80px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      background: darkgray;
-    }
-    .link{
-      background: #20a0ff;
-    }
-  }
+<style >
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
