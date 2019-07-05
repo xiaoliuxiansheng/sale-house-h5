@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wxgzh.house.dao.HouseDao">
+	<!--<resultMap type="BuildingEntity" id="result">
+		<id column="pk_builiding" property="pkBuiliding"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="city" property="city"/>
+		<result column="region" property="region"/>
+		<result column="address" property="address"/>
+		<result column="daddress" property="daddress"/>
+		<result column="managecost" property="managecost"/>
+		<result column="floors" property="floors"/>
+		<result column="height" property="height"/>
+		<result column="parkspace" property="parkspace"/>
+		<result column="elevatorbrand" property="elevatorbrand"/>
+		<result column="elevatorcount" property="elevatorcount"/>
+		<result column="area" property="area"/>
+		<result column="airconditioning" property="airconditioning"/>
+		<result column="developer" property="developer"/>
+		<result column="company" property="company"/>
+		<result column="introduce" property="introduce"/>
+		<result column="typeimg" property="typeimg"/>
+		<result column="buildingimg" property="buildingimg"/>
+		<result column="lon" property="lon"/>
+		<result column="lat" property="lat"/>
+	</resultMap>-->
+
+	<insert id="insert">
+		insert into wx_house(pk_house,buildingname,floor,area,price,rent,trimstyle,houseimg,describe,name,phone,rors,isexist)
+		values('${pk_house}','${buildingname}','${floor}','${area}','${price}','${rent}','${trimstyle}','${houseimg}','${describe}','${name}','${phone}','${rors}','${isexist}')
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from wx_house where pk_house = #{id}
+	</delete>
+
+	<!--根据id查询-->
+	<select id="selectById" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
+		select * from wx_house
+		where pk_house = #{id}
+	</select>
+
+	<update id="update">
+		update wx_house
+		<trim prefix="set" suffixOverrides=",">
+			<if test="map.pk_house != null">
+				pk_house = #{map.pk_house},
+			</if>
+			<if test="map.buildingname != null">
+				buildingname = #{map.buildingname},
+			</if>
+			<if test="map.floor != null">
+				floor = #{map.floor},
+			</if>
+			<if test="map.area != null">
+				area = #{map.area},
+			</if>
+			<if test="map.price != null">
+				price = #{map.price},
+			</if>
+			<if test="map.rent != null">
+				rent = #{map.rent},
+			</if>
+			<if test="map.trimstyle != null">
+				trimstyle = #{map.trimstyle},
+			</if>
+			<if test="map.houseimg != null">
+				houseimg = #{map.houseimg},
+			</if>
+			<if test="map.describe != null">
+				describe = #{map.describe},
+			</if>
+			<if test="map.name != null">
+				name = #{map.name},
+			</if>
+			<if test="map.phone != null">
+				phone = #{map.phone},
+			</if>
+			<if test="map.rors != null">
+				rors = #{map.rors},
+			</if>
+			<if test="map.isexist != null">
+				isexist = #{map.isexist},
+			</if>
+		</trim>
+		where pk_builiding = #{id}
+	</update>
+
+
+</mapper>
