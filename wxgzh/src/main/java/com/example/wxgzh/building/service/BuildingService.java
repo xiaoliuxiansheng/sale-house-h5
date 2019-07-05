@@ -1,6 +1,7 @@
 package com.example.wxgzh.building.service;
 
 
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.entity.BuildingEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,4 +15,10 @@ public interface BuildingService {
 	public BuildingEntity modBuilding(BuildingEntity entity, String path, MultipartFile[] files, List<String> imgIds) throws Exception;
 
 	public BuildingEntity query(String id) throws Exception;
+
+	public List<String> queryRegion() throws Exception;
+
+	public BuildingEntity queryById(String id) throws Exception;
+
+	public QueryResult<BuildingEntity> queryAll(String key,String pageNo,String pageSize) throws Exception;
 }

@@ -120,5 +120,12 @@
 		where pk_builiding = #{id}
 	</update>
 
+	<select id="selectRegion" resultType="java.lang.String">
+		select region
+		from wx_builiding group by region
+	</select>
+	<select id="selectByKey" resultMap="result" useCache="false">
+		select * from wx_builiding
+	</select>
 
 </mapper>

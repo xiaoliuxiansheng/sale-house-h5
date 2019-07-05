@@ -6,11 +6,14 @@ package com.example.wxgzh.building.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.example.wxgzh.building.dao.BuildingDao;
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.CoordinatesUtil;
 import com.example.wxgzh.common.util.PictureUtil;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.BuildingEntity;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -241,5 +244,47 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public BuildingEntity query(String id) throws Exception {
         return null;
+    }
+
+    @Override
+    public List<String> queryRegion() throws Exception {
+        List<String> result = dao.selectRegion();
+        return result;
+    }
+
+    @Override
+    public BuildingEntity queryById(String id) throws Exception {
+        BuildingEntity b = dao.selectById(id);
+        return b;
+    }
+
+    @Override
+    public QueryResult<BuildingEntity> queryAll(String key, String pageNo, String pageSize) throws Exception {
+        if(key != null) {
+            key = "%"+key+"%";
+        }
+        int no = 1;
+        if(pageNo!=null) {
+            no = Integer.parseInt(pageNo);
+        }
+        int size = 10;
+        if(pageSize != null) {
+            size = Integer.parseInt(pageSize);
+        }
+
+        PageHelper.startPage(no, size);
+        List<BuildingEntity> e = dao.selectByKey(key);
+        PageInfo<BuildingEntity> pageinfo= new PageInfo<>(e);
+        List<BuildingEntity> rows = new ArrayList<>();
+        for (BuildingEntity buildingEntity : pageinfo.getList()) {
+            rows.add(buildingEntity);
+        }
+        QueryResult<BuildingEntity> m = new QueryResult<>();
+        m.setPageNo(no);
+        m.setPageSize(size);
+        m.setTotalRows((int)pageinfo.getTotal());
+        m.setRows(rows);
+
+        return m;
     }
 }

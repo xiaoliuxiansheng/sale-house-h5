@@ -5,8 +5,11 @@ import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.LeaserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BuildingDao extends TemplateDao<BuildingEntity, String> {
 
-    void modify(BuildingEntity entity)throws Exception;
+    List<String> selectRegion () throws Exception;
+    List<BuildingEntity> selectByKey(String key) throws Exception;
 }

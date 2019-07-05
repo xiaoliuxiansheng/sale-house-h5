@@ -3,6 +3,7 @@ package com.example.wxgzh.building.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.wxgzh.building.service.BuildingService;
 import com.example.wxgzh.common.dto.JSONResponse;
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.LeaserEntity;
@@ -109,6 +110,31 @@ public class BuildingController {
 	@ResponseBody
 	public JSONResponse modBuilding(HttpServletRequest req, HttpServletResponse resp, BuildingEntity entity, @RequestParam(value="photo") MultipartFile[] files, @RequestParam(value="imgId")List<String> imgIds) throws Exception{
 		BuildingEntity e = service.modBuilding(entity, savePath, files, imgIds);
+		return JSONResponse.ok(e);
+	}
+
+	/**
+	 * 查询区域信息
+	 * @return 区域信息集合
+	 * @throws Exception
+	 */
+	@GetMapping("/queryRegion")
+	@ResponseBody
+	public JSONResponse queryRegion()throws Exception {
+		List result = service.queryRegion();
+		return JSONResponse.ok(result);
+	}
+
+	@GetMapping("/list")
+	@ResponseBody
+	public JSONResponse queryBuildingByKey(String key,String pageNo,String pageSize) throws Exception{
+		QueryResult<BuildingEntity> e = service.queryAll(key, pageNo, pageSize);
+		return JSONResponse.ok(e);
+	}
+	@GetMapping("/queryById")
+	@ResponseBody
+	public JSONResponse queryById(String id) throws Exception{
+		BuildingEntity e = service.queryById(id);
 		return JSONResponse.ok(e);
 	}
 
