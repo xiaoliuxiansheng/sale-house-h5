@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let base = 'http:192.168.1.12:8081/api'
+let base = ''
 
 export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data) }
 

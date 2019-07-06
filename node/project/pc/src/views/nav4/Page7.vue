@@ -15,13 +15,14 @@
     <el-input v-model="parms.name" placeholder="请输入楼盘名称"></el-input>
   </el-form-item>
     <el-form-item label="楼盘图片资源">
+<!--      <input class="file" name="file" type="file" multiple="multiple" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
       <el-upload
         class="upload-demo"
-        action="http://192.168.1.12:8080/api/building/add"
+        action="https://jsonplaceholder.typicode.com/posts/"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
-        :file-list="parms.photo"
-        :before-upload="beforeupload"
+        :file-list="fileList2"
+        :before-upload="beforeAvatarUpload"
         list-type="picture">
         <el-button size="small" type="primary">点击上传</el-button>
         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -123,11 +124,12 @@
 </template>
 
 <script>
-  import { addloupan } from '../../api/api'
-  // import axios from 'axios'
   export default {
     data () {
       return {
+        uploadHeader: {
+          enctype:"multipart/form-data"
+        },
         form: {
           name: '',
           region: '',
@@ -187,41 +189,48 @@
           company:null,
           introduce:null,
           typeimg:null,
-          photo:[]
+          height:null
         },
         fileList2: [],
         dynamicTags: ['精装', '家具', '桌椅'],
         inputVisible: false,
-        inputValue: ''
-
+        inputValue: '',
+        formdata:[],
+        file:[]
       }
+    },
+    created(){
+      this.formdata = new FormData();
     },
     methods: {
       submit(){
         this.addbuild()
       },
       addbuild(){
-        addloupan(this.parms).then((res)=>{
-             if (res.code=="ok"){
-               console.log(res)
-             }
+        this.formdata=new FormData()
+        this.file.forEach((item,index)=>{
+          this.formdata.append('photo',item);
+        })
+        for(let k in this.parms){
+            this.formdata.append(k,this.parms[k])
+        }
+        let config = {
+          headers:{'Content-Type':'multipart/form-data'}
+        }; //添加请求头
+        this.$axios.post('/building/add', this.formdata,config)
+          .then(response=>{
+            console.log(response.data);
           })
-      },
-      beforeupload (file) {
-        this.parms.photo.push(file);
-        return false;
       },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
-
       showInput() {
         this.inputVisible = true;
         this.$nextTick(_ => {
           this.$refs.saveTagInput.$refs.input.focus();
         });
       },
-
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {
@@ -231,7 +240,7 @@
         this.inputValue = '';
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
+        this.fileList2[this.file.length]=file
       },
       handlePreview(file) {
         console.log(file);
@@ -241,18 +250,17 @@
       },
       handleAvatarSuccess (res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
+        console.log(this.imageUrl)
       },
       beforeAvatarUpload (file) {
-        const isJPG = file.type === 'image/jpeg' ;
         const isLt2M = file.size / 1024 / 1024 < 2
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
-        return isJPG && isLt2M;
+        console.log(file)
+        this.file.push(file);
+        // return  false
+        return  isLt2M;
       }
     }
   }
