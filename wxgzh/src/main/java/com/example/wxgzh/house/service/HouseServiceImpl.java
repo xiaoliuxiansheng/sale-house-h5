@@ -92,12 +92,14 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public void delHouse(String id, String path) throws Exception {
         HouseEntity entity = dao.selectById(id);
-        if (entity != null) {
-            dao.delete(id);
-            String str = path + "/" + id;
-            //删除图片
-            PictureUtil.deleteDir(str);
+
+        if(entity == null) {
+            throw new WxgzhException("楼盘不存在或已被删除！");
         }
+        dao.delete(id);
+        String str = path + "/" + id;
+        //删除图片
+        PictureUtil.deleteDir(str);
 
     }
 
@@ -244,9 +246,19 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<HouseEntity> query(String id) throws Exception {
+    public List<HouseEntity> query(String url,String id) throws Exception {
 
         List<HouseEntity> houseEntities =dao.query(id);
+
+        if (!houseEntities.isEmpty()){
+            for (HouseEntity e:houseEntities
+                 ) {
+                e.setHouseimg(url+e.getHouseimg());
+                if (e.getAvatar()!=null){
+                    e.setAvatar(url+e.getAvatar());
+                }
+            }
+        }
 
         return houseEntities;
     }

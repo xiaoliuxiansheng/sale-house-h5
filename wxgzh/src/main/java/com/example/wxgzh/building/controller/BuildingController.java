@@ -139,4 +139,11 @@ public class BuildingController {
 		return JSONResponse.ok(e);
 	}
 
+
+	@GetMapping("/queryNames")
+	@ResponseBody
+	public JSONResponse queryNames() throws Exception{
+		List<BuildingEntity> e = service.queryNames();
+		return JSONResponse.ok(e);
+	}
 }

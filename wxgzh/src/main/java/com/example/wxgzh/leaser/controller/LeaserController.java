@@ -109,7 +109,7 @@ public class LeaserController {
 	}
 
 
-	//allocate
+	//allocate分配
 	@GetMapping("/allocate")
 	@ResponseBody
 	public JSONResponse queryManager(ManagerRelaEntity entity) throws Exception{
@@ -117,5 +117,12 @@ public class LeaserController {
 		service.allocate(entity);
 
 		return JSONResponse.ok();
+	}
+
+	@GetMapping("/query")
+	@ResponseBody
+	public JSONResponse selectByName(String id) throws Exception{
+		LeaserEntity e = service.query(id);
+		return JSONResponse.ok(e);
 	}
 }

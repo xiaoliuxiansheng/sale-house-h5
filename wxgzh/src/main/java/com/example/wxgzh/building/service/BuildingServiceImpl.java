@@ -38,6 +38,10 @@ public class BuildingServiceImpl implements BuildingService {
     public BuildingEntity addBuilding(BuildingEntity entity) throws Exception {
         //获取楼盘名称
         String name = $("楼盘名称不能为空", entity.getName());
+        BuildingEntity e = dao.select("name",name);
+        if (e != null){
+            throw new WxgzhException("楼盘名称不能重复,重复楼盘名为："+name);
+        }
         //获取城市名称
         String city = entity.getCity();
         //获取区域名称
@@ -289,5 +293,13 @@ public class BuildingServiceImpl implements BuildingService {
         m.setRows(rows);
 
         return m;
+    }
+
+    @Override
+    public List<BuildingEntity> queryNames() throws Exception {
+
+        List<BuildingEntity> entities = dao.queryByNames();
+
+        return entities;
     }
 }

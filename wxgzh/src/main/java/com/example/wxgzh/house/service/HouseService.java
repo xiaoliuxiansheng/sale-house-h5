@@ -15,5 +15,5 @@ public interface HouseService {
 
 	public HouseEntity modHouse(HouseAo ao, String path, MultipartFile[] files, List<String> imgIds) throws Exception;
 
-	public List<HouseEntity> query(String id) throws Exception;
+	public List<HouseEntity> query(String url,String id) throws Exception;
 }

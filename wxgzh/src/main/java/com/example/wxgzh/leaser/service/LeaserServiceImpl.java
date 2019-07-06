@@ -120,7 +120,7 @@ public class LeaserServiceImpl implements LeaserService {
 
 	@Override
 	public LeaserEntity query(String id) throws Exception {
-		id = $(id, "招商经理id不能为空");
+		id = $("招商经理id不能为空",id);
 		LeaserEntity e = dao.selectById(id);
 		return e;
 	}
