@@ -4,7 +4,8 @@ public class LeaserEntity {
     private String pk_leaser;//招商经理主键
     private String name;//招商经理名称
     private String phone;//招商经理电话
-    private String password;//招商经理电话
+    private String password;//招商经理密码
+    private String avatar;//招商经理头像
 
     public String getPk_leaser() {
         return pk_leaser;
@@ -36,5 +37,13 @@ public class LeaserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
