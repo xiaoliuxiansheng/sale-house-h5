@@ -39,10 +39,10 @@
 
 	<!--根据id查询-->
 	<select id="selectById" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
-		select wh.*,wl.name as leasername,wl.leaserphone,wl.avatar from wx_house wh
+		select wh.pk_building,wh.pk_house,wh.buildingname,wh.floor,wh.area,wh.price,wh.rent,wh.trimstyle,wh.houseimg,wh.describe,wh.name,wh.phone,wh.rors,wh.isexist,wl.name as leasername,wl.phone as leaserphone,wl.avatar from wx_house wh
 		left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
 		left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
-		where pk_house = #{id}
+		where wh.pk_house = #{id}
 	</select>
 
 	<update id="update">
@@ -89,10 +89,10 @@
 	</update>
 
 	<select id="query" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
-		select wh.*,wl.name as leasername,wl.leaserphone,wl.avatar from wx_house wh
+		select wh.pk_building,wh.pk_house,wh.buildingname,wh.floor,wh.area,wh.price,wh.rent,wh.trimstyle,wh.houseimg,wh.describe,wh.name,wh.phone,wh.rors,wh.isexist,wl.name as leasername,wl.phone as leaserphone,wl.avatar from wx_house wh
 		left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
 		left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
-		where pk_building=#{id}
+		where wh.pk_building=#{id}
 	</select>
 
 
