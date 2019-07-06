@@ -16,6 +16,7 @@ import com.example.wxgzh.house.dao.HouseDao;
 import com.example.wxgzh.house.dto.HouseAo;
 import com.example.wxgzh.leaser.dao.LeaserDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    @Transactional
     public HouseEntity addHouse(HouseAo ao) throws Exception {
 
         HouseEntity entity = new HouseEntity();
