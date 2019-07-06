@@ -2,7 +2,7 @@
   <el-form ref="form" :model="form" label-width="130px" @submit.prevent="onSubmit"
            style="margin:20px;width:600px;">
     <el-form-item label="选择区域">
-      <el-select v-model="parms.plot" placeholder="请选择所属区域">
+      <el-select v-model="parms.region" placeholder="请选择所属区域">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -12,48 +12,62 @@
       </el-select>
     </el-form-item>
     <el-form-item label="楼盘名称">
-      <el-input v-model="parms.name" placeholder="请输入楼盘名称"></el-input>
-    </el-form-item>
+    <el-input v-model="parms.name" placeholder="请输入楼盘名称"></el-input>
+  </el-form-item>
+    <el-form-item label="楼盘图片资源">
+<!--      <input class="file" name="file" type="file" multiple="multiple" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
+      <el-upload
+        class="upload-demo"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :file-list="fileList2"
+        :before-upload="beforeAvatarUpload"
+        list-type="picture">
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
+    </el-form-item >
     <el-row>
       <el-col :span="12">
         <el-form-item label="楼层" prop="name">
-          <el-input v-model="parms.area"></el-input>
+          <el-input v-model="parms.floors"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="物管费（元/m²）" prop="name">
-          <el-input v-model="parms.price"></el-input>
+          <el-input v-model="parms.managecost"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
         <el-form-item label="层高" prop="name">
-          <el-input v-model="parms.area"></el-input>
+          <el-input v-model="parms.height"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="停车位（个）" prop="name">
-          <el-input v-model="parms.price"></el-input>
+          <el-input v-model="parms.parkspace"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
         <el-form-item label="空调" prop="name">
-          <el-input v-model="parms.area"></el-input>
+          <el-input v-model="parms.airconditioning"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="标准层面积（m²）" prop="name">
-          <el-input v-model="parms.price"></el-input>
+          <el-input v-model="parms.area"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
         <el-form-item label="电梯" prop="name">
-          <el-input v-model="parms.area"></el-input>
+          <el-input v-model="parms.elevatorbrand"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -65,12 +79,12 @@
     <el-row>
       <el-col :span="12">
         <el-form-item label="开发商" prop="name">
-          <el-input v-model="parms.area"></el-input>
+          <el-input v-model="parms.developer"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="物管公司" prop="name">
-          <el-input v-model="parms.price"></el-input>
+          <el-input v-model="parms.company"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -96,14 +110,14 @@
       <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     </el-form-item>
     <el-form-item label="大楼介绍"  prop="region">
-      <el-input v-model="parms.text"
+      <el-input v-model="parms.introduce"
                 type="textarea"
                 autosize
                 placeholder="请输入房源描述">
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary">立即创建</el-button>
+      <el-button type="primary" @click="submit">立即创建</el-button>
       <el-button @click.native.prevent>取消</el-button>
     </el-form-item>
   </el-form>
@@ -113,6 +127,9 @@
   export default {
     data () {
       return {
+        uploadHeader: {
+          enctype:"multipart/form-data"
+        },
         form: {
           name: '',
           region: '',
@@ -125,50 +142,95 @@
           imageUrl: '',
         },
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: '渝中区',
+          label: '渝中区'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: '江北区',
+          label: '江北区'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: '南岸区',
+          label: '南岸区'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: '九龙坡区',
+          label: '九龙坡区'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '沙坪坝区',
+          label: '沙坪坝区'
+        }, {
+          value: '大渡口区',
+          label: '大渡口区'
+        }, {
+          value: '北碚区',
+          label: '北碚区'
+        }, {
+          value: '渝北区',
+          label: '渝北区'
+        }, {
+          value: '巴南区',
+          label: '巴南区'
+        }, {
+          value: '两江新区',
+          label: '两江新区'
         }],
         value: '',
         parms:{
           name:null,
-          plot:null,
+          region:null,
+          address:null,
+          daddress:null,
+          managecost:null,
+          floors:null,
+          parkspace:null,
+          elevatorbrand:null,
+          elevatorcount:null,
           area:null,
-          price:null,
-          options:1,
-          Manager:null,
-          text:null
+          airconditioning:null,
+          developer:null,
+          company:null,
+          introduce:null,
+          typeimg:null,
+          height:null
         },
-        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
+        fileList2: [],
         dynamicTags: ['精装', '家具', '桌椅'],
         inputVisible: false,
-        inputValue: ''
-
+        inputValue: '',
+        formdata:[],
+        file:[]
       }
     },
+    created(){
+      this.formdata = new FormData();
+    },
     methods: {
+      submit(){
+        this.addbuild()
+      },
+      addbuild(){
+        this.formdata=new FormData()
+        this.file.forEach((item,index)=>{
+          this.formdata.append('photo',item);
+        })
+        for(let k in this.parms){
+            this.formdata.append(k,this.parms[k])
+        }
+        let config = {
+          headers:{'Content-Type':'multipart/form-data'}
+        }; //添加请求头
+        this.$axios.post('/building/add', this.formdata,config)
+          .then(response=>{
+            console.log(response.data);
+          })
+      },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
-
       showInput() {
         this.inputVisible = true;
         this.$nextTick(_ => {
           this.$refs.saveTagInput.$refs.input.focus();
         });
       },
-
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {
@@ -178,7 +240,7 @@
         this.inputValue = '';
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
+        this.fileList2[this.file.length]=file
       },
       handlePreview(file) {
         console.log(file);
@@ -188,18 +250,17 @@
       },
       handleAvatarSuccess (res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
+        console.log(this.imageUrl)
       },
       beforeAvatarUpload (file) {
-        const isJPG = file.type === 'image/jpeg' ;
         const isLt2M = file.size / 1024 / 1024 < 2
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
-        return isJPG && isLt2M;
+        console.log(file)
+        this.file.push(file);
+        // return  false
+        return  isLt2M;
       }
     }
   }

@@ -29,7 +29,7 @@ public class HouseController {
 	@Autowired
 	HouseService service;
 
-	@Value("${picture.houseimg-save-dir}")
+	@Value("${all.photo-save-dir}")
 	private String savePath;
 
 	/**
@@ -114,6 +114,20 @@ public class HouseController {
 	public JSONResponse modBuilding(HttpServletRequest req, HttpServletResponse resp, HouseAo ao, @RequestParam(value="photo") MultipartFile[] files, @RequestParam(value="imgId")List<String> imgIds) throws Exception{
 		HouseEntity e = service.modHouse(ao, savePath, files, imgIds);
 		return JSONResponse.ok(e);
+	}
+
+
+	/**
+	 * 通过楼盘主键，查询该楼盘下面所有的房间
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/que")
+	@ResponseBody
+	public JSONResponse queryHousesByB(String id) throws Exception{
+		List<HouseEntity> entities = service.query(id);
+		return JSONResponse.ok(entities);
 	}
 
 }

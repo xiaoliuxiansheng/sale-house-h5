@@ -7,6 +7,18 @@
         <el-radio class="radio" :label="0">出售</el-radio>
       </el-radio-group>
     </el-form-item>
+    <el-row>
+      <el-col :span="12">
+        <el-form-item label="房东姓名" prop="name">
+          <el-input v-model="parms.area"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="房东电话" prop="name">
+          <el-input v-model="parms.price"></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
     <el-form-item label="选择小区">
     <el-select v-model="parms.plot" placeholder="请选择所属小区">
       <el-option

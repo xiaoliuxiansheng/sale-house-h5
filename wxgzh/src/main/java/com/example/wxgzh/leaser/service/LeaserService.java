@@ -3,6 +3,7 @@ package com.example.wxgzh.leaser.service;
 
 import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.entity.LeaserEntity;
+import com.example.wxgzh.entity.ManagerRelaEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface LeaserService {
@@ -16,5 +17,7 @@ public interface LeaserService {
 
 	public QueryResult<LeaserEntity> queryAll(String name, String pageNo, String pageSize) throws Exception;
 
-	public LeaserEntity login(String account,String password)throws Exception;
+	public LeaserEntity login(String phone,String password)throws Exception;
+
+	public void allocate(ManagerRelaEntity entity)throws Exception;
 }

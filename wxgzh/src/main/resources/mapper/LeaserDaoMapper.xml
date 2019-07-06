@@ -58,4 +58,10 @@
             </if>
         </where>
     </select>
+
+
+    <insert id="allocate" parameterType="com.example.wxgzh.entity.ManagerRelaEntity">
+        insert into wx_leaser_rela(pk_leaser_rela, pk_leaser, pk_house)
+        values (#{pk_leaser_rela}, #{pk_leaser}, #{pk_house})
+    </insert>
 </mapper>

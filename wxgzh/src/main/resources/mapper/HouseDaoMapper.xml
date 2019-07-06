@@ -29,8 +29,8 @@
 	</resultMap>-->
 
 	<insert id="insert">
-		insert into wx_house(pk_house,buildingname,floor,area,price,rent,trimstyle,houseimg,describe,name,phone,rors,isexist)
-		values('${pk_house}','${buildingname}','${floor}','${area}','${price}','${rent}','${trimstyle}','${houseimg}','${describe}','${name}','${phone}','${rors}','${isexist}')
+		insert into wx_house(pk_building,pk_house,buildingname,floor,area,price,rent,trimstyle,houseimg,describe,name,phone,rors)
+		values(#{pk_building},#{pk_house},#{buildingname},#{floor},#{area},#{price},#{rent},#{trimstyle},#{houseimg},#{describe},#{name},#{phone},#{rors})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -39,16 +39,15 @@
 
 	<!--根据id查询-->
 	<select id="selectById" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
-		select * from wx_house
+		select wh.*,wl.name as leasername,wl.leaserphone,wl.avatar from wx_house wh
+		left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
+		left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
 		where pk_house = #{id}
 	</select>
 
 	<update id="update">
 		update wx_house
 		<trim prefix="set" suffixOverrides=",">
-			<if test="map.pk_house != null">
-				pk_house = #{map.pk_house},
-			</if>
 			<if test="map.buildingname != null">
 				buildingname = #{map.buildingname},
 			</if>
@@ -88,6 +87,13 @@
 		</trim>
 		where pk_builiding = #{id}
 	</update>
+
+	<select id="query" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
+		select wh.*,wl.name as leasername,wl.leaserphone,wl.avatar from wx_house wh
+		left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
+		left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
+		where pk_building=#{id}
+	</select>
 
 
 </mapper>

@@ -11,9 +11,12 @@ import com.example.wxgzh.common.util.PictureUtil;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.HouseEntity;
+import com.example.wxgzh.entity.ManagerRelaEntity;
 import com.example.wxgzh.house.dao.HouseDao;
 import com.example.wxgzh.house.dto.HouseAo;
+import com.example.wxgzh.leaser.dao.LeaserDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -29,27 +32,39 @@ public class HouseServiceImpl implements HouseService {
     //创建一个dao层对象
     final HouseDao dao;
 
-    public HouseServiceImpl(HouseDao dao) {
+    //创建一个dao层对象
+    final LeaserDao leaserDao;
+
+    public HouseServiceImpl(HouseDao dao,LeaserDao leaserDao) {
         this.dao = dao;
+        this.leaserDao = leaserDao;
     }
 
     @Override
+    @Transactional
     public HouseEntity addHouse(HouseAo ao) throws Exception {
+
         HouseEntity entity = new HouseEntity();
+        ManagerRelaEntity mentity = new ManagerRelaEntity();
+
+        String pk_building = $("楼盘主键不能为空！",ao.getPk_building());//楼盘信息主键
         String pk_house = ao.getPk_house();//房间信息主键
         String buildingname = ao.getBuildingname();//楼盘名称
         String floor = ao.getFloor();//楼层
         int area = Integer.parseInt(ao.getArea(),10);//房间面积(m3)
         int price = Integer.parseInt(ao.getPrice(),10);//房间单价(元/m2·月)
-        int rent = Integer.parseInt(ao.getRent(),10);//租金(元/月)
+        int rent = -1;//租金(元/月)设置租金初始值
+        rent = area * price;
         String trimstyle = ao.getTrimstyle();//装修风格
         String houseimg = ao.getHouseimg();//房间照片地址
         String describe = ao.getDescribe();//房源描述
         String name = ao.getName();//联系人
         String phone = ao.getPhone();//联系电话
         String rors = ao.getRors();//出租(rent)或者出售(sell);1为出租，2为出售
-        String isexist = ao.getIsexist();//是否存在(如果出售或出租，则为N)
+        //String isexist = ao.getIsexist();//是否存在(如果出售或出租，则为N)
+        String pk_leaser = ao.getPk_leaser();
 
+        entity.setPk_building(pk_building);
         entity.setPk_house(pk_house);
         entity.setBuildingname(buildingname);
         entity.setFloor(floor);
@@ -62,9 +77,15 @@ public class HouseServiceImpl implements HouseService {
         entity.setName(name);
         entity.setPhone(phone);
         entity.setRors(rors);
-        entity.setIsexist(isexist);
+        //entity.setIsexist(isexist);
 
         dao.insert(entity);
+
+        String pk_leaser_rela = UUID.random32();
+        mentity.setPk_leaser_rela(pk_leaser_rela);
+        mentity.setPk_leaser(pk_leaser);
+        mentity.setPk_house(pk_house);
+        leaserDao.allocate(mentity);
         return entity;
     }
 
@@ -223,7 +244,10 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public HouseEntity query(String id) throws Exception {
-        return null;
+    public List<HouseEntity> query(String id) throws Exception {
+
+        List<HouseEntity> houseEntities =dao.query(id);
+
+        return houseEntities;
     }
 }

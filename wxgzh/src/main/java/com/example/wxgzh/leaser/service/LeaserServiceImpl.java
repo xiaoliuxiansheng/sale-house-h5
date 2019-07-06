@@ -8,6 +8,7 @@ import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.MD5;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.LeaserEntity;
+import com.example.wxgzh.entity.ManagerRelaEntity;
 import com.example.wxgzh.leaser.dao.LeaserDao;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -154,11 +155,11 @@ public class LeaserServiceImpl implements LeaserService {
 	}
 
 	@Override
-	public LeaserEntity login(String account, String password) throws Exception {
-		LeaserEntity entity = dao.select("phone", $("账号不能为空", account));
+	public LeaserEntity login(String phone, String password) throws Exception {
+		LeaserEntity entity = dao.select("phone", $("电话号码不能为空", phone));
 		password = $("密码不能为空", password);
 		if (entity == null){
-			throw new WxgzhException("该账号不存在或已被删除！");
+			throw new WxgzhException("该招商经理不存在或已被删除！");
 		}
 		if (!entity.getPassword().equals(MD5.encode(password))){
 			throw new WxgzhException("密码错误，请重试！");
@@ -167,5 +168,15 @@ public class LeaserServiceImpl implements LeaserService {
 		}
 	}
 
+	@Override
+	public void allocate(ManagerRelaEntity entity) throws Exception {
+
+		String pk_leaser_rela = UUID.random32();
+
+		entity.setPk_leaser_rela(pk_leaser_rela);
+
+		dao.allocate(entity);
+
+	}
 
 }

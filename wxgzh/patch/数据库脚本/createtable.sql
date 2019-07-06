@@ -4,14 +4,14 @@ create user wxgzh identified by wxgzh;
 --给用户授权
 grant connect, resource to wxgzh;
 --授权允许查看sys用户所拥有的数据字典表，不然使用plsql时会报错提示
-grant SELECT ANY DICTIONARY to wxgzh;
+grant SELECT ANY DICTIONARY to wxgzh
 
 ----管理员
 create table wx_manager
 (
   pk_manager      char(32) not null,--管理员主键
   account    VARCHAR2(50) not null,--账号
-  password    VARCHAR2(50) not null,--密码
+  password    char(32) not null,--密码
   vdef1           VARCHAR2(50),
   vdef2           VARCHAR2(50),
   vdef3           VARCHAR2(50),
@@ -54,10 +54,11 @@ create table wx_builiding
 ----房间信息
 create table wx_house
 (
+  pk_building   char(32) not null,--楼盘信息主键
   pk_house   char(32) not null,--房间信息主键
   buildingname   VARCHAR2(100),--楼盘名称
   floor     VARCHAR2(100),--楼层
-  area     NUMBER(10),--房间面积(m3)
+  area     NUMBER(10),--房间面积(m2)
   price     NUMBER(10),--房间单价(元/m2·月)
   rent           NUMBER(10),--租金(元/月)
   trimstyle   varchar2(50),--装修风格
@@ -80,7 +81,8 @@ create table wx_leaser
   pk_leaser  char(32) not null,--招商经理主键
   name    VARCHAR2(50) not null,--招商经理姓名
   phone    VARCHAR2(20) not null,--招商经理电话
-  password  VARCHAR2(50) not null,--招商经理登陆密码
+  password  char(32) not null,--招商经理登陆密码
+  avatar        VARCHAR2(500),--招商经理头像地址
   vdef1         VARCHAR2(50),
   vdef2         VARCHAR2(50),
   vdef3         VARCHAR2(50),
