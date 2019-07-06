@@ -6,8 +6,8 @@
         <el-form-item>
 <!--          <el-button type="primary" v-on:click="getUsers">出租</el-button>-->
           <div class="btn">
-            <div class="link">出租</div>
-            <div>出售</div>
+            <div :class="{link: link==0 }" @click="changtype(0)">出租</div>
+            <div :class="{link: link==1 }"  @click="changtype(1)">出售</div>
           </div>
         </el-form-item>
       </el-form>
@@ -176,6 +176,7 @@
   export default {
     data () {
       return {
+        link:0,
         filters: {
           name: ''
         },
@@ -263,6 +264,9 @@
         }
       } } ,
     methods: {
+      changtype(x){
+        this.link=x
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -426,6 +430,7 @@
 
 <style lang="scss">
   .btn{
+    cursor: pointer;
     width: 160px;
     height: 50px;
     border-radius: 15px;
