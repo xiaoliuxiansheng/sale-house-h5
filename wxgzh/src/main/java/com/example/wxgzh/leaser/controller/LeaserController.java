@@ -7,10 +7,7 @@ import com.example.wxgzh.entity.ManagerRelaEntity;
 import com.example.wxgzh.leaser.service.LeaserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +27,9 @@ public class LeaserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping("/add")
+	@PostMapping("/add")
 	@ResponseBody
-	public JSONResponse addLeaser(LeaserEntity entity, @RequestParam(value="avatar") MultipartFile file) throws Exception{
+	public JSONResponse addLeaser(LeaserEntity entity, @RequestParam(value="file") MultipartFile file) throws Exception{
 		LeaserEntity e = service.addLeaser(entity, file);
 
 		return JSONResponse.ok(e);
@@ -104,7 +101,7 @@ public class LeaserController {
 	}
 
 
-	//allocate
+	//allocate分配
 	@GetMapping("/allocate")
 	@ResponseBody
 	public JSONResponse queryManager(ManagerRelaEntity entity) throws Exception{
@@ -112,5 +109,12 @@ public class LeaserController {
 		service.allocate(entity);
 
 		return JSONResponse.ok();
+	}
+
+	@GetMapping("/query")
+	@ResponseBody
+	public JSONResponse selectByName(String id) throws Exception{
+		LeaserEntity e = service.query(id);
+		return JSONResponse.ok(e);
 	}
 }

@@ -32,7 +32,7 @@ public class AvatarController {
 
 		try(ServletOutputStream out = resp.getOutputStream();
 			FileInputStream in=new FileInputStream(
-					new File(saveDir, fileSufix));
+					new File(saveDir, url));
 		){
 			byte[] buf=new byte[10240];
 			int readed=0;

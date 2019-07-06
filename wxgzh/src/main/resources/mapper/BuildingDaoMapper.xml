@@ -137,4 +137,8 @@
         </where>
 	</select>
 
+	<select id="queryByNames" resultMap="result">
+		select pk_builiding,name from wx_builiding
+	</select>
+
 </mapper>

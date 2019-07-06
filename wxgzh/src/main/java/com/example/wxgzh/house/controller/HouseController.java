@@ -1,7 +1,6 @@
 package com.example.wxgzh.house.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.example.wxgzh.common.dto.JSONResponse;
 import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.UUID;
@@ -129,8 +128,15 @@ public class HouseController {
 	 */
 	@PostMapping("/que")
 	@ResponseBody
-	public JSONResponse queryHousesByB(String id) throws Exception{
-		List<HouseEntity> entities = service.query(id);
+	public JSONResponse queryHousesByB(HttpServletRequest req,String id) throws Exception{
+		String ip = req.getServerName();
+
+		int port = req.getServerPort();
+
+		String url = "http://"+ip+":"+port;
+
+		List<HouseEntity> entities = service.query(url,id);
+
 		return JSONResponse.ok(entities);
 	}
 

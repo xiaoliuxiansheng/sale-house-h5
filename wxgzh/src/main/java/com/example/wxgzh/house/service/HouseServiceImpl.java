@@ -246,9 +246,19 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<HouseEntity> query(String id) throws Exception {
+    public List<HouseEntity> query(String url,String id) throws Exception {
 
         List<HouseEntity> houseEntities =dao.query(id);
+
+        if (!houseEntities.isEmpty()){
+            for (HouseEntity e:houseEntities
+                 ) {
+                e.setHouseimg(url+e.getHouseimg());
+                if (e.getAvatar()!=null){
+                    e.setAvatar(url+e.getAvatar());
+                }
+            }
+        }
 
         return houseEntities;
     }
