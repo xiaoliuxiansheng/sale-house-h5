@@ -131,8 +131,8 @@
                 name like #{name}
             </if>
 
-            <if test="regin != null">
-                and regin like #{regin}
+            <if test="region != null">
+                and region like #{region}
             </if>
         </where>
 	</select>
