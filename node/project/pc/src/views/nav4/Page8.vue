@@ -4,10 +4,10 @@
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
       <el-form :inline="true" :model="filters">
         <el-form-item>
-          <el-input v-model="filters.name" placeholder="楼盘名称"></el-input>
+          <el-input v-model="parms.name" placeholder="楼盘名称"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-select v-model="value" placeholder="选择区域">
+          <el-select v-model="parms.region" placeholder="选择区域">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -17,7 +17,8 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" v-on:click="getUsers">查询</el-button>
+          <el-button type="primary" v-on:click="search()">查询</el-button>
+          <el-button type="primary" v-on:click="reset()">重置</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -26,19 +27,19 @@
     <el-table :data="users" highlight-current-row v-loading="listLoading" style="width: 100%;">
       <el-table-column prop="name" label="楼盘名称" width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="楼层" width="auto" >
+      <el-table-column prop="floors" label="楼层" width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="物管费" min-width="auto" >
+      <el-table-column prop="managecost" label="物管费" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="标准层面积" min-width="auto" >
+      <el-table-column prop="area" label="标准层面积" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="地址" width="auto" >
+      <el-table-column prop="address" label="地址" width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="物管公司" width="auto" >
+      <el-table-column prop="company" label="物管公司" width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="开发商" min-width="auto" >
+      <el-table-column prop="developer" label="开发商" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="房源数量" min-width="auto" >
+      <el-table-column prop="parkspace" label="房源数量" min-width="auto" >
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template scope="scope">
@@ -179,30 +180,47 @@
 </template>
 
 <script>
-  import util from '../../common/js/util'
-  import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api'
-
   export default {
     data () {
       return {
         filters: {
           name: ''
         },
+        parms:{
+          pageNo:1,
+          name:null,
+          region:null
+        },
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: '渝中区',
+          label: '渝中区'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: '江北区',
+          label: '江北区'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: '南岸区',
+          label: '南岸区'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: '九龙坡区',
+          label: '九龙坡区'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '沙坪坝区',
+          label: '沙坪坝区'
+        }, {
+          value: '大渡口区',
+          label: '大渡口区'
+        }, {
+          value: '北碚区',
+          label: '北碚区'
+        }, {
+          value: '渝北区',
+          label: '渝北区'
+        }, {
+          value: '巴南区',
+          label: '巴南区'
+        }, {
+          value: '两江新区',
+          label: '两江新区'
         }],
         value: '',
         users: [],
@@ -271,7 +289,45 @@
           desc: ''
         }
       } } ,
+    created(){
+      this.getlist()
+    },
     methods: {
+      search(){
+        this.parms.pageNo=1
+        this.getlist()
+      },
+      reset(){
+        this.parms={
+          pageNo:1,
+          name:null,
+          region:null
+        }
+        this.getlist()
+      },
+      getlist(){
+        let formdata;
+        formdata=new FormData()
+        for(let k in this.parms){
+          console.log(k,this.parms[k])
+          formdata.append(k,this.parms[k])
+        }
+        console.log(formdata)
+        let config = {
+          headers:{'Content-Type':'multipart/form-data'}
+        }; //添加请求头
+        this.$axios.get("/building/list",{params:{
+          name:this.parms.name,
+            pageNo:this.parms.pageNo,
+            region:this.parms.region
+        }}).then((res)=>{
+         if (res.data.code=="ok"){
+           console.log(res)
+           this.users=res.data.data.rows
+           this.total=Number(res.data.data.totalRows)
+         }
+        })
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -305,8 +361,8 @@
         return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知'
       },
       handleCurrentChange (val) {
-        this.page = val
-        this.getUsers()
+        this.parms.pageNo = val
+        this.getlist()
       },
       // 获取用户列表
       getUsers () {
@@ -323,18 +379,29 @@
       },
       // 删除
       handleDel: function (index, row) {
+        console.log(row)
         this.$confirm('确认删除该记录吗?', '提示', {
           type: 'warning'
         }).then(() => {
           this.listLoading = true
-          let para = { id: row.id }
-          removeUser(para).then((res) => {
+          let formdata;
+          formdata=new FormData()
+          formdata.append('id', row.pkBuiliding );
+          let para = { id: row.pkBuiliding }
+         this.$axios.post("/building/del",formdata).then((res) => {
             this.listLoading = false
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            })
-            this.getUsers()
+           if (res.data.code=="ok"){
+             this.$message({
+               message: '删除成功',
+               type: 'success'
+             })
+           } else {
+             this.$message({
+               message: '删除失败，请稍后再试！',
+               type: 'warning'
+             })
+           }
+            this.getlist()
           })
         }).catch(() => {
 
@@ -425,9 +492,6 @@
 
         })
       }
-    },
-    mounted () {
-      this.getUsers()
     }
   }
 

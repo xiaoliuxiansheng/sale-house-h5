@@ -10,6 +10,9 @@
           <el-button type="primary" v-on:click="getUsers">查询</el-button>
         </el-form-item>
         <el-form-item>
+          <el-button type="primary" v-on:click="reset">重置</el-button>
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" @click="handleAdd">新增</el-button>
         </el-form-item>
       </el-form>
@@ -19,17 +22,16 @@
     <el-table :data="users" highlight-current-row v-loading="listLoading" style="width: 100%;">
       <el-table-column prop="name" label="姓名" width="auto" >
       </el-table-column>
-      <el-table-column prop="sex" label="性别" width="auto" :formatter="formatSex" >
+      <el-table-column prop="phone" label="联系电话" width="auto" >
       </el-table-column>
-      <el-table-column prop="age" label="年龄" width="auto" >
+      <el-table-column prop="avatar" label="头像" width="auto" >
+        <template scope="scope">
+          <div class="avatarimg">
+            <img :src="scope.row.avatar">
+          </div>
+        </template>
       </el-table-column>
-      <el-table-column prop="birth" label="联系电话" width="auto" >
-      </el-table-column>
-      <el-table-column prop="birth" label="头像" width="auto" >
-      </el-table-column>
-      <el-table-column prop="addr" label="账号" min-width="auto" >
-      </el-table-column>
-      <el-table-column prop="addr" label="密码" min-width="auto" >
+      <el-table-column prop="phone" label="账号" min-width="auto" >
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template scope="scope">
@@ -49,18 +51,18 @@
 
     <!--编辑界面-->
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
-      <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+      <el-form :model="editForm" label-width="80px" :rules="addFormRules" ref="addForm">
         <el-row>
           <el-col :span="10">
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="addForm.name" auto-complete="off"></el-input>
+              <el-input v-model="editForm.name" auto-complete="off"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="8">
+          <el-col :span="10">
             <el-form-item label="电话"  prop="phone">
-              <el-input placeholder="请输入电话" v-model="addForm.phone" clearable></el-input>
+              <el-input placeholder="请输入电话" v-model="editForm.phone" clearable></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -70,20 +72,16 @@
             action="https://jsonplaceholder.typicode.com/posts/"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
+            :before-upload="editbeforeAvatarUpload"
+            :file-list="fileList">
             <img v-if="imageUrl" :src="imageUrl" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
         <el-row>
           <el-col :span="10">
-            <el-form-item label="账号" prop="num">
-              <el-input placeholder="请输入账号" v-model="addForm.num" clearable></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="密码" prop="pwd">
-              <el-input placeholder="请输入密码" v-model="addForm.pwd" clearable></el-input>
+            <el-form-item label="密码" >
+              <el-input placeholder="请输入密码" v-model="addForm.password" clearable></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -100,12 +98,12 @@
         <el-row>
           <el-col :span="10">
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="addForm.name" auto-complete="off"></el-input>
+              <el-input v-model="addForm.name" auto-complete="off" placeholder="请输入名称" ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="8">
+          <el-col :span="12">
             <el-form-item label="电话"  prop="phone">
               <el-input placeholder="请输入电话" v-model="addForm.phone" clearable></el-input>
             </el-form-item>
@@ -114,7 +112,7 @@
         <el-form-item label="头像">
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="http://192.168.1.4:8081/api/o/o"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
@@ -123,14 +121,9 @@
           </el-upload>
         </el-form-item>
         <el-row>
-          <el-col :span="10">
-            <el-form-item label="账号" prop="num">
-              <el-input placeholder="请输入账号" v-model="addForm.num" clearable></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-          <el-form-item label="密码" prop="pwd">
-            <el-input placeholder="请输入密码" v-model="addForm.pwd" clearable></el-input>
+          <el-col :span="12">
+          <el-form-item label="密码">
+            <el-input placeholder="请输入密码" v-model="addForm.password" clearable></el-input>
           </el-form-item>
           </el-col>
         </el-row>
@@ -151,14 +144,14 @@ export default {
   data () {
     return {
       filters: {
-        name: ''
+        name: null,
+        pageNo:null,
       },
       users: [],
       total: 0,
       page: 1,
       listLoading: false,
       sels: [], // 列表选中列
-
       editFormVisible: false, // 编辑界面是否显示
       editLoading: false,
       editFormRules: {
@@ -168,14 +161,13 @@ export default {
       },
       // 编辑界面数据
       editForm: {
-        id: 0,
-        name: '',
-        sex: -1,
-        age: 0,
-        num: null,
+        name: null,
+        file:null,
+        password: null,
         phone: null,
-        pwd: null
+        file:null
      },
+      fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
       addFormVisible: false, // 新增界面是否显示
       addLoading: false,
       addFormRules: {
@@ -201,11 +193,10 @@ export default {
       },
       // 新增界面数据
       addForm: {
-        name: '',
-        sex: -1,
-        age: 0,
-        birth: '',
-        addr: ''
+        name: null,
+        file:null,
+        password: null,
+        phone: null
       },
       imageUrl: '',
       input: '',
@@ -221,6 +212,13 @@ export default {
       }
     } } ,
   methods: {
+    reset(){
+      this.filters={
+        name: null,
+        pageNo:null
+      }
+      this.getUsers()
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -247,6 +245,20 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
+      this.addForm.file=file
+      return isJPG && isLt2M
+    },
+    editbeforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      this.editForm.file=file
       return isJPG && isLt2M
     },
     // 性别显示转换
@@ -254,20 +266,20 @@ export default {
       return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知'
     },
     handleCurrentChange (val) {
-      this.page = val
+      this.filters.pageNo = val
       this.getUsers()
     },
     // 获取用户列表
     getUsers () {
-      let para = {
-        page: this.page,
-        name: this.filters.name
-      }
       this.listLoading = true
-      getUserListPage(para).then((res) => {
-        this.total = res.data.total
-        this.users = res.data.users
-        this.listLoading = false
+      this.$axios.get("/leaser/list",{params:this.filters}).then((res) => {
+        console.log(res)
+        if (res.data.code=="ok"){
+          this.total =Number(res.data.data.totalRows)
+          this.users = res.data.data.rows
+          this.listLoading = false
+        }
+        console.log(this.users)
       })
     },
     // 删除
@@ -276,67 +288,96 @@ export default {
         type: 'warning'
       }).then(() => {
         this.listLoading = true
-        let para = { id: row.id }
-        removeUser(para).then((res) => {
+        let para = { id: row.pk_leaser }
+        this.$axios.post("/leaser/del",para).then((res) => {
           this.listLoading = false
-          this.$message({
-            message: '删除成功',
-            type: 'success'
-          })
+          if (res.data.code=="ok"){
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: '删除失败，请稍后重试！',
+              type: 'warning'
+            })
+          }
           this.getUsers()
         })
       }).catch(() => {
-
       })
     },
     // 显示编辑界面
     handleEdit: function (index, row) {
       this.editFormVisible = true
       this.editForm = Object.assign({}, row)
+      console.log(row)
+      // this.fileList[0].url=row.avatar
     },
     // 显示新增界面
     handleAdd: function () {
       this.addFormVisible = true
       this.addForm = {
-        name: '',
-        sex: -1,
-        age: 0,
-        birth: '',
-        addr: ''
+        name: null,
+        file:null,
+        password: null,
+        phone: null
       }
     },
     // 编辑
     editSubmit: function () {
-      this.$refs.editForm.validate((valid) => {
-        if (valid) {
-          this.$confirm('确认提交吗？', '提示', {}).then(() => {
+      // this.$refs.editForm.validate((valid) => {
+      //   if (valid) {
+          this.$confirm('确认提交吗？', '提示', {}).then((res) => {
             this.editLoading = true
-            let para = Object.assign({}, this.editForm)
-            para.birth = (!para.birth || para.birth === '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd')
-            editUser(para).then((res) => {
-              this.editLoading = false
-              this.$message({
-                message: '提交成功',
-                type: 'success'
+            this.addLoading = true
+              let formdata;
+              formdata=new FormData()
+              for(let k in this.editForm){
+                formdata.append(k,this.editForm[k])
+              }
+              let config = {
+                headers:{'Content-Type':'multipart/form-data'}
+              }; //添加请求头
+              this.$axios.post("/leaser/mod",formdata,config).then((res) => {
+                if (res.data.code=="ok"){
+                  this.$message({
+                    message: '修改成功',
+                    type: 'success'
+                  })
+                } else {
+                  this.$message({
+                    message: '修改失败，请稍后重试！',
+                    type: 'warning'
+                  })
+                }
+                this.editLoading = false
+                // this.$refs['editForm'].resetFields()
+                this.editFormVisible = false
+                this.getUsers()
               })
-              this.$refs['editForm'].resetFields()
-              this.editFormVisible = false
-              this.getUsers()
-            })
+            // NProgress.start();
+
           })
-        }
-      })
+        // }
+      // })
     },
     // 新增
     addSubmit: function () {
       this.$refs.addForm.validate((valid) => {
         if (valid) {
-          this.$confirm('确认提交吗？', '提示', {}).then(() => {
+          this.$confirm('确认提交吗？', '提示', {}).then((res) => {
             this.addLoading = true
             // NProgress.start();
-            let para = Object.assign({}, this.addForm)
-            para.birth = (!para.birth || para.birth === '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd')
-            addUser(para).then((res) => {
+            let formdata;
+            formdata=new FormData()
+            for(let k in this.addForm){
+              formdata.append(k,this.addForm[k])
+            }
+            let config = {
+              headers:{'Content-Type':'multipart/form-data'}
+            }; //添加请求头
+            this.$axios.post("/leaser/add",formdata,config).then((res) => {
               this.addLoading = false
               // NProgress.done();
               this.$message({
@@ -382,7 +423,7 @@ export default {
 
 </script>
 
-<style >
+<style lang="scss">
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -405,5 +446,11 @@ export default {
     width: 178px;
     height: 178px;
     display: block;
+  }
+  .avatarimg{
+    img{
+      height: 50px;
+      width: 50px;
+    }
   }
 </style>
