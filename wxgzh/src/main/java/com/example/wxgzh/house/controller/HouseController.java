@@ -10,10 +10,7 @@ import com.example.wxgzh.house.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -29,7 +27,7 @@ public class HouseController {
 	@Autowired
 	HouseService service;
 
-	@Value("${picture.houseimg-save-dir}")
+	@Value("${all.photo-save-dir}")
 	private String savePath;
 
 	/**
@@ -65,16 +63,21 @@ public class HouseController {
 
 	/**
 	 * 删除房间信息
-	 * @param id
+	 * @param value
 	 * @return
 	 * @throws Exception
 	 */
-	@PostMapping("/del")
-	@ResponseBody
-	public JSONResponse delHouse(String id) throws Exception{
+	@RequestMapping(value = "/del", method = RequestMethod.POST)
+	public JSONResponse delHouse(@RequestBody Map value) throws Exception{
+
+		String id = (String) value.get("id");
+
 		service.delHouse(id, savePath);
+
 		return JSONResponse.ok();
 	}
+
+
 
 	private List<String> saveFile(HttpServletRequest request,
 								  MultipartFile file, List<String> list, String id) {
@@ -114,6 +117,27 @@ public class HouseController {
 	public JSONResponse modBuilding(HttpServletRequest req, HttpServletResponse resp, HouseAo ao, @RequestParam(value="photo") MultipartFile[] files, @RequestParam(value="imgId")List<String> imgIds) throws Exception{
 		HouseEntity e = service.modHouse(ao, savePath, files, imgIds);
 		return JSONResponse.ok(e);
+	}
+
+
+	/**
+	 * 通过楼盘主键，查询该楼盘下面所有的房间
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/que")
+	@ResponseBody
+	public JSONResponse queryHousesByB(HttpServletRequest req,String id) throws Exception{
+		String ip = req.getServerName();
+
+		int port = req.getServerPort();
+
+		String url = "http://"+ip+":"+port;
+
+		List<HouseEntity> entities = service.query(url,id);
+
+		return JSONResponse.ok(entities);
 	}
 
 }

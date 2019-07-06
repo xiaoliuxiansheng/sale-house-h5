@@ -7,6 +7,7 @@ import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.LeaserEntity;
+import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -138,4 +139,11 @@ public class BuildingController {
 		return JSONResponse.ok(e);
 	}
 
+
+	@GetMapping("/queryNames")
+	@ResponseBody
+	public JSONResponse queryNames() throws Exception{
+		List<BuildingEntity> e = service.queryNames();
+		return JSONResponse.ok(e);
+	}
 }

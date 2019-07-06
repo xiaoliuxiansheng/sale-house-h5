@@ -2,6 +2,7 @@ package com.example.wxgzh.entity;
 
 public class HouseEntity {
 
+    private String pk_building;//楼盘信息主键
     private String pk_house;//房间信息主键
     private String buildingname;//楼盘名称
     private String floor;//楼层
@@ -15,7 +16,43 @@ public class HouseEntity {
     private String phone;//联系电话
     private String rors;//出租(rent)或者出售(sell);1为出租，2为出售
     private String isexist;//是否存在(如果出售或出租，则为N)
+    private String leasername;//招商经理名称
+    private String leaserphone;//招商经理电话
+    private String avatar;//招商经理头像地址
 
+
+    public String getLeasername() {
+        return leasername;
+    }
+
+    public void setLeasername(String leasername) {
+        this.leasername = leasername;
+    }
+
+    public String getLeaserphone() {
+        return leaserphone;
+    }
+
+    public void setLeaserphone(String leaserphone) {
+        this.leaserphone = leaserphone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+
+    public String getPk_building() {
+        return pk_building;
+    }
+
+    public void setPk_building(String pk_building) {
+        this.pk_building = pk_building;
+    }
 
     public String getPk_house() {
         return pk_house;

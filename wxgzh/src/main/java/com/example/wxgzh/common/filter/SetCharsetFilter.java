@@ -30,8 +30,12 @@ public class SetCharsetFilter implements Filter {
 		response.setContentType("application/json;charset=utf-8");
 		HttpServletResponse resp= ((HttpServletResponse)response);
 		HttpServletRequest req=(HttpServletRequest) request;
-		resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin")); 
-		resp.setHeader("Access-Control-Allow-Credentials", "true");
+//		resp.setHeader("Access-Control-Allow-Origin", "*");
+//		resp.setHeader("Access-Control-Allow-Credentials", "true");
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+		resp.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		resp.addHeader("Access-Control-Allow-Headers",
+				"Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token");
 		chain.doFilter(request, response);  //放行
 	}
 

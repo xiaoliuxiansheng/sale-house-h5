@@ -1,9 +1,8 @@
 package com.example.wxgzh.common.dao;
 
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
+
+import java.util.Map;
 
 public interface TemplateDao<T,ID> {
 	

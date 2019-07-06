@@ -1,26 +1,24 @@
 package com.example.wxgzh.picture.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+
 @Controller
-@RequestMapping("/photo")
-public class PictureController {
+@RequestMapping("/avatar")
+public class AvatarController {
 
 	@Value("${all.photo-save-dir}")
 	private String savePath;
 
-	@GetMapping("/**")
+	@GetMapping("/*")
 	public void avatar(HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		String url = req.getRequestURI();
 		String avatarPath = url.substring(url.lastIndexOf('/')+1);
@@ -34,7 +32,7 @@ public class PictureController {
 
 		try(ServletOutputStream out = resp.getOutputStream();
 			FileInputStream in=new FileInputStream(
-					new File(saveDir,url.replace("/avatar/","")));
+					new File(saveDir, url));
 		){
 			byte[] buf=new byte[10240];
 			int readed=0;
