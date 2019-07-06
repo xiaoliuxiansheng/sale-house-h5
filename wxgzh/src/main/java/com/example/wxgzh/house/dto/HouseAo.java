@@ -2,6 +2,7 @@ package com.example.wxgzh.house.dto;
 
 public class HouseAo {
 
+    private String pk_building;//楼盘信息主键
     private String pk_house;//房间信息主键
     private String buildingname;//楼盘名称
     private String floor;//楼层
@@ -15,7 +16,23 @@ public class HouseAo {
     private String phone;//联系电话
     private String rors;//出租(rent)或者出售(sell);1为出租，2为出售
     private String isexist;//是否存在(如果出售或出租，则为N)
+    private String pk_leaser;//招商经理主键
 
+    public String getPk_leaser() {
+        return pk_leaser;
+    }
+
+    public void setPk_leaser(String pk_leaser) {
+        this.pk_leaser = pk_leaser;
+    }
+
+    public String getPk_building() {
+        return pk_building;
+    }
+
+    public void setPk_building(String pk_building) {
+        this.pk_building = pk_building;
+    }
 
     public String getPk_house() {
         return pk_house;
