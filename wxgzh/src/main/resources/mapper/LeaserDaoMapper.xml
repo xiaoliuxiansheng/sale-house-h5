@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.wxgzh.leaser.dao.LeaserDao">
-	<insert id="insert" parameterType="com.example.wxgzh.entity.LeaserEntity">
-		insert into wx_leaser(pk_leaser,name,phone,password)
-		values(#{pk_leaser},#{name},#{phone},#{password})
-	</insert>
+    <resultMap type="leaserEntity" id="result">
+        <id column="pk_leaser" property="pk_leaser"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="password" property="password"/>
+        <result column="avatar" property="avatar"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.example.wxgzh.entity.LeaserEntity">
+        insert into wx_leaser(pk_leaser, name, phone, password, avatar)
+        values (#{pk_leaser}, #{name}, #{phone}, #{password}, #{avatar})
+    </insert>
 
-	<delete id="delete" parameterType="String">
-		delete wx_leaser where pk_leaser = #{id}
-	</delete>
+    <delete id="delete" parameterType="String">
+        delete
+        wx_leaser
+        where
+        pk_leaser
+        =
+        #{id}
+    </delete>
 
-	<!-- 是否存在数据 -->
-	<select id="exists" resultType="int">
-		select count(${column}) from wx_leaser
-		where ${column} = #{value}
-	</select>
+    <!-- 是否存在数据 -->
+    <select id="exists" resultType="int">
+        select count(${column})
+        from wx_leaser
+        where ${column} = #{value}
+    </select>
 
-	<update id="modify" parameterType="com.example.wxgzh.entity.LeaserEntity">
-		update wx_leaser set name = #{name},phone = #{phone},password = #{password}
-		where pk_leaser = #{pk_leaser}
-	</update>
+    <update id="modify" parameterType="com.example.wxgzh.entity.LeaserEntity">
+        update wx_leaser
+        set name     = #{name},
+            phone    = #{phone},
+            password = #{password}
+        where pk_leaser = #{pk_leaser}
+    </update>
+
+    <!-- 查询一条记录 -->
+    <select id="select" resultMap="result">
+        select * from wx_leaser where ${column} = #{value}
+    </select>
+
+    <select id="selectById" resultMap="result" parameterType="String">
+        select *
+        from wx_leaser
+        where pk_leaser = #{id}
+    </select>
+
+    <select id="selectByKey" resultMap="result" useCache="false">
+        select * from wx_leaser
+        <where>
+            <if test="key !=null">
+                name like #{key}
+            </if>
+        </where>
+    </select>
 </mapper>

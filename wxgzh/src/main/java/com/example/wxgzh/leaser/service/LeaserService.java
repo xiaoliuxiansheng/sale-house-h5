@@ -1,14 +1,20 @@
 package com.example.wxgzh.leaser.service;
 
 
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.entity.LeaserEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface LeaserService {
-	public LeaserEntity addLeaser(LeaserEntity entity) throws Exception;
+	public LeaserEntity addLeaser(LeaserEntity entity, MultipartFile file) throws Exception;
 
 	public void delLeaser(String id) throws Exception;
 
-	public LeaserEntity modLeaser(LeaserEntity entity) throws Exception;
+	public LeaserEntity modLeaser(LeaserEntity entity, MultipartFile file) throws Exception;
 
 	public LeaserEntity query(String id) throws Exception;
+
+	public QueryResult<LeaserEntity> queryAll(String name, String pageNo, String pageSize) throws Exception;
+
+	public LeaserEntity login(String account,String password)throws Exception;
 }

@@ -20,5 +20,5 @@ public interface BuildingService {
 
 	public BuildingEntity queryById(String id) throws Exception;
 
-	public QueryResult<BuildingEntity> queryAll(String key,String pageNo,String pageSize) throws Exception;
+	public QueryResult<BuildingEntity> queryAll(String name, String region, String pageNo,String pageSize) throws Exception;
 }

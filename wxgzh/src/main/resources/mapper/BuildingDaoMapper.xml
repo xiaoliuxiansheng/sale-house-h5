@@ -126,6 +126,15 @@
 	</select>
 	<select id="selectByKey" resultMap="result" useCache="false">
 		select * from wx_builiding
+        <where>
+            <if test="name != null">
+                name like #{name}
+            </if>
+
+            <if test="regin != null">
+                and regin like #{regin}
+            </if>
+        </where>
 	</select>
 
 </mapper>

@@ -127,8 +127,8 @@ public class BuildingController {
 
 	@GetMapping("/list")
 	@ResponseBody
-	public JSONResponse queryBuildingByKey(String key,String pageNo,String pageSize) throws Exception{
-		QueryResult<BuildingEntity> e = service.queryAll(key, pageNo, pageSize);
+	public JSONResponse queryBuildingByKey(String name,String region,String pageNo,String pageSize) throws Exception{
+		QueryResult<BuildingEntity> e = service.queryAll(name, region, pageNo, pageSize);
 		return JSONResponse.ok(e);
 	}
 	@GetMapping("/queryById")

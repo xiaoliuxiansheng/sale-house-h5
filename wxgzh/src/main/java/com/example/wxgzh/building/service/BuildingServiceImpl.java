@@ -259,9 +259,12 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public QueryResult<BuildingEntity> queryAll(String key, String pageNo, String pageSize) throws Exception {
-        if(key != null) {
-            key = "%"+key+"%";
+    public QueryResult<BuildingEntity> queryAll(String name, String region, String pageNo, String pageSize) throws Exception {
+        if(name != null) {
+            name = "%"+name+"%";
+        }
+        if(region != null) {
+            region = "%"+region+"%";
         }
         int no = 1;
         if(pageNo!=null) {
@@ -273,7 +276,7 @@ public class BuildingServiceImpl implements BuildingService {
         }
 
         PageHelper.startPage(no, size);
-        List<BuildingEntity> e = dao.selectByKey(key);
+        List<BuildingEntity> e = dao.selectByKey(name, region);
         PageInfo<BuildingEntity> pageinfo= new PageInfo<>(e);
         List<BuildingEntity> rows = new ArrayList<>();
         for (BuildingEntity buildingEntity : pageinfo.getList()) {

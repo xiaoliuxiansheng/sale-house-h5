@@ -11,5 +11,5 @@ import java.util.List;
 public interface BuildingDao extends TemplateDao<BuildingEntity, String> {
 
     List<String> selectRegion () throws Exception;
-    List<BuildingEntity> selectByKey(String key) throws Exception;
+    List<BuildingEntity> selectByKey(String name, String region) throws Exception;
 }
