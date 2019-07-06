@@ -7,10 +7,7 @@ import com.example.wxgzh.entity.ManagerRelaEntity;
 import com.example.wxgzh.leaser.service.LeaserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +27,9 @@ public class LeaserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping("/add")
+	@PostMapping("/add")
 	@ResponseBody
-	public JSONResponse addLeaser(LeaserEntity entity, @RequestParam(value="avatar") MultipartFile file) throws Exception{
+	public JSONResponse addLeaser(LeaserEntity entity, @RequestParam(value="file") MultipartFile file) throws Exception{
 		LeaserEntity e = service.addLeaser(entity, file);
 
 		return JSONResponse.ok(e);
@@ -74,8 +71,16 @@ public class LeaserController {
 	 */
 	@GetMapping("/list")
 	@ResponseBody
-	public JSONResponse selectByName(String name,String pageNo,String pageSize) throws Exception{
-		QueryResult<LeaserEntity> e = service.queryAll(name, pageNo, pageSize);
+	public JSONResponse selectByName(HttpServletRequest req,String name,String pageNo,String pageSize) throws Exception{
+		String ip = req.getServerName();
+
+		int port = req.getServerPort();
+
+		//String apppath = req.getContextPath();
+
+		String url = "http://"+ip+":"+port;
+
+		QueryResult<LeaserEntity> e = service.queryAll(url,name, pageNo, pageSize);
 		return JSONResponse.ok(e);
 	}
 

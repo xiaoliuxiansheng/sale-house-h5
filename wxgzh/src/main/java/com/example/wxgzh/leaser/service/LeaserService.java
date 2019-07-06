@@ -15,7 +15,7 @@ public interface LeaserService {
 
 	public LeaserEntity query(String id) throws Exception;
 
-	public QueryResult<LeaserEntity> queryAll(String name, String pageNo, String pageSize) throws Exception;
+	public QueryResult<LeaserEntity> queryAll(String url,String name, String pageNo, String pageSize) throws Exception;
 
 	public LeaserEntity login(String phone,String password)throws Exception;
 

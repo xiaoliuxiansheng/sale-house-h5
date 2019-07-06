@@ -126,7 +126,7 @@ public class LeaserServiceImpl implements LeaserService {
 	}
 
 	@Override
-	public QueryResult<LeaserEntity> queryAll(String name, String pageNo, String pageSize) throws Exception {
+	public QueryResult<LeaserEntity> queryAll(String url,String name, String pageNo, String pageSize) throws Exception {
 		if(name != null) {
 			name = "%"+name+"%";
 		}
@@ -145,6 +145,10 @@ public class LeaserServiceImpl implements LeaserService {
 		List<LeaserEntity> rows = new ArrayList<>();
 		for (LeaserEntity leaserEntity : pageinfo.getList()) {
 			rows.add(leaserEntity);
+		}
+		for (LeaserEntity entity: rows
+		) {
+			entity.setAvatar(url + entity.getAvatar());
 		}
 		QueryResult<LeaserEntity> m = new QueryResult<>();
 		m.setPageNo(no);

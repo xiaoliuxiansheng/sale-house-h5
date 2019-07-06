@@ -53,8 +53,8 @@
     <select id="selectByKey" resultMap="result" useCache="false">
         select * from wx_leaser
         <where>
-            <if test="key !=null">
-                name like #{key}
+            <if test="name != null">
+                name like #{name}
             </if>
         </where>
     </select>
