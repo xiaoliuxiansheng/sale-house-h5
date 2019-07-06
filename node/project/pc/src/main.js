@@ -7,7 +7,8 @@ import Mock from './mock'
 import 'font-awesome/css/font-awesome.min.css'
 import store from './vuex/store'
 import Vuex from 'vuex'
-
+import Axios from 'axios'
+Vue.prototype.$axios=Axios
 Mock.bootstrap()
 Vue.use(ElementUI)
 Vue.use(Vuex)
