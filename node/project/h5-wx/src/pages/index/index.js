@@ -7,6 +7,7 @@ import Vant from 'vant'
 import Axios from 'axios'
 // Axios.defaults.baseURL ="http://192.168.1.12:8081/api"
 Vue.prototype.$axios=Axios
+Axios.defaults.baseURL = 'http://192.168.1.4:8081/api'
 Vue.use(Vant)
 Vue.config.productionTip = false
 /* eslint-disable no-new */

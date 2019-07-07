@@ -6,24 +6,24 @@
     <div class="content" >
       <div class="swiper">
       <van-swipe :autoplay="3000" indicator-color="red">
-        <van-swipe-item v-for="item in 5">
-          <img src="@/assets/images/test.jpg"/>
+        <van-swipe-item v-for="(item,index) in msg.houseimg">
+          <img :src="item"/>
         </van-swipe-item>
       </van-swipe>
       </div>
       <div class="txt">
         <div class="title">
-          <span>中渝都会首站1号</span>
+          <span>{{msg.subordinate}}</span>
           <span class="position"><van-icon name="location-o" /></span>
         </div>
         <div class="two">
-          <div><span class="left" style="color: darkcyan">200</span>m²<span class="rigth" ><span style="color: darkcyan">租金 63元</span>/m²*月</span></div>
-          <div><span class="left">简装-家具</span><span class="rigth" ><span style="color: darkcyan">12600元</span>/月</span></div>
+          <div><span class="left" style="color: darkcyan">{{msg.area}}</span>m²<span class="rigth" ><span style="color: darkcyan">租金 {{msg.price}}元</span>/m²*月</span></div>
+          <div><span class="left">{{msg.trimstyle}}</span><span class="rigth" ><span style="color: darkcyan">{{msg.rent}}元</span>/月</span></div>
         </div>
         <div class="three">
           <div class="names">房源描述</div>
-          <span v-for="item in 6">
-            1、装修与布局：精装修交付，3个隔间，1个大通间，可自行设计装修
+          <span >
+            {{msg.describe}}
           </span>
         </div>
         <div class="four">
@@ -31,40 +31,57 @@
           <div class="box">
             <div class="img">
               <div class="left">
-                <img src="@/assets/images/test.jpg"/>
+                <img :src="msg.buildingimg[0]"/>
               </div>
               <div class="right">
-                <div class="top">
-                  <img src="@/assets/images/test.jpg"/>
+                <div class="top" v-if="msg.buildingimg[1]">
+                  <img :src="msg.buildingimg[1]"/>
                 </div>
-                <div class="bottom">
-                  <img src="@/assets/images/test.jpg"/>
+                <div class="bottom" v-if="msg.buildingimg[2]">>
+                  <img :src="msg.buildingimg[2]"/>
                 </div>
               </div>
             </div>
             <div class="txtss">
               <div class="perss" >
-                <span class="left"><span style="color: #999">楼层：</span>29层</span>
-                <span class="rigth"><span style="color: #999">物管费：</span>660个</span>
+                <span class="left"><span style="color: #999">楼层：</span>{{msg.floors}}层</span>
+                <span class="rigth"><span style="color: #999">物管费：</span>{{msg.managecost}}元/m²·月</span>
               </div>
               <div class="perss" >
-                <span class="left"><span style="color: #999">楼层：</span>29层</span>
-                <span class="rigth"><span style="color: #999">物管费：</span>660个</span>
+                <span class="left"><span style="color: #999">层高：</span>{{msg.height}}米</span>
+                <span class="rigth"><span style="color: #999">停车位：</span>{{msg.parkspace}}个</span>
               </div>
               <div class="perss" >
-                <span class="left"><span style="color: #999">楼层：</span>29层</span>
-                <span class="rigth"><span style="color: #999">物管费：</span>660个</span>
+                <span class="left"><span style="color: #999">电梯：</span>{{msg.elevatorbrand}}</span>
+                <span class="rigth"><span style="color: #999">标准层面积：</span>{{msg.standardarea}}m²</span>
               </div>
-              <div class="btn">查看大楼详情</div>
+              <div class="btn" @click="pushlist()">查看大楼详情</div>
             </div>
           </div>
         </div>
-        <div class="five">
-          <div class="names">大楼参数</div>
-          <div class="btns">
-            <span v-for="(item,index) in 5" :class="{'checked':'index>1'}">地铁</span>
-          </div>
+<!--        <div class="five">-->
+<!--          <div class="names">大楼参数</div>-->
+<!--          <div class="btns">-->
+<!--            <span v-for="(item,index) in 5" :class="{'checked':'index>1'}">地铁</span>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+    <div class="footer">
+      <div class="pers left" >
+        <img src="@/assets/images/test.jpg">
+      </div>
+      <div class="pers center">
+        <div class="top">
+          <span class="namess">陈方旭</span>
+          <span class="spanss">招商经理</span>
         </div>
+        <div class="phone">
+          18875150394
+        </div>
+      </div>
+      <div class="pers right">
+        <van-icon name="phone-o" />
       </div>
     </div>
   </div>
@@ -75,9 +92,40 @@
     components: {XImg},
     data(){
         return{
-          title:this.$route.query.name
+          id:this.$route.query.id,
+          title:null,
+          msg:{},
+          buildid:null
         }
+      },
+    created() {
+      this.getmsg()
+    },
+    methods:{
+      getmsg(){
+        this.$axios.get("/house/detail",{params:{
+          id:this.$route.query.id
+          }}).then((res)=>{
+            if (res.data.code=="ok"){
+              console.log(res)
+              this.title=res.data.data.subordinate
+              this.msg=res.data.data
+              console.log(this.msg.houseimg)
+                this.msg.houseimg=this.msg.houseimg.split(",")
+              this.msg.buildingimg=this.msg.buildingimg.split(",")
+            }
+        })
+      },
+      pushlist(){
+        this.$router.push({
+          path:"/list",
+          query:{
+            buildid:this.msg.pk_building
+          }
+        })
       }
+    }
+
   }
 </script>
 <style  scoped lang="scss">
@@ -86,6 +134,52 @@
     padding: 0;
     margin: 0;
     overflow: hidden;
+    padding-bottom: 3.2rem;
+  }
+  .footer{
+    position: fixed;
+    height: 80/$sc+rem;
+    bottom: 0;
+    background: #eee;
+    width: 100%;
+    z-index: 99;
+    display: flex;
+    .pers{
+      display: flex;
+    }
+    .left{
+      flex: 1;
+      vertical-align: middle;
+      padding: 5/$sc+rem;
+      img{
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+    }
+    .center{
+      flex: 2;
+      padding-top: 8/$sc+rem;
+      flex-direction: column;
+      font-size: 18/$sc+rem;
+      .div{
+        display: block;
+      }
+      .spanss{
+        display: inline-block;
+        margin-left: 12/$sc+rem;
+      }
+      .phone{
+        margin-top: 8/$sc+rem;
+      }
+    }
+    .right{
+      flex: 1;
+      font-size: 2.8rem;
+      color: #0c84d6;
+      text-align: center;
+      line-height: 90/$sc+rem;
+    }
   }
   .head{
     width: 100%;

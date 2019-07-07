@@ -47,16 +47,21 @@ export default {
         if (valid) {
           this.logining = true
           var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass }
-          requestLogin(loginParams).then(data => {
+          let formdata=new FormData()
+          formdata.append("account",this.ruleForm2.account)
+          formdata.append("password",this.ruleForm2.checkPass)
+
+          this.$axios.post("manager/login",formdata).then(data => {
             this.logining = false
             let { msg, code, user } = data
-            if (code !== 200) {
+            console.log(data)
+            if (data.data.code== "error") {
               this.$message({
-                message: msg,
-                type: 'error'
+                message: data.data.message,
+                type: "warning"
               })
             } else {
-              sessionStorage.setItem('user', JSON.stringify(user))
+              sessionStorage.setItem('user', JSON.stringify(loginParams))
               this.$router.push({ path: '/table' })
             }
           })

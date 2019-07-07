@@ -53,13 +53,13 @@
         v-for="tag in dynamicTags"
         closable
         :disable-transitions="false"
-        @close="handleClose(tag)">
+        @close="handleClose(tag)" >
         {{tag}}
       </el-tag>
       <el-input
         class="input-new-tag"
         v-if="inputVisible"
-        v-model="parms.trimstyle"
+        v-model="inputValue"
         ref="saveTagInput"
         size="small"
         @keyup.enter.native="handleInputConfirm"
@@ -148,6 +148,7 @@
     methods: {
       // 创建信息
       pushmsg(){
+        this.parms.trimstyle=this.dynamicTags.join("-");
         let formdata;
         formdata=new FormData()
         this.file.forEach((item,index)=>{
@@ -165,6 +166,17 @@
               type: "success",
               message:"添加成功！"
             })
+            this.parms={
+              pk_leaser:null,
+                phone:null,
+                price:null,
+                describe:null,
+                trimstyle:null,
+                area:null,
+                floor:null,
+                pk_building:null,
+                rors:1
+            }
           } else {
             this.$message({
               type: "warning",
@@ -221,17 +233,12 @@
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload (file) {
-        const isJPG = file.type === 'image/jpeg' ;
         const isLt2M = file.size / 1024 / 1024 < 2
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
         this.file.push(file);
-        return isJPG && isLt2M;
+        return  isLt2M;
       }
     }
   }

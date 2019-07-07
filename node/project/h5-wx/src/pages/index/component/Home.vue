@@ -12,19 +12,19 @@
     </van-dropdown-menu>
     </div>
     <div class="content" >
-      <div class="item" v-for="item in 10" @click="checkitem()">
+      <div class="item" v-for="(item,index) in users" @click="checkitem(item)">
         <van-row>
-          <van-col span="8"><img src="@/assets/images/test.jpg"></van-col>
+          <van-col span="8"><img :src="item.houseimg[0]"></van-col>
           <van-col span="16">
             <div class="name">
-              中渝广场 3号
+              {{item.subordinate}}
             </div>
             <div class="adress">
-              渝北区-加州新牌坊
+              {{item.address}}
             </div>
             <div class="price">
-              <span style="color: #0c84d6;">260</span>㎡
-              <span style="color: #0c84d6;" class="rigth">80</span>元/㎡*月
+              <span style="color: #0c84d6;">{{item.price}}</span>㎡
+              <span  class="rigth" style="float: right"><span style="color: #0c84d6;">{{item.rent}}</span>元/㎡*月</span>
             </div>
           </van-col>
         </van-row>
@@ -59,23 +59,51 @@
             { text: '好评排序', value: 'b' },
             { text: '销量排序', value: 'c' },
           ],
-          // testimg:require('@/assets/images/tidai.png')
+          parms:{
+            name:null,
+            region:null,
+            price:null,
+            area:null,
+            pageNo:null,
+            rors:1
+          },
+          users:[]
         }
       },
     created() {
-        // this.getmsg()
+        this.getmsg()
     },
     methods:{
-        getmsg(){
-          this.$axios.get("http://m.yuexz.com/cq/NoneLogin.aspx?action=gethouselist&pageindex=0").then((res)=>{
+      getmsg(){
+        let formdata;
+        formdata=new FormData()
+        for (let k in this.parms){
+          if(this.parms[k]){
+            formdata.append(k,this.parms[k])
+          }
+        }
+        this.$axios.post("/house/list",formdata).then((res) => {
+          if (res.data.code=="error"){
+            this.$message({
+              message:res.data.message,
+              type:"warning"
+            })
+          } else {
             console.log(res)
-          })
-        },
-      checkitem(){
+            this.users = res.data.data.rows
+            this.users.forEach((item,index)=>{
+              this.users[index].houseimg=item.houseimg.split(",")
+            })
+            console.log(this.users)
+          }
+        })
+      },
+      checkitem(item){
+        console.log(item)
           this.$router.push({
             path:"/details",
             query:{
-              name:"中渝都会首战1号"
+              id:item.pk_house
             }
           })
       }

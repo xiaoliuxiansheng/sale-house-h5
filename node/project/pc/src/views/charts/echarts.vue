@@ -6,8 +6,8 @@
         <el-form-item>
 <!--          <el-button type="primary" v-on:click="getUsers">出租</el-button>-->
           <div class="btn">
-            <div :class="{link: link==0 }" @click="changtype(0)">出租</div>
-            <div :class="{link: link==1 }"  @click="changtype(1)">出售</div>
+            <div :class="{link: link==1}" @click="changtype(1)">出租</div>
+            <div :class="{link: link==2 }"  @click="changtype(2)">出售</div>
           </div>
         </el-form-item>
       </el-form>
@@ -15,21 +15,17 @@
 
     <!--列表-->
     <el-table :data="users" highlight-current-row v-loading="listLoading" style="width: 100%;">
-      <el-table-column prop="name" label="楼盘名称" width="auto" >
+      <el-table-column prop="buildingname" label="楼盘名称" width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="楼层" width="auto" >
+      <el-table-column prop="floor" label="楼层房号" width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="物管费" min-width="auto" >
+      <el-table-column prop="name" label="业主姓名" width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="标准层面积" min-width="auto" >
+      <el-table-column prop="phone" label="业主电话" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="地址" width="auto" >
+      <el-table-column prop="area" label="建筑面积" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="物管公司" width="auto" >
-      </el-table-column>
-      <el-table-column prop="addr" label="开发商" min-width="auto" >
-      </el-table-column>
-      <el-table-column prop="addr" label="房源数量" min-width="auto" >
+      <el-table-column prop="price" label="价格" width="auto" >
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template scope="scope">
@@ -176,7 +172,7 @@
   export default {
     data () {
       return {
-        link:0,
+        link:1,
         filters: {
           name: ''
         },
@@ -261,11 +257,17 @@
           type: [],
           resource: '',
           desc: ''
+        },
+        parms:{
+          rors:1,
+          pageNo:1
         }
       } } ,
     methods: {
       changtype(x){
         this.link=x
+        this.parms.rors=x
+        this.getUsers()
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -300,35 +302,56 @@
         return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知'
       },
       handleCurrentChange (val) {
-        this.page = val
+        this.parms.pageNo = val
         this.getUsers()
       },
       // 获取用户列表
       getUsers () {
-        let para = {
-          page: this.page,
-          name: this.filters.name
+        let formdata=new FormData();
+        for(let k in this.parms){
+          formdata.append(k,this.parms[k])
         }
         this.listLoading = true
-        getUserListPage(para).then((res) => {
-          this.total = res.data.total
-          this.users = res.data.users
+        this.$axios.post("/ower/list",formdata).then((res) => {
+          if(res.data.code=="ok"){
+            this.total = res.data.data.totalRows
+            this.users = res.data.data.rows
+          } else {
+            this.$message({
+              message:res.data.message,
+              type:"warning"
+            })
+          }
           this.listLoading = false
         })
       },
       // 删除
       handleDel: function (index, row) {
+        this.parms.id=row.pk_ower
         this.$confirm('确认删除该记录吗?', '提示', {
           type: 'warning'
         }).then(() => {
           this.listLoading = true
           let para = { id: row.id }
-          removeUser(para).then((res) => {
+          let formdata=new FormData()
+          for(let k in this.parms){
+            if (this.parms){
+              formdata.append(k,this.parms[k])
+            }
+          }
+          this.$axios.post("/ower/del",formdata).then((res) => {
             this.listLoading = false
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            })
+            if (res.data.code=="ok"){
+              this.$message({
+                message: '删除成功',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: res.data.message,
+                type: 'warning'
+              })
+            }
             this.getUsers()
           })
         }).catch(() => {

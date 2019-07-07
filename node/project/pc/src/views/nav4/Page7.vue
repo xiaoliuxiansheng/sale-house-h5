@@ -14,6 +14,9 @@
     <el-form-item label="楼盘名称">
     <el-input v-model="parms.name" placeholder="请输入楼盘名称"></el-input>
   </el-form-item>
+    <el-form-item label="楼盘详细地址">
+      <el-input v-model="parms.daddress" placeholder="请输入楼盘详细地址"></el-input>
+    </el-form-item>
     <el-form-item label="楼盘图片资源">
 <!--      <input class="file" name="file" type="file" multiple="multiple" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
       <el-upload
@@ -72,7 +75,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="地址" prop="name">
-          <el-input v-model="parms.price"></el-input>
+          <el-input v-model="parms.address"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -222,6 +225,7 @@
             if (res.data.code=="ok"){
               this.parms={
                 name:null,
+                daddress:null,
                 region:null,
                 address:null,
                 daddress:null,

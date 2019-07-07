@@ -288,8 +288,10 @@ export default {
         type: 'warning'
       }).then(() => {
         this.listLoading = true
-        let para = { id: row.pk_leaser }
-        this.$axios.post("/leaser/del",para).then((res) => {
+        let  formdata;
+        formdata =new FormData()
+        formdata.append("id",row.pk_leaser)
+        this.$axios.post("/leaser/del",formdata).then((res) => {
           this.listLoading = false
           if (res.data.code=="ok"){
             this.$message({

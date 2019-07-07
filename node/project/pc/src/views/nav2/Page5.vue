@@ -15,17 +15,17 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <el-select v-model="value" placeholder="选择面积">
+          <el-select v-model="parms.area" placeholder="选择面积">
             <el-option
-              v-for="item in options"
+              v-for="item in options2"
               :key="item.value"
               :label="item.label"
               :value="item.value">
             </el-option>
           </el-select>
-          <el-select v-model="value" placeholder="选择价格">
+          <el-select v-model="parms.price" placeholder="选择价格">
             <el-option
-              v-for="item in options"
+              v-for="item in options3"
               :key="item.value"
               :label="item.label"
               :value="item.value">
@@ -40,19 +40,37 @@
 
     <!--列表-->
     <el-table :data="users" highlight-current-row v-loading="listLoading" style="width: 100%;">
-      <el-table-column prop="name" label="所属楼盘" width="auto" >
+      <el-table-column prop="subordinate" label="所属楼盘" width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="面积" width="auto" >
+      <el-table-column prop="area" label="面积（m²）" width="auto" >
       </el-table-column>
-      <el-table-column prop="birth" label="价格/m²" width="auto" >
+      <el-table-column prop="price" label="价格元/m²·月" width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="描述" min-width="auto" >
+      <el-table-column prop="describe" label="描述" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="addr" label="照片" min-width="auto" >
-      </el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column prop="addr" label="房屋照片" min-width="auto" >
         <template scope="scope">
-<!--          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
+          <div class="avatarimg"  v-if="scope.row.houseimg.length>0" v-for="(item,index) in scope.row.houseimg"  style="display: inline-block" >
+            <img :src="item" v-if="index<1">
+          </div>
+          <div v-else>
+            <img src="@/assets/default.png">
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="业主姓名" min-width="auto" >
+      </el-table-column>
+      <el-table-column prop="phone" label="业主联系方式" min-width="auto" >
+      </el-table-column>
+      <el-table-column prop="isexist" label="是否出租" min-width="auto" >
+        <template scope="scope">
+          <span v-if="scope.row.isexist=='Y'">否</span>
+          <span v-else>是</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="auto">
+        <template scope="scope">
+          <!--          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
           <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -198,22 +216,84 @@
         filters: {
           name: ''
         },
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
+        options: [
+          {
+            value: '',
+            label: '不限'
+          }, {
+          value: '渝中区',
+          label: '渝中区'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: '江北区',
+          label: '江北区'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: '南岸区',
+          label: '南岸区'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: '九龙坡区',
+          label: '九龙坡区'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '沙坪坝区',
+          label: '沙坪坝区'
+        }, {
+          value: '大渡口区',
+          label: '大渡口区'
+        }, {
+          value: '北碚区',
+          label: '北碚区'
+        }, {
+          value: '渝北区',
+          label: '渝北区'
+        }, {
+          value: '巴南区',
+          label: '巴南区'
+        }, {
+          value: '两江新区',
+          label: '两江新区'
         }],
+        options3: [
+          {
+            value: '',
+            label: '不限'
+          },{
+            value: '0-50',
+            label: '50元/m²·月以下'
+          }, {
+            value: '50-80',
+            label: '50-80元/m²·月'
+          }, {
+            value: '80-100',
+            label: '80-100元/m²·月'
+          }, {
+            value: '100',
+            label: '100元以上'
+          }],
+        options2: [
+          {
+            value: '',
+            label: '不限'
+          },{
+            value: '0-100',
+            label: '100m²以下'
+          }, {
+            value: '100-200',
+            label: '100-200m²'
+          }, {
+            value: '200-300',
+            label: '200-300m²'
+          }, {
+            value: '300-500',
+            label: '300-500m²'
+          }, {
+            value: '500-800',
+            label: '500-800m²'
+          }, {
+            value: '800-1500',
+            label: '800-1500m²'
+          }, {
+            value: '1500',
+            label: '1500以上'
+          }],
         value: '',
         users: [],
         total: 0,
@@ -279,6 +359,14 @@
           type: [],
           resource: '',
           desc: ''
+        },
+        parms:{
+          name:null,
+          region:null,
+          price:null,
+          area:null,
+          pageNo:null,
+          rors:2
         }
       } } ,
     methods: {
@@ -301,7 +389,6 @@
       beforeAvatarUpload (file) {
         const isJPG = file.type === 'image/jpeg'
         const isLt2M = file.size / 1024 / 1024 < 2
-
         if (!isJPG) {
           this.$message.error('上传头像图片只能是 JPG 格式!')
         }
@@ -315,7 +402,7 @@
         return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知'
       },
       handleCurrentChange (val) {
-        this.page = val
+        this.parms.pageNo = val
         this.getUsers()
       },
       // 获取用户列表
@@ -325,10 +412,29 @@
           name: this.filters.name
         }
         this.listLoading = true
-        getUserListPage(para).then((res) => {
-          this.total = res.data.total
-          this.users = res.data.users
-          this.listLoading = false
+        let formdata;
+        formdata=new FormData()
+        for (let k in this.parms){
+          if(this.parms[k]){
+            formdata.append(k,this.parms[k])
+          }
+        }
+        this.$axios.post("/house/list",formdata).then((res) => {
+          if (res.data.code=="error"){
+            this.$message({
+              message:res.data.message,
+              type:"warning"
+            })
+          } else {
+            console.log(res)
+            this.total = res.data.data.totalRows
+            this.users = res.data.data.rows
+            this.users.forEach((item,index)=>{
+              this.users[index].houseimg=item.houseimg.split(",")
+            })
+            console.log(this.users)
+            this.listLoading = false
+          }
         })
       },
       // 删除
@@ -337,13 +443,21 @@
           type: 'warning'
         }).then(() => {
           this.listLoading = true
-          let para = { id: row.id }
-          removeUser(para).then((res) => {
+          let formdata=new FormData()
+          formdata.append("id",row.pk_house)
+          this.$axios.post("/house/del",formdata).then((res) => {
             this.listLoading = false
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            })
+            if(res.data.code=="ok"){
+              this.$message({
+                message: '删除成功',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: res.data.message,
+                type: 'warning'
+              })
+            }
             this.getUsers()
           })
         }).catch(() => {
@@ -443,7 +557,13 @@
 
 </script>
 
-<style >
+<style lang="scss">
+  .avatarimg{
+    img{
+      width: 50px;
+      height: 50px;
+    }
+  }
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;

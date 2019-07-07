@@ -11,15 +11,28 @@
       </el-col>
       <el-col :span="4" class="userinfo">
         <el-dropdown trigger="hover">
-          <span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar"/> {{sysUserName}}</span>
+          <span class="el-dropdown-link userinfo-inner"><img src="@/assets/default.png"/> 管理员</span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>我的消息</el-dropdown-item>
-            <el-dropdown-item>设置</el-dropdown-item>
+<!--            <el-dropdown-item  ><span @click="check()">设置</span></el-dropdown-item>-->
             <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
     </el-col>
+    <el-dialog title="修改管理员账号" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="账号" :label-width="formLabelWidth">
+          <el-input v-model="form.name" auto-complete="off"></el-input>
+        </el-form-item>
+        <<el-form-item label="原始密码" :label-width="formLabelWidth">
+        <el-input v-model="form.name" auto-complete="off"></el-input>
+      </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
     <el-col :span="24" class="main">
       <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-未折叠-->
@@ -61,10 +74,11 @@
                  @click="$router.push(item.children[0].path)"><i :class="item.iconCls"></i>
             </div>
           </li>
-</template>
-</li>
-</ul>
-</aside>
+
+  </template>
+  </li>
+  </ul>
+  </aside>
 <section class="content-container">
   <div class="grid-content bg-purple-light">
     <el-col :span="24" class="breadcrumb-container">
@@ -90,6 +104,18 @@
 export default {
   data () {
     return {
+      dialogFormVisible: false,
+      form: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      formLabelWidth: '120px',
       sysName: '欢迎登录！',
       collapsed: false,
       sysUserName: '',
@@ -123,6 +149,10 @@ export default {
     }
   },
   methods: {
+    check(){
+      console.log("--------------------------------")
+      this.dialogFormVisible = true
+    },
     onSubmit () {
       console.log('submit!')
     },
@@ -155,12 +185,12 @@ export default {
     }
   },
   mounted () {
-    var user = sessionStorage.getItem('user')
-    if (user) {
-      user = JSON.parse(user)
-      this.sysUserName = user.name || ''
-      this.sysUserAvatar = user.avatar || ''
-    }
+    // var user = sessionStorage.getItem('user')
+    // if (user) {
+    //   user = JSON.parse(user)
+    //   this.sysUserName = user.name || ''
+    //   this.sysUserAvatar = user.avatar || ''
+    // }
   }
 }
 
