@@ -2,41 +2,47 @@
   <el-form ref="form" :model="form" label-width="130px" @submit.prevent="onSubmit"
            style="margin:20px;width:600px;">
     <el-form-item label="方式"  prop="region">
-      <el-radio-group v-model="parms.options">
+      <el-radio-group v-model="parms.rors">
         <el-radio class="radio" :label="1">出租</el-radio>
-        <el-radio class="radio" :label="0">出售</el-radio>
+        <el-radio class="radio" :label="2">出售</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-row>
       <el-col :span="12">
-        <el-form-item label="房东姓名" prop="name">
-          <el-input v-model="parms.area"></el-input>
+        <el-form-item label="业主姓名" prop="name">
+          <el-input v-model="parms.name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="房东电话" prop="name">
-          <el-input v-model="parms.price"></el-input>
+        <el-form-item label="业主电话" prop="name">
+          <el-input v-model="parms.phone"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
-    <el-form-item label="选择小区">
-    <el-select v-model="parms.plot" placeholder="请选择所属小区">
+    <el-row>
+      <el-col :span="12">
+    <el-form-item label="选择楼盘">
+    <el-select v-model="parms.pk_building" placeholder="请选择所属楼盘">
       <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
+        v-for="item in buildoption"
+        :key="item.pkBuiliding"
+        :label="item.name"
+        :value="item.pkBuiliding">
       </el-option>
     </el-select>
     </el-form-item>
+      </el-col>
+    </el-row>
     <el-row>
       <el-col :span="12">
         <el-form-item label="房屋面积（m²)" prop="name">
           <el-input v-model="parms.area"></el-input>
         </el-form-item>
       </el-col>
+      <el-col :span="2">
+      </el-col>
       <el-col :span="12">
-      <el-form-item label="租金/售价（m²)" prop="name">
+      <el-form-item label="租金/售价（元/m²·月)" prop="name">
         <el-input v-model="parms.price"></el-input>
       </el-form-item>
       </el-col>
@@ -53,7 +59,7 @@
       <el-input
         class="input-new-tag"
         v-if="inputVisible"
-        v-model="inputValue"
+        v-model="parms.trimstyle"
         ref="saveTagInput"
         size="small"
         @keyup.enter.native="handleInputConfirm"
@@ -63,7 +69,7 @@
       <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     </el-form-item>
     <el-form-item label="房源描述"  prop="region">
-      <el-input v-model="parms.text"
+      <el-input v-model="parms.describe"
                 type="textarea"
                 autosize
                 placeholder="请输入房源描述">
@@ -72,27 +78,28 @@
     <el-form-item label="上传房屋图片资源">
       <el-upload
         class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://192.168.1.4:8081/api/o/o"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList2"
+        :before-upload="beforeAvatarUpload"
         list-type="picture">
         <el-button size="small" type="primary">点击上传</el-button>
         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
       </el-upload>
     </el-form-item >
     <el-form-item label="分配招商经理">
-    <el-select v-model="parms.Manager" placeholder="分配所属招商经理">
+    <el-select v-model="parms.pk_leaser" placeholder="分配所属招商经理">
       <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
+        v-for="item in mangeroption"
+        :key="item.pk_leaser"
+        :label="item.name"
+        :value="item.pk_leaser">
       </el-option>
     </el-select>
     </el-form-item >
     <el-form-item>
-      <el-button type="primary">立即创建</el-button>
+      <el-button type="primary" @click="pushmsg()">立即创建</el-button>
       <el-button @click.native.prevent>取消</el-button>
     </el-form-item>
   </el-form>
@@ -113,39 +120,75 @@
           desc: '',
           imageUrl: '',
         },
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        buildoption:[],
+        mangeroption:[],
         value: '',
         parms:{
-          plot:null,
-          area:null,
+          pk_leaser:null,
+          phone:null,
           price:null,
-          options:1,
-          Manager:null,
-          text:null
+          describe:null,
+          trimstyle:null,
+          area:null,
+          floor:null,
+          pk_building:null,
+          rors:1
         },
-        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
+        fileList2: [],
         dynamicTags: ['精装', '家具', '桌椅'],
         inputVisible: false,
-        inputValue: ''
-
+        inputValue: '',
+        file:[]
       }
     },
+    created(){
+      this.getbuilds()
+      this.getmanager()
+    },
     methods: {
+      // 创建信息
+      pushmsg(){
+        let formdata;
+        formdata=new FormData()
+        this.file.forEach((item,index)=>{
+          formdata.append('photo',item);
+        })
+        for(let k in this.parms){
+          formdata.append(k,this.parms[k])
+        }
+        let config = {
+          headers:{'Content-Type':'multipart/form-data'}
+        }; //添加请求头
+        this.$axios.post("/house/add",formdata,config).then((res)=>{
+          if (res.data.code=="ok"){
+            this.$message({
+              type: "success",
+              message:"添加成功！"
+            })
+          } else {
+            this.$message({
+              type: "warning",
+              message:res.data.message
+            })
+          }
+        })
+      },
+      //获取楼盘信息
+      getbuilds(){
+        this.$axios.get("/building/queryNames").then((res)=>{
+          if (res.data.code=="ok"){
+            this.buildoption=res.data.data
+          }
+        })
+      },
+      // 获取招商经理
+      getmanager(){
+        this.$axios.get("/leaser/queryAll").then((res)=>{
+          if (res.data.code=="ok"){
+            this.mangeroption=res.data.data
+          }
+        })
+      },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
@@ -187,6 +230,7 @@
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
+        this.file.push(file);
         return isJPG && isLt2M;
       }
     }

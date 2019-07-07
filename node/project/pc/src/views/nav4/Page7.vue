@@ -18,7 +18,7 @@
 <!--      <input class="file" name="file" type="file" multiple="multiple" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
       <el-upload
         class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://192.168.1.4:8081/api/o/o"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList2"
@@ -218,8 +218,32 @@
           headers:{'Content-Type':'multipart/form-data'}
         }; //添加请求头
         this.$axios.post('/building/add', this.formdata,config)
-          .then(response=>{
-            console.log(response.data);
+          .then(res=>{
+            if (res.data.code=="ok"){
+              this.parms={
+                name:null,
+                region:null,
+                address:null,
+                daddress:null,
+                managecost:null,
+                floors:null,
+                parkspace:null,
+                elevatorbrand:null,
+                elevatorcount:null,
+                area:null,
+                airconditioning:null,
+                developer:null,
+                company:null,
+                introduce:null,
+                typeimg:null,
+                height:null
+              }
+              this.file=[]
+              this.$message({
+                message: '添加楼盘信息成功！',
+                type: 'success'
+              })
+            }
           })
       },
       handleClose(tag) {
