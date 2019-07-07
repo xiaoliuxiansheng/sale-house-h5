@@ -44,6 +44,11 @@
 		where ${column} = #{value}
 	</select>
 
+	<select id="select" resultType="int">
+		select * from wx_builiding
+		where ${column} = #{value}
+	</select>
+
 	<!--根据id查询-->
 	<select id="selectById" parameterType="String" resultMap="result">
 		select * from wx_builiding
@@ -135,6 +140,7 @@
                 and region like #{region}
             </if>
         </where>
+		order by ts desc
 	</select>
 
 	<select id="queryByNames" resultMap="result">

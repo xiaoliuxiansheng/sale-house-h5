@@ -59,7 +59,7 @@ public class ManagerController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping("/login")
+	@PostMapping("/login")
 	@ResponseBody
 	public JSONResponse queryManager(HttpServletRequest request,String account, String password) throws Exception{
 

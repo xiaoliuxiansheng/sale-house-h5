@@ -5,6 +5,7 @@ public class HouseEntity {
     private String pk_building;//楼盘信息主键
     private String pk_house;//房间信息主键
     private String buildingname;//楼盘名称
+    private String subordinate;//所属楼盘名称
     private String floor;//楼层
     private int area;//房间面积(m3)
     private int price;//房间单价(元/m2·月)
@@ -20,6 +21,86 @@ public class HouseEntity {
     private String leaserphone;//招商经理电话
     private String avatar;//招商经理头像地址
 
+    private String managecost;
+    private String floors;
+    private String height;
+    private String parkspace;
+    private String elevatorbrand;
+    private String elevatorcount;
+    private String standardarea;
+    private String buildingimg;
+
+    public String getManagecost() {
+        return managecost;
+    }
+
+    public void setManagecost(String managecost) {
+        this.managecost = managecost;
+    }
+
+    public String getFloors() {
+        return floors;
+    }
+
+    public void setFloors(String floors) {
+        this.floors = floors;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getParkspace() {
+        return parkspace;
+    }
+
+    public void setParkspace(String parkspace) {
+        this.parkspace = parkspace;
+    }
+
+    public String getElevatorbrand() {
+        return elevatorbrand;
+    }
+
+    public void setElevatorbrand(String elevatorbrand) {
+        this.elevatorbrand = elevatorbrand;
+    }
+
+    public String getElevatorcount() {
+        return elevatorcount;
+    }
+
+    public void setElevatorcount(String elevatorcount) {
+        this.elevatorcount = elevatorcount;
+    }
+
+    public String getStandardarea() {
+        return standardarea;
+    }
+
+    public void setStandardarea(String standardarea) {
+        this.standardarea = standardarea;
+    }
+
+    public String getBuildingimg() {
+        return buildingimg;
+    }
+
+    public void setBuildingimg(String buildingimg) {
+        this.buildingimg = buildingimg;
+    }
+
+    public String getSubordinate() {
+        return subordinate;
+    }
+
+    public void setSubordinate(String subordinate) {
+        this.subordinate = subordinate;
+    }
 
     public String getLeasername() {
         return leasername;

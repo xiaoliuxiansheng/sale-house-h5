@@ -2,11 +2,14 @@ package com.example.wxgzh.house.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.example.wxgzh.common.dto.JSONResponse;
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.HouseEntity;
+import com.example.wxgzh.entity.ManagerEntity;
 import com.example.wxgzh.house.dto.HouseAo;
 import com.example.wxgzh.house.service.HouseService;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,14 +67,13 @@ public class HouseController {
 
 	/**
 	 * 删除房间信息
-	 * @param value
+	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/del", method = RequestMethod.POST)
-	public JSONResponse delHouse(@RequestBody Map value) throws Exception{
-
-		String id = (String) value.get("id");
+	@PostMapping("/del")
+	@ResponseBody
+	public JSONResponse delHouse(String id) throws Exception{
 
 		service.delHouse(id, savePath);
 
@@ -140,4 +143,70 @@ public class HouseController {
 		return JSONResponse.ok(entities);
 	}
 
+	@PostMapping("/list")
+	@ResponseBody
+	public JSONResponse queryHousesByKey(HttpServletRequest req,String name, String region, String price, String area, String pageNo, String pageSize, String rors) throws Exception{
+		String ip = req.getServerName();
+		String minprice = "";
+		String maxprice = "";
+		String minarea = "";
+		String maxarea = "";
+		String[] prices = new String[2];
+		String[] ares = new String[2];
+		if(price != null && !"".equals(price)){
+			prices = price.split("-");
+		}
+		if(area != null && !"".equals(area)) {
+			ares = area.split("-");
+		}
+		if(prices.length == 1) {
+			minprice = prices[0];
+		}else{
+			minprice = prices[0];
+			maxprice = prices[1];
+		}
+		if(ares.length == 1) {
+			minarea = ares[0];
+		}else {
+			minarea = ares[0];
+			maxarea = ares[1];
+		}
+		int port = req.getServerPort();
+
+		String url = "http://"+ip+":"+port;
+		QueryResult<HouseEntity> e = service.selectByKey(name, region, minprice, maxprice, minarea, maxarea, pageNo, pageSize, rors, url);
+		return JSONResponse.ok(e);
+	}
+	@ResponseBody
+	public JSONResponse queryHousesOA(HttpServletRequest req,HttpServletResponse resp, String pageNo,String pageSize) throws Exception{
+		HttpSession session = req.getSession(false);
+		if (session == null) {
+			throw new WxgzhException("非法操作！");
+		}
+		ManagerEntity e= (ManagerEntity)session.getAttribute("leaser");
+		String id = "";
+		if(e != null) {
+			id = e.getPk_manager();
+		}
+
+		QueryResult<HouseEntity> entities = service.queryOA(id, pageNo, pageSize);
+
+		return JSONResponse.ok(entities);
+	}
+
+
+	@GetMapping("/detail")
+	@ResponseBody
+	public JSONResponse queryHouseDetail(HttpServletRequest req,String id)throws Exception{
+
+		String ip = req.getServerName();
+
+		int port = req.getServerPort();
+
+		String url = "http://"+ip+":"+port;
+
+		HouseEntity e = service.queryDetail(url,id);
+
+		return JSONResponse.ok(e);
+	}
 }

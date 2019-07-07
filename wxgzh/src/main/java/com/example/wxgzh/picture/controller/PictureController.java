@@ -34,7 +34,7 @@ public class PictureController {
 
 		try(ServletOutputStream out = resp.getOutputStream();
 			FileInputStream in=new FileInputStream(
-					new File(saveDir,url.replace("/avatar/","")));
+					new File(saveDir,url.replace("/photo/","")));
 		){
 			byte[] buf=new byte[10240];
 			int readed=0;

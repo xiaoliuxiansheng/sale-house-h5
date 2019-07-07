@@ -17,4 +17,6 @@ public interface LeaserDao extends TemplateDao<LeaserEntity, String> {
     List<LeaserEntity> selectByKey(@Param("name")String name) throws Exception;
 
     void allocate(ManagerRelaEntity entity)throws Exception;
+
+    List<LeaserEntity> queryLeasers()throws Exception;
 }
