@@ -2,9 +2,11 @@ package com.example.wxgzh.house.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.example.wxgzh.common.dto.JSONResponse;
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.HouseEntity;
+import com.example.wxgzh.entity.ManagerEntity;
 import com.example.wxgzh.house.dto.HouseAo;
 import com.example.wxgzh.house.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +139,29 @@ public class HouseController {
 		String url = "http://"+ip+":"+port;
 
 		List<HouseEntity> entities = service.query(url,id);
+
+		return JSONResponse.ok(entities);
+	}
+
+	/**
+	 * oa系统查询
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/oalist")
+	@ResponseBody
+	public JSONResponse queryHousesOA(HttpServletRequest req,HttpServletResponse resp, String pageNo,String pageSize) throws Exception{
+		HttpSession session = req.getSession(false);
+		if (session == null) {
+			throw new WxgzhException("非法操作！");
+		}
+		ManagerEntity e= (ManagerEntity)session.getAttribute("leaser");
+		String id = "";
+		if(e != null) {
+			id = e.getPk_manager();
+		}
+
+		QueryResult<HouseEntity> entities = service.queryOA(id, pageNo, pageSize);
 
 		return JSONResponse.ok(entities);
 	}

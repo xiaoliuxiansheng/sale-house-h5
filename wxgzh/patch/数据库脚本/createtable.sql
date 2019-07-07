@@ -4,7 +4,7 @@ create user wxgzh identified by wxgzh;
 --给用户授权
 grant connect, resource to wxgzh;
 --授权允许查看sys用户所拥有的数据字典表，不然使用plsql时会报错提示
-grant SELECT ANY DICTIONARY to wxgzh
+grant SELECT ANY DICTIONARY to wxgzh;
 
 ----管理员
 create table wx_manager
@@ -32,12 +32,12 @@ create table wx_builiding
   floors   VARCHAR2(10),--楼层(层)
   height   VARCHAR2(10),--层高(米)
   parkspace   VARCHAR2(10),--停车位(个)
-  elevatorbrand  VARCHAR2(10),--电梯品牌
+  elevatorbrand  VARCHAR2(100),--电梯品牌
   elevatorcount  VARCHAR2(10),--停车位数量
   area     VARCHAR2(10),--标准层面积(m2)
   airconditioning VARCHAR2(50),--空调
-  developer   VARCHAR2(50),--开发商
-  company   VARCHAR2(50),--物管公司
+  developer   VARCHAR2(150),--开发商
+  company   VARCHAR2(150),--物管公司
   introduce   VARCHAR2(500),--大楼介绍
   typeimg   VARCHAR2(500),--户型图地址
   buildingimg    VARCHAR2(500),--楼盘照片
@@ -104,3 +104,7 @@ create table wx_leaser_rela
   constraint    pk_wx_leaser_rela primary key (pk_leaser_rela),
   ts               char(19) default to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
 );
+
+--超级管理员账号初始化
+insert into wx_manager (pk_manager, account, password)
+values ('cncqyuzhongdap20190707pkmanagerl','admin','admin');

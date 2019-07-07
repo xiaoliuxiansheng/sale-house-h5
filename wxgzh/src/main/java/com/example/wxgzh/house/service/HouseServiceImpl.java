@@ -5,6 +5,7 @@ package com.example.wxgzh.house.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.CoordinatesUtil;
 import com.example.wxgzh.common.util.PictureUtil;
@@ -15,6 +16,8 @@ import com.example.wxgzh.entity.ManagerRelaEntity;
 import com.example.wxgzh.house.dao.HouseDao;
 import com.example.wxgzh.house.dto.HouseAo;
 import com.example.wxgzh.leaser.dao.LeaserDao;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -261,5 +264,32 @@ public class HouseServiceImpl implements HouseService {
         }
 
         return houseEntities;
+    }
+
+    @Override
+    public QueryResult<HouseEntity> queryOA(String id, String pageNo,String pageSize) throws Exception {
+        int no = 1;
+        if(pageNo!=null) {
+            no = Integer.parseInt(pageNo);
+        }
+        int size = 10;
+        if(pageSize != null) {
+            size = Integer.parseInt(pageSize);
+        }
+
+        PageHelper.startPage(no, size);
+        List<HouseEntity> e = dao.queryOA(id);
+        PageInfo<HouseEntity> pageinfo= new PageInfo<>(e);
+        List<HouseEntity> rows = new ArrayList<>();
+        for (HouseEntity houseEntity : pageinfo.getList()) {
+            rows.add(houseEntity);
+        }
+        QueryResult<HouseEntity> m = new QueryResult<>();
+        m.setPageNo(no);
+        m.setPageSize(size);
+        m.setTotalRows((int)pageinfo.getTotal());
+        m.setRows(rows);
+
+        return m;
     }
 }

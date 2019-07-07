@@ -12,5 +12,5 @@ public interface HouseDao extends TemplateDao<HouseEntity, String> {
     void modify(HouseEntity entity)throws Exception;
 
     List<HouseEntity> query(String id)throws Exception;
-
+    List<HouseEntity> queryOA(String id) throws Exception;
 }
