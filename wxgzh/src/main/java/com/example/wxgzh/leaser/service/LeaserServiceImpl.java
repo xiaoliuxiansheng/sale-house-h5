@@ -58,46 +58,30 @@ public class LeaserServiceImpl implements LeaserService {
 
 	@Override
 	public void delLeaser(String id) throws Exception {
-		id = $(id, "招商经理id不能为空");
+		id = $("招商经理id不能为空",id);
 		LeaserEntity old = dao.selectById(id);
 		if(old == null) {
 			throw new WxgzhException("该招商经理不存在或已被删除！");
 		}
-		dao.delete(id);
 		String filePath = savePath + old.getAvatar();
 		//删除本地头像
 		File oldfile = new File(filePath);
 		if(oldfile.exists()){
 			oldfile.delete();
 		}
+		dao.delete(id);
 	}
 
 	@Override
 	public LeaserEntity modLeaser(LeaserEntity entity, MultipartFile file) throws Exception {
-		String id = $(entity.getPk_leaser(), "招商经理id不能为空");
+		String id = $("招商经理id不能为空",entity.getPk_leaser() );
 		String name = entity.getName();
 		String phone = entity.getPhone();
 		String password = entity.getPassword();
 		LeaserEntity old = dao.selectById(id);
-		if(name != null) {
-			if(name.equals(old.getName())) {
-				old.setName(name);
-			}
-		}
-		if(phone != null) {
-			if(phone.equals(old.getPhone())) {
-				old.setPhone(phone);
-			}
-		}
-		if(password != null) {
-			if(MD5.encode(password).equals(old.getPassword())) {
-				old.setPassword(MD5.encode(password));
-			}
-		}
-		if(old == null) {
+		if (old==null){
 			throw new WxgzhException("该招商经理不存在或已被删除！");
 		}
-		dao.modify(entity);
 		//判断是否修改头像
 		if(!file.isEmpty()) {
 			String filePath = savePath + old.getAvatar();
@@ -115,6 +99,24 @@ public class LeaserServiceImpl implements LeaserService {
 			file.transferTo(saveDir);
 			old.setAvatar("/" + "avatar" + "/" + id + unit);
 		}
+		if(name != null) {
+			if(!name.equals(old.getName())) {
+				old.setName(name);
+			}
+		}
+		if(phone != null) {
+			if(!phone.equals(old.getPhone())) {
+				old.setPhone(phone);
+			}
+		}
+		if(password != null) {
+			if(!MD5.encode(password).equals(old.getPassword())) {
+				old.setPassword(MD5.encode(password));
+			}
+		}
+
+		dao.modify(old);
+
 		return old;
 	}
 
@@ -126,7 +128,7 @@ public class LeaserServiceImpl implements LeaserService {
 	}
 
 	@Override
-	public QueryResult<LeaserEntity> queryAll(String name, String pageNo, String pageSize) throws Exception {
+	public QueryResult<LeaserEntity> queryAll(String url,String name, String pageNo, String pageSize) throws Exception {
 		if(name != null) {
 			name = "%"+name+"%";
 		}
@@ -145,6 +147,10 @@ public class LeaserServiceImpl implements LeaserService {
 		List<LeaserEntity> rows = new ArrayList<>();
 		for (LeaserEntity leaserEntity : pageinfo.getList()) {
 			rows.add(leaserEntity);
+		}
+		for (LeaserEntity entity: rows
+		) {
+			entity.setAvatar(url + entity.getAvatar());
 		}
 		QueryResult<LeaserEntity> m = new QueryResult<>();
 		m.setPageNo(no);
@@ -177,6 +183,13 @@ public class LeaserServiceImpl implements LeaserService {
 
 		dao.allocate(entity);
 
+	}
+
+	@Override
+	public List<LeaserEntity> queryLeasers() throws Exception {
+
+		List<LeaserEntity> e= dao.queryLeasers();
+		return e;
 	}
 
 }

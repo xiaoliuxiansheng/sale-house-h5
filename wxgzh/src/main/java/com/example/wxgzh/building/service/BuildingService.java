@@ -20,7 +20,7 @@ public interface BuildingService {
 
 	public BuildingEntity queryById(String id) throws Exception;
 
-	public QueryResult<BuildingEntity> queryAll(String name, String region, String pageNo,String pageSize) throws Exception;
+	public QueryResult<BuildingEntity> queryAll(String url, String name, String region, String pageNo,String pageSize) throws Exception;
 
 	public List<BuildingEntity> queryNames()throws  Exception;
 }

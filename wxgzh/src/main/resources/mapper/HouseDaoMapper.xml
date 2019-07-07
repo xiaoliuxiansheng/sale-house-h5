@@ -3,34 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.wxgzh.house.dao.HouseDao">
-	<!--<resultMap type="BuildingEntity" id="result">
-		<id column="pk_builiding" property="pkBuiliding"/>
-		<result column="name" property="name"/>
-		<result column="price" property="price"/>
-		<result column="city" property="city"/>
-		<result column="region" property="region"/>
-		<result column="address" property="address"/>
-		<result column="daddress" property="daddress"/>
-		<result column="managecost" property="managecost"/>
-		<result column="floors" property="floors"/>
-		<result column="height" property="height"/>
-		<result column="parkspace" property="parkspace"/>
-		<result column="elevatorbrand" property="elevatorbrand"/>
-		<result column="elevatorcount" property="elevatorcount"/>
-		<result column="area" property="area"/>
-		<result column="airconditioning" property="airconditioning"/>
-		<result column="developer" property="developer"/>
-		<result column="company" property="company"/>
-		<result column="introduce" property="introduce"/>
-		<result column="typeimg" property="typeimg"/>
-		<result column="buildingimg" property="buildingimg"/>
-		<result column="lon" property="lon"/>
-		<result column="lat" property="lat"/>
-	</resultMap>-->
 
-	<insert id="insert">
+	<insert id="insert" parameterType="com.example.wxgzh.entity.HouseEntity">
 		insert into wx_house(pk_building,pk_house,buildingname,floor,area,price,rent,trimstyle,houseimg,describe,name,phone,rors)
-		values(#{pk_building},#{pk_house},#{buildingname},#{floor},#{area},#{price},#{rent},#{trimstyle},#{houseimg},#{describe},#{name},#{phone},#{rors})
+		values(#{pk_building,jdbcType=VARCHAR},#{pk_house,jdbcType=VARCHAR},#{buildingname,jdbcType=VARCHAR},#{floor,jdbcType=VARCHAR},#{area,jdbcType=NUMERIC},#{price,jdbcType=NUMERIC},#{rent,jdbcType=NUMERIC},#{trimstyle,jdbcType=VARCHAR},#{houseimg,jdbcType=VARCHAR},#{describe,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{rors,jdbcType=VARCHAR})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -96,4 +72,37 @@
 	</select>
 
 
+	<select id="selectByKey" resultType="com.example.wxgzh.entity.HouseEntity">
+		select wh.pk_building,wh.pk_house,wh.buildingname,wh.floor,wh.area,wh.price,wh.rent,wh.trimstyle,wh.houseimg,wh.describe,wh.name,wh.phone,wh.rors,wh.isexist,wl.name as leasername,wl.phone as leaserphone,wl.avatar,wb.name as subordinate from wx_house wh
+	    left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
+	    left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
+		left join wx_builiding wb on wb.pk_builiding = wh.pk_building
+		<where>
+		     wh.rors = #{rors}
+			<if test="name!= null">
+				and wb.name like #{name}
+			</if>
+			<if test="region != null">
+				and wb.region = #{region}
+			</if>
+			<if test="minprice != null">
+				and wh.price &gt; #{minprice}
+			</if>
+			<if test="maxprice != null">
+				and wh.price &lt;= #{maxprice}
+			</if>
+			<if test="minarea != null">
+				and wh.area &gt; #{minarea}
+			</if>
+			<if test="maxarea != null">
+				and wh.area &lt;= #{maxarea}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryDetail" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
+		select wh.pk_house,wh.pk_building,wb.name as subordinate,wh.houseimg,wh.area,wh.price,wh.rent,wh.trimstyle,wh.describe,wb.buildingimg,wb.floors,wb.managecost,wb.height,wb.parkspace,wb.elevatorbrand,wb.elevatorcount,wb.area as standardarea from wx_house wh
+		left join wx_builiding wb on wh.pk_building = wb.pk_builiding
+		where wh.pk_house = #{id}
+	</select>
 </mapper>

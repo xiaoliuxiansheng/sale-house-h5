@@ -5,16 +5,19 @@ package com.example.wxgzh.house.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.exeption.WxgzhException;
-import com.example.wxgzh.common.util.CoordinatesUtil;
 import com.example.wxgzh.common.util.PictureUtil;
 import com.example.wxgzh.common.util.UUID;
 import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.HouseEntity;
+import com.example.wxgzh.entity.LeaserEntity;
 import com.example.wxgzh.entity.ManagerRelaEntity;
 import com.example.wxgzh.house.dao.HouseDao;
 import com.example.wxgzh.house.dto.HouseAo;
 import com.example.wxgzh.leaser.dao.LeaserDao;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -253,7 +256,14 @@ public class HouseServiceImpl implements HouseService {
         if (!houseEntities.isEmpty()){
             for (HouseEntity e:houseEntities
                  ) {
-                e.setHouseimg(url+e.getHouseimg());
+                if(e.getHouseimg() != null) {
+                    String img = e.getHouseimg().replaceAll("&",",");
+                    List<String> lists = JSONArray.parseArray(img, String.class);
+                    for(int i=0; i< lists.size(); i++) {
+                        lists.set(i,url + lists.get(i));
+                    }
+                    e.setHouseimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+                }
                 if (e.getAvatar()!=null){
                     e.setAvatar(url+e.getAvatar());
                 }
@@ -262,4 +272,114 @@ public class HouseServiceImpl implements HouseService {
 
         return houseEntities;
     }
+
+    @Override
+    public QueryResult<HouseEntity> selectByKey(String name, String region, String minprice, String maxprice, String minarea, String maxarea, String pageNo, String pageSize, String rors, String url) throws Exception {
+        if(rors == null || "".equals(rors)) {
+            rors = "1";
+        }
+        int no = 1;
+        if(pageNo != null || "".equals(pageNo)) {
+            no = Integer.parseInt(pageNo);
+        }
+        int size = 10;
+        if(pageSize != null || "".equals(pageSize)) {
+            size = Integer.parseInt(pageSize);
+        }
+
+        PageHelper.startPage(no, size);
+        int xarea = -1;
+        int iarea = -1;
+        int xprice = -1;
+        int iprice = -1;
+        try {
+            if(maxarea!=null && maxarea.length()!=0){
+                xarea = Integer.parseInt(maxarea);
+            }
+            if(minarea!=null && minarea.length()!=0){
+                xarea = Integer.parseInt(minarea);
+            }
+            if(maxprice!=null && maxprice.length()!=0){
+                xprice = Integer.parseInt(maxprice);
+            }
+            if(minprice!=null && minprice.length()!=0){
+                iprice = Integer.parseInt(minprice);
+            }
+        }catch (WxgzhException e){
+            throw new WxgzhException("请输入整数！");
+        }
+        if(name != null && !"".equals(name)) {
+            name = "%" + name +"%";
+        }
+
+        List<HouseEntity> entities = dao.selectByKey(name,region,minprice,maxprice,minarea,maxarea, rors);
+        PageInfo<HouseEntity> pageinfo= new PageInfo<>(entities);
+        List<HouseEntity> rows = new ArrayList<>();
+        for (HouseEntity houseEntity : pageinfo.getList()) {
+            rows.add(houseEntity);
+        }
+        for (HouseEntity b: rows
+        ) {
+            String img = b.getHouseimg().replaceAll("&",",");
+            List<String> lists = JSONArray.parseArray(img, String.class);
+            for(int i=0; i< lists.size(); i++) {
+                lists.set(i,url + lists.get(i));
+            }
+            //json数组把，转换为&
+            b.setHouseimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+        }
+        QueryResult<HouseEntity> m = new QueryResult<>();
+        m.setPageNo(no);
+        m.setPageSize(size);
+        m.setTotalRows((int)pageinfo.getTotal());
+        m.setRows(rows);
+        return m;
+    }
+
+    @Override
+    public QueryResult<HouseEntity> queryOA(String id, String pageNo,String pageSize) throws Exception {
+        int no = 1;
+        if(pageNo!=null) {
+            no = Integer.parseInt(pageNo);
+        }
+        int size = 10;
+        if(pageSize != null) {
+            size = Integer.parseInt(pageSize);
+        }
+
+        PageHelper.startPage(no, size);
+        List<HouseEntity> e = dao.queryOA(id);
+        PageInfo<HouseEntity> pageinfo= new PageInfo<>(e);
+        List<HouseEntity> rows = new ArrayList<>();
+        for (HouseEntity houseEntity : pageinfo.getList()) {
+            rows.add(houseEntity);
+        }
+        QueryResult<HouseEntity> m = new QueryResult<>();
+        m.setPageNo(no);
+        m.setPageSize(size);
+        m.setTotalRows((int)pageinfo.getTotal());
+        m.setRows(rows);
+
+        return m;
+    }
+
+    @Override
+    public HouseEntity queryDetail(String url, String id) throws Exception {
+
+        HouseEntity e = dao.queryDetail(id);
+
+        if(e == null){
+            throw new WxgzhException("该房间不存在或已被删除！");
+        }
+
+        String img = e.getHouseimg().replaceAll("&",",");
+        List<String> lists = JSONArray.parseArray(img, String.class);
+        for(int i=0; i< lists.size(); i++) {
+            lists.set(i,url + lists.get(i));
+        }
+        //json数组把，转换为&
+        e.setHouseimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+        return e;
+    }
+
 }

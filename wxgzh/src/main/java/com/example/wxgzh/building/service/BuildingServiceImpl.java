@@ -263,7 +263,7 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public QueryResult<BuildingEntity> queryAll(String name, String region, String pageNo, String pageSize) throws Exception {
+    public QueryResult<BuildingEntity> queryAll(String url,String name, String region, String pageNo, String pageSize) throws Exception {
         if(name != null) {
             name = "%"+name+"%";
         }
@@ -285,6 +285,16 @@ public class BuildingServiceImpl implements BuildingService {
         List<BuildingEntity> rows = new ArrayList<>();
         for (BuildingEntity buildingEntity : pageinfo.getList()) {
             rows.add(buildingEntity);
+        }
+        for (BuildingEntity b: rows
+             ) {
+            String img = b.getBuildingimg().replaceAll("&",",");
+            List<String> lists = JSONArray.parseArray(img, String.class);
+            for(int i=0; i< lists.size(); i++) {
+                lists.set(i,url + lists.get(i));
+            }
+            //json数组把，转换为&
+            b.setBuildingimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
         }
         QueryResult<BuildingEntity> m = new QueryResult<>();
         m.setPageNo(no);

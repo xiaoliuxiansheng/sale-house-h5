@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -41,10 +43,11 @@ public class LeaserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping("/del")
+	@PostMapping("/del")
 	@ResponseBody
 	public JSONResponse delLeaser(String id) throws Exception{
 		service.delLeaser(id);
+		System.out.println(JSONResponse.ok());
 		return JSONResponse.ok();
 	}
 
@@ -56,9 +59,9 @@ public class LeaserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping("/mod")
+	@PostMapping("/mod")
 	@ResponseBody
-	public JSONResponse modLeaser(LeaserEntity entity, MultipartFile file) throws Exception{
+	public JSONResponse modLeaser(LeaserEntity entity, @RequestParam(value="file")MultipartFile file) throws Exception{
 		LeaserEntity e = service.modLeaser(entity, file);
 		return JSONResponse.ok(e);
 	}
@@ -71,8 +74,16 @@ public class LeaserController {
 	 */
 	@GetMapping("/list")
 	@ResponseBody
-	public JSONResponse selectByName(String name,String pageNo,String pageSize) throws Exception{
-		QueryResult<LeaserEntity> e = service.queryAll(name, pageNo, pageSize);
+	public JSONResponse selectByName(HttpServletRequest req,String name,String pageNo,String pageSize) throws Exception{
+		String ip = req.getServerName();
+
+		int port = req.getServerPort();
+
+		//String apppath = req.getContextPath();
+
+		String url = "http://"+ip+":"+port;
+
+		QueryResult<LeaserEntity> e = service.queryAll(url,name, pageNo, pageSize);
 		return JSONResponse.ok(e);
 	}
 
@@ -115,6 +126,14 @@ public class LeaserController {
 	@ResponseBody
 	public JSONResponse selectByName(String id) throws Exception{
 		LeaserEntity e = service.query(id);
+		return JSONResponse.ok(e);
+	}
+
+
+	@GetMapping("/queryAll")
+	@ResponseBody
+	public JSONResponse selectAll() throws Exception{
+		List<LeaserEntity> e = service.queryLeasers();
 		return JSONResponse.ok(e);
 	}
 }

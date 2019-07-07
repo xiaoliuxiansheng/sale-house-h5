@@ -53,8 +53,8 @@
     <select id="selectByKey" resultMap="result" useCache="false">
         select * from wx_leaser
         <where>
-            <if test="key !=null">
-                name like #{key}
+            <if test="name != null">
+                name like #{name}
             </if>
         </where>
     </select>
@@ -64,4 +64,8 @@
         insert into wx_leaser_rela(pk_leaser_rela, pk_leaser, pk_house)
         values (#{pk_leaser_rela}, #{pk_leaser}, #{pk_house})
     </insert>
+
+    <select id="queryLeasers" resultType="com.example.wxgzh.entity.LeaserEntity">
+        select * from wx_leaser
+    </select>
 </mapper>
