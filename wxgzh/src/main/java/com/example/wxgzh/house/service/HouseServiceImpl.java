@@ -373,12 +373,19 @@ public class HouseServiceImpl implements HouseService {
         }
 
         String img = e.getHouseimg().replaceAll("&",",");
+        String imgs = e.getBuildingimg().replaceAll("&",",");
         List<String> lists = JSONArray.parseArray(img, String.class);
+        List<String> lists2 = JSONArray.parseArray(imgs, String.class);
         for(int i=0; i< lists.size(); i++) {
             lists.set(i,url + lists.get(i));
         }
         //json数组把，转换为&
         e.setHouseimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+        for(int j=0; j< lists2.size(); j++) {
+            lists2.set(j,url + lists2.get(j));
+        }
+        //json数组把，转换为&
+        e.setBuildingimg(lists2.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
         return e;
     }
 
