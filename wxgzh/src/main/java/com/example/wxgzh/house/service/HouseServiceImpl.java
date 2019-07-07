@@ -368,6 +368,10 @@ public class HouseServiceImpl implements HouseService {
 
         HouseEntity e = dao.queryDetail(id);
 
+        if(e == null){
+            throw new WxgzhException("该房间不存在或已被删除！");
+        }
+
         String img = e.getHouseimg().replaceAll("&",",");
         List<String> lists = JSONArray.parseArray(img, String.class);
         for(int i=0; i< lists.size(); i++) {

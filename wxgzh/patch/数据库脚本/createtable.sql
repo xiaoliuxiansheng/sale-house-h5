@@ -105,6 +105,24 @@ create table wx_leaser_rela
   ts               char(19) default to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
 );
 
+----放盘信息表
+create table wx_ower
+(
+  pk_ower char(32) not null,--主键
+  buildingname   VARCHAR2(100),--楼盘名称
+  floor     VARCHAR2(100),--楼层
+  area      NUMBER(10),--房间面积(m2)
+  price     NUMBER(10),--房间单价(元/m2·月)
+  name      VARCHAR2(50),--联系人
+  phone     VARCHAR2(20),--联系电话
+  rors      char(1),--出租(rent)或者出售(sell);1为出租，2为出售
+  vdef1      VARCHAR2(50),
+  vdef2      VARCHAR2(50),
+  vdef3      VARCHAR2(50),
+  constraint    pk_wx_ower primary key (pk_ower),
+  ts               char(19) default to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+);
+
 --超级管理员账号初始化
 insert into wx_manager (pk_manager, account, password)
 values ('cncqyuzhongdap20190707pkmanagerl','admin','admin');
