@@ -107,4 +107,16 @@
 	    left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
 		where wh.pk_house = #{id}
 	</select>
+
+
+	<select id="queryOA" parameterType="String" resultType="com.example.wxgzh.entity.HouseEntity">
+		select wh.* from wx_house wh
+		left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
+		left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
+		<where>
+			<if test="id != null">
+				wl.pk_leaser = #{id}
+			</if>
+		</where>
+	</select>
 </mapper>

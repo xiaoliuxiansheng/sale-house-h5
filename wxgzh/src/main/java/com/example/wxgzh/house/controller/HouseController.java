@@ -186,6 +186,11 @@ public class HouseController {
 	@PostMapping("/oalist")
 	@ResponseBody
 	public JSONResponse queryHousesOA(HttpServletRequest req,HttpServletResponse resp, String pageNo,String pageSize) throws Exception{
+
+		String ip = req.getServerName();
+		int port = req.getServerPort();
+		String url = "http://"+ip+":"+port;
+
 		HttpSession session = req.getSession(false);
 		if (session == null) {
 			throw new WxgzhException("非法操作！");
@@ -196,7 +201,7 @@ public class HouseController {
 			id = e.getPk_manager();
 		}
 
-		QueryResult<HouseEntity> entities = service.queryOA(id, pageNo, pageSize);
+		QueryResult<HouseEntity> entities = service.queryOA(id, pageNo, pageSize,url);
 
 		return JSONResponse.ok(entities);
 	}
