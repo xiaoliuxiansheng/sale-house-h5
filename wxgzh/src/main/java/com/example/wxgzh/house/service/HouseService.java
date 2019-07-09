@@ -19,7 +19,7 @@ public interface HouseService {
 
 	public QueryResult<HouseEntity> selectByKey(String name, String region, String minprice, String maxprice, String minarea, String maxarea, String pageNo, String pageSize, String rors, String url)throws Exception;
 
-	public QueryResult<HouseEntity> queryOA(String id, String pageNo, String pageSize) throws Exception;
+	public QueryResult<HouseEntity> queryOA(String id, String pageNo, String pageSize,String url) throws Exception;
 
 	public HouseEntity queryDetail(String url,String id)throws Exception;
 
