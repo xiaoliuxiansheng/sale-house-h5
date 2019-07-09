@@ -78,7 +78,7 @@
     <el-form-item label="上传房屋图片资源">
       <el-upload
         class="upload-demo"
-        action="http://192.168.1.4:8081/api/o/o"
+        action="http://111.230.43.181:8081/api/o/o"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList2"

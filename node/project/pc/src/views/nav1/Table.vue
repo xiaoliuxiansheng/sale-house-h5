@@ -112,7 +112,7 @@
         <el-form-item label="头像">
           <el-upload
             class="avatar-uploader"
-            action="http://192.168.1.4:8081/api/o/o"
+            action="http://111.230.43.181:8081/api/o/o"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
