@@ -249,17 +249,12 @@ export default {
       return isJPG && isLt2M
     },
     editbeforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       this.editForm.file=file
-      return isJPG && isLt2M
+      return isLt2M
     },
     // 性别显示转换
     formatSex: function (row, column) {
@@ -398,25 +393,25 @@ export default {
       this.sels = sels
     },
     // 批量删除
-    batchRemove: function () {
-      var ids = this.sels.map(item => item.id).toString()
-      this.$confirm('确认删除选中记录吗？', '提示', {
-        type: 'warning'
-      }).then(() => {
-        this.listLoading = true
-        let para = { ids: ids }
-        batchRemoveUser(para).then((res) => {
-          this.listLoading = false
-          this.$message({
-            message: '删除成功',
-            type: 'success'
-          })
-          this.getUsers()
-        })
-      }).catch(() => {
-
-      })
-    }
+    // batchRemove: function () {
+    //   var ids = this.sels.map(item => item.id).toString()
+    //   this.$confirm('确认删除选中记录吗？', '提示', {
+    //     type: 'warning'
+    //   }).then(() => {
+    //     this.listLoading = true
+    //     let para = { ids: ids }
+    //     batchRemoveUser(para).then((res) => {
+    //       this.listLoading = false
+    //       this.$message({
+    //         message: '删除成功',
+    //         type: 'success'
+    //       })
+    //       this.getUsers()
+    //     })
+    //   }).catch(() => {
+    //
+    //   })
+    // }
   },
   mounted () {
     this.getUsers()

@@ -285,7 +285,6 @@
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
-        console.log(file)
         this.file.push(file);
         // return  false
         return  isLt2M;

@@ -1,79 +1,83 @@
 <template>
   <div class="body">
     <div class="head">
-      <span class="left"><van-icon name="arrow-left" /></span>{{title}}<span class="rigth"><van-icon name="home-o" /></span>
+      <span class="left" @click="$router.go(-1)"><van-icon name="arrow-left" />
+      </span>{{title}}
+      <span class="rigth">
+      <van-icon name="home-o" />
+      </span>
     </div>
-    <div class="content" >
+    <div class="content"  v-if="users!==null">
       <div class="swiper">
         <van-swipe :autoplay="3000" indicator-color="red">
-          <van-swipe-item v-for="item in 5">
-            <img src="@/assets/images/test.jpg"/>
+          <van-swipe-item v-for="item in users.buildimg">
+            <img :src="item"/>
           </van-swipe-item>
         </van-swipe>
       </div>
-      <div class="txt">
+      <div class="txt" v-if="users!==null">
         <div class="title">
-          <span>中渝都会首站1号<br>渝北区-加州新牌坊</span>
+          <span>{{users.buildname}}<br>{{users.address}}</span>
           <span class="position" style="margin-top: -11px;"><van-icon name="location-o" /></span>
         </div>
         <div class="two">
-          <div v-for="(item,index) in 16" class="per"  v-if="index<flag">
+          <div v-for="(item,index) in users.housesInfo" class="per"  v-if="index<flag">
             <div class="left">
-              <img src="@/assets/images/test.jpg">
+              <img :src="item.houseimg[0]">
             </div>
             <div class="rigth">
               <div class="top">
                 <span class="frist">
-                  <span style="color: #43b1c0">200</span>m²
+                  <span style="color: #43b1c0">{{item.area}}</span>m²
                 </span>
                 <span class="second">
-                 <span style="color: #43b1c0">63</span>元/m²·月
+                 <span style="color: #43b1c0">{{item.price}}</span>元/m²·月
                 </span>
               </div>
               <div class="bottom">
-                简装+家具
+                {{item.trimstyle}}
               </div>
             </div>
           </div>
-          <div class="nums" v-if="flag=='2'" @click="flag='1000'">全部房源16套</div>
+          <div class="nums" v-if="flag=='2'" @click="flag='1000'">全部房源{{users.housesInfo.length}}套</div>
         </div>
         <div class="three">
           <div class="names">楼盘参数</div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">楼层：</span>：29层</span>
+            <span class="name"><span style="color: #999;">楼层：</span>：{{users.floorcount}}层</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">物管费：</span>：4元/m²·月</span>
+            <span class="name"><span style="color: #999;">物管费：</span>：{{users.cost}}元/m²·月</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">层高：</span>：3.3米</span>
+            <span class="name"><span style="color: #999;">层高：</span>：{{users.buildheight}}米</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">停车位：</span>：660个</span>
+            <span class="name"><span style="color: #999;">停车位：</span>：{{users.park}}个</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">电梯：</span>：格里</span>
+            <span class="name"><span style="color: #999;">电梯：</span>：{{users.ebrand}}</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">标准层面积：</span>：830m²</span>
+            <span class="name"><span style="color: #999;">标准层面积：</span>：{{users.buildarea}}m²</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">空调：</span>：分体空调</span>
+            <span class="name"><span style="color: #999;">空调：</span>：{{users.airconditioning}}</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">地址：</span>：渝北区某某正</span>
+            <span class="name"><span style="color: #999;">地址：</span>：{{users.daddress}}</span>
           </div>
           <div class="pers">
-          <span class="name"><span style="color: #999;">开发商：</span>：重庆某某地产公司</span>
+          <span class="name"><span style="color: #999;">开发商：</span>：{{users.developer}}</span>
         </div>
           <div class="pers">
-            <span class="name"><span  style="color: #999;">武官公司：</span>：重庆某某地产公司</span>
+            <span class="name"><span  style="color: #999;">物管公司：</span>：{{users.company}}</span>
           </div>
         </div>
         <div class="four">
           <div class="names">大楼介绍</div>
           <div class="txt">
-            有道翻译提供即时免费的中文、英语、日语、韩语、法语、德语、俄语、西班牙语、葡萄牙语、越南语、印尼语、意大利语全文翻译、网页翻译、文档翻译服务。
+            {{users.introduce}}
           </div>
         </div>
 <!--        <div class="five">-->
@@ -92,35 +96,34 @@
     components: {XImg},
     data(){
       return{
-        title:this.$route.query.name,
+        title:this.$route.query.title,
+        buildid:this.$route.query.buildid,
         flag:2,
+        users:null,
+        buildname:null
       }
     },
     created() {
-      // this.getmsg()
+      this.getmsg()
     },
     methods:{
       getmsg(){
-        let formdata;
-        formdata=new FormData()
-        for (let k in this.parms){
-          if(this.parms[k]){
-            formdata.append(k,this.parms[k])
+        this.$axios.get("/building/detail",{
+          params:{
+            id:this.buildid
           }
-        }
-        this.$axios.post("/house/list",formdata).then((res) => {
+        }).then((res) => {
           if (res.data.code=="error"){
             this.$message({
               message:res.data.message,
               type:"warning"
             })
           } else {
-            console.log(res)
-            this.users = res.data.data.rows
-            this.users.forEach((item,index)=>{
-              this.users[index].houseimg=item.houseimg.split(",")
+            this.users = res.data.data
+            this.users.buildimg=this.users.buildimg.split(",")
+            this.users.housesInfo.forEach((item,index)=>{
+              this.users.housesInfo[index].houseimg.split(",")
             })
-            console.log(this.users)
           }
         })
       },
@@ -154,6 +157,9 @@
     line-height: 50/$sc+rem;
     text-align: center;
     font-size: 18/$sc+rem;
+    span{
+      cursor: pointer;
+    }
     .left{
       display: inline-block;
       font-size: 22/$sc+rem;

@@ -11,7 +11,7 @@
       <van-dropdown-item v-model="value2" :options="option4" />
     </van-dropdown-menu>
     </div>
-    <div class="content" >
+    <div class="content"  v-if="users">
       <div class="item" v-for="(item,index) in users" @click="checkitem(item)">
         <van-row>
           <van-col span="8"><img :src="item.houseimg[0]"></van-col>
@@ -173,7 +173,6 @@
           color: #666;
           .rigth{
             display: inline-block;
-            margin-left:60px ;
           }
         }
       }
