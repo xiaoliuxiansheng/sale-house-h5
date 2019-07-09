@@ -2,7 +2,6 @@ package com.example.wxgzh.house.service;
 
 
 import com.example.wxgzh.common.dto.QueryResult;
-import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.HouseEntity;
 import com.example.wxgzh.house.dto.HouseAo;
 import org.springframework.web.multipart.MultipartFile;

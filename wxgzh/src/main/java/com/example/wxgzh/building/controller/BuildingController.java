@@ -5,6 +5,7 @@ import com.example.wxgzh.building.service.BuildingService;
 import com.example.wxgzh.common.dto.JSONResponse;
 import com.example.wxgzh.common.dto.QueryResult;
 import com.example.wxgzh.common.util.UUID;
+import com.example.wxgzh.entity.BuiHouEntity;
 import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.LeaserEntity;
 import org.apache.tomcat.util.http.fileupload.FileItem;
@@ -150,5 +151,20 @@ public class BuildingController {
 	public JSONResponse queryNames() throws Exception{
 		List<BuildingEntity> e = service.queryNames();
 		return JSONResponse.ok(e);
+	}
+
+	@GetMapping("/detail")
+	@ResponseBody
+	public JSONResponse queryDetail(HttpServletRequest req,String id)throws Exception{
+
+		String ip = req.getServerName();
+
+		int port = req.getServerPort();
+
+		String url = "http://"+ip+":"+port;
+
+		BuiHouEntity entity = service.queryDetail(id,url);
+
+		return JSONResponse.ok(entity);
 	}
 }
