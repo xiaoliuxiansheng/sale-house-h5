@@ -62,7 +62,7 @@
         <el-row>
           <el-col :span="10">
             <el-form-item label="电话"  prop="phone">
-              <el-input placeholder="请输入电话" v-model="editForm.phone" clearable></el-input>
+              <el-input placeholder="请输入电话" v-model="editForm.phone" clearable ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -80,8 +80,8 @@
         </el-form-item>
         <el-row>
           <el-col :span="10">
-            <el-form-item label="密码" >
-              <el-input placeholder="请输入密码" v-model="addForm.password" clearable></el-input>
+            <el-form-item label="密码" prop="repassword">
+              <el-input placeholder="请输入密码" v-model="addForm.password" clearable show-password></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -98,14 +98,14 @@
         <el-row>
           <el-col :span="10">
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="addForm.name" auto-complete="off" placeholder="请输入名称" ></el-input>
+              <el-input v-model="addForm.name" placeholder="请输入名称" ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
             <el-form-item label="电话"  prop="phone">
-              <el-input placeholder="请输入电话" v-model="addForm.phone" clearable></el-input>
+              <el-input placeholder="请输入电话" v-model="addForm.phone" clearable ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -123,7 +123,7 @@
         <el-row>
           <el-col :span="12">
           <el-form-item label="密码">
-            <el-input placeholder="请输入密码" v-model="addForm.password" clearable></el-input>
+            <el-input placeholder="请输入密码" v-model="addForm.password" clearable show-password></el-input>
           </el-form-item>
           </el-col>
         </el-row>
@@ -142,6 +142,30 @@ import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from 
 
 export default {
   data () {
+    let checkPhone = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('手机号不能为空'));
+      } else {
+        const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
+        if (reg.test(value)) {
+          callback();
+        } else {
+          return callback(new Error('请输入正确的手机号'));
+        }
+      }
+    };
+    let  passwords = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('密码不能为空'));
+      } else {
+        const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/;
+        if (reg.test(value)) {
+          callback();
+        } else {
+          return callback(new Error('密码长度要大于6位，由数字和字母组成!'));
+        }
+      }
+    };
     return {
       filters: {
         name: null,
@@ -182,13 +206,13 @@ export default {
           { required: true, message: '输入年龄', trigger: 'blur' }
         ],
         phone: [
-          { required: true, message: '请输入联系方式', trigger: 'blur' }
+          {validator: checkPhone, trigger: 'blur'}
         ],
         num: [
           { required: true, message: '请输入账号', trigger: 'blur' }
         ],
-        pwd: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+        password: [
+          {validator: passwords, trigger: 'blur'}
         ]
       },
       // 新增界面数据
