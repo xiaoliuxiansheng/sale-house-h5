@@ -21,7 +21,7 @@
           <span class="position" style="margin-top: -11px;"><van-icon name="location-o" /></span>
         </div>
         <div class="two">
-          <div v-for="(item,index) in users.housesInfo" class="per"  v-if="index<flag">
+          <div v-for="(item,index) in users.housesInfo" class="per"  v-if="index<flag" @click="checkitem(item)">
             <div class="left">
               <img :src="item.houseimg[0]">
             </div>
@@ -114,10 +114,7 @@
           }
         }).then((res) => {
           if (res.data.code=="error"){
-            this.$message({
-              message:res.data.message,
-              type:"warning"
-            })
+            this.$toast.fail(res.data.message);
           } else {
             this.users = res.data.data
             this.users.buildimg=this.users.buildimg.split(",")
@@ -127,11 +124,12 @@
           }
         })
       },
-      pushlist(){
+      checkitem(item){
+        console.log(item)
         this.$router.push({
-          path:"/list",
+          path:"/details",
           query:{
-            name:"中渝都会首战1号"
+            id:item.pk_house
           }
         })
       }
