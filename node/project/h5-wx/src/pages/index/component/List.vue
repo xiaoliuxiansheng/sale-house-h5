@@ -103,13 +103,13 @@
 </template>
 <script>
   import XImg from "vux/src/components/x-img/index";
-  import BmScale from 'vue-baidu-map/components/controls/Scale'
-  import BmNavigation from 'vue-baidu-map/components/controls/Navigation'
-  import BmMarkerClusterer from  'vue-baidu-map/components/extra/MarkerClusterer'
-  import BmMarker from 'vue-baidu-map/components/overlays/Marker'
-  import BaiduMap from 'vue-baidu-map/components/map/Map.vue'
+  // import BmScale from 'vue-baidu-map/components/controls/Scale'
+  // import BmNavigation from 'vue-baidu-map/components/controls/Navigation'
+  // import BmMarkerClusterer from  'vue-baidu-map/components/extra/MarkerClusterer'
+  // import BmMarker from 'vue-baidu-map/components/overlays/Marker'
+  // import BaiduMap from 'vue-baidu-map/components/map/Map.vue'
   export default {
-    components: {XImg,BmMarker,BaiduMap,BmScale,BmNavigation,BmMarkerClusterer},
+    components: {XImg},
     data(){
       return{
         title:this.$route.query.title,
