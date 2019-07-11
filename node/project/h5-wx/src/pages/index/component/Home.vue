@@ -48,7 +48,7 @@
       data(){
         return{
           value1: 0,
-          value2: 'a',
+          value2: 'Login.vue',
           checkstyle:[
             { text: '写字楼出租', value: 1 },
             { text: '写字楼出售', value: 2 },],
@@ -113,7 +113,7 @@
             }
           ],
           option4: [
-            { text: '高级搜索', value: 'a' },
+            { text: '高级搜索', value: 'Login.vue' },
             { text: '好评排序', value: 'b' },
             { text: '销量排序', value: 'c' },
           ],
