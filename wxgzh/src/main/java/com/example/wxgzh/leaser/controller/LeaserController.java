@@ -94,7 +94,7 @@ public class LeaserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping("/login")
+	@PostMapping("/login")
 	@ResponseBody
 	public JSONResponse queryManager(HttpServletRequest request, String phone, String password) throws Exception{
 
