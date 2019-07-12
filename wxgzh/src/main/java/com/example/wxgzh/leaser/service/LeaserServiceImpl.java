@@ -161,7 +161,7 @@ public class LeaserServiceImpl implements LeaserService {
 	}
 
 	@Override
-	public LeaserEntity login(String phone, String password) throws Exception {
+	public LeaserEntity login(String phone, String password,String url) throws Exception {
 		LeaserEntity entity = dao.select("phone", $("电话号码不能为空", phone));
 		password = $("密码不能为空", password);
 		if (entity == null){
@@ -170,6 +170,9 @@ public class LeaserServiceImpl implements LeaserService {
 		if (!entity.getPassword().equals(MD5.encode(password))){
 			throw new WxgzhException("密码错误，请重试！");
 		}else{
+
+			entity.setAvatar(url + entity.getAvatar());
+
 			return entity;
 		}
 	}

@@ -193,7 +193,7 @@ public class HouseController {
 
 		HttpSession session = req.getSession(false);
 		if (session == null) {
-			throw new WxgzhException("非法操作！");
+			throw new WxgzhException("该用户未登录或已超时！");
 		}
 		ManagerEntity e= (ManagerEntity)session.getAttribute("leaser");
 		String id = "";

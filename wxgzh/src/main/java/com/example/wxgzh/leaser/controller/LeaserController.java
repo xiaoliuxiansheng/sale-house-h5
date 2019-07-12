@@ -98,7 +98,13 @@ public class LeaserController {
 	@ResponseBody
 	public JSONResponse queryManager(HttpServletRequest request, String phone, String password) throws Exception{
 
-		LeaserEntity entity = service.login(phone,password);
+		String ip = request.getServerName();
+
+		int port = request.getServerPort();
+
+		String url = "http://"+ip+":"+port;
+
+		LeaserEntity entity = service.login(phone,password,url);
 
 		HttpSession session = request.getSession(false);
 		if (session != null) {
