@@ -19,7 +19,7 @@ public interface LeaserService {
 
 	public QueryResult<LeaserEntity> queryAll(String url,String name, String pageNo, String pageSize) throws Exception;
 
-	public LeaserEntity login(String phone,String password)throws Exception;
+	public LeaserEntity login(String phone,String password,String url)throws Exception;
 
 	public void allocate(ManagerRelaEntity entity)throws Exception;
 
