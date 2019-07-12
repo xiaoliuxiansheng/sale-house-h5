@@ -1,17 +1,25 @@
 <template>
   <div class="box">
    <div class="head">
-     <span>写字楼出租</span>
+     <van-dropdown-menu>
+       <van-dropdown-item v-model="parms.rors" :options="checkstyle" @change="changeoption()"/>
+     </van-dropdown-menu>
    </div>
     <div class="search">
     <van-dropdown-menu>
-      <van-dropdown-item v-model="value1" :options="option1" />
-      <van-dropdown-item v-model="value2" :options="option2" />
-      <van-dropdown-item v-model="value1" :options="option3" />
-      <van-dropdown-item v-model="value2" :options="option4" />
+      <van-dropdown-item v-model="parms.region" :options="option1"  @change="changeoption()"/>
+      <van-dropdown-item v-model="parms.area" :options="option2" @change="changeoption()"/>
+      <van-dropdown-item v-model="parms.price" :options="option3" @change="changeoption()"/>
     </van-dropdown-menu>
     </div>
-    <div class="content"  v-if="users">
+    <div class="content"  v-if="users" id="list-content">
+      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          @load="onLoad"
+          :offset="10"
+        >
       <div class="item" v-for="(item,index) in users" @click="checkitem(item)">
         <van-row>
           <van-col span="8"><img :src="item.houseimg[0]"></van-col>
@@ -29,6 +37,8 @@
           </van-col>
         </van-row>
       </div>
+        </van-list>
+      </van-pull-refresh>
     </div>
   </div>
 </template>
@@ -38,24 +48,72 @@
       data(){
         return{
           value1: 0,
-          value2: 'a',
+          value2: 'Login.vue',
+          checkstyle:[
+            { text: '写字楼出租', value: 1 },
+            { text: '写字楼出售', value: 2 },],
           option1: [
-            { text: '区域', value: 0 },
-            { text: '新款商品', value: 1 },
-            { text: '活动商品', value: 2 }
+            {text:"区域",value:null},
+            { text: '渝中区', value: '渝中区' },
+            { text: '江北区', value: "江北区"},
+            { text: '南岸区', value: "南岸区" },
+            { text: '九龙坡区', value: '九龙坡区' },
+            { text: '沙坪坝区', value:"沙坪坝区" },
+            { text: '大渡口区', value: "大渡口区" },
+            { text: '北碚区', value: '北碚区' },
+            { text: '渝北区', value: "渝北区"},
+            { text: '巴南区', value: "巴南区" },
+            { text: '两江新区', value: "两江新区" }
           ],
           option2: [
-            { text: '面积', value: 'a' },
-            { text: '好评排序', value: 'b' },
-            { text: '销量排序', value: 'c' },
+            { text: '面积', value: null },
+            {
+              value: null,
+              text: '不限'
+            },{
+              value: '0-100',
+              text: '100m²以下'
+            }, {
+              value: '100-200',
+              text: '100-200m²'
+            }, {
+              value: '200-300',
+              text: '200-300m²'
+            }, {
+              value: '300-500',
+              text: '300-500m²'
+            }, {
+              value: '500-800',
+              text: '500-800m²'
+            }, {
+              value: '800-1500',
+              text: '800-1500m²'
+            }, {
+              value: '1500',
+              text: '1500以上'
+            }
           ],
           option3: [
-            { text: '价格', value: 0 },
-            { text: '新款商品', value: 1 },
-            { text: '活动商品', value: 2 }
+            { text: '价格', value: null },
+            {
+              value: '',
+              text: '不限'
+            },{
+              value: '0-50',
+              text: '50元/m²·月以下'
+            }, {
+              value: '50-80',
+              text: '50-80元/m²·月'
+            }, {
+              value: '80-100',
+              text: '80-100元/m²·月'
+            }, {
+              value: '100',
+              text: '100元以上'
+            }
           ],
           option4: [
-            { text: '高级搜索', value: 'a' },
+            { text: '高级搜索', value: 'Login.vue' },
             { text: '好评排序', value: 'b' },
             { text: '销量排序', value: 'c' },
           ],
@@ -64,16 +122,51 @@
             region:null,
             price:null,
             area:null,
-            pageNo:null,
+            pageNo:1,
             rors:1
           },
-          users:[]
+          users:[],
+          loading: false,   //是否处于加载状态
+          finished: false,  //是否已加载完所有数据
+          isLoading: false,   //是否处于下拉刷新状态
+          totalpage:null
         }
       },
     created() {
         this.getmsg()
     },
+    mounted(){
+      let winHeight = document.documentElement.clientHeight                          //视口大小
+      document.getElementById('list-content').style.height = (winHeight - 80) +'px'  //调整上拉加载框高度
+    },
     methods:{
+      changeoption(){
+        this.users=[]
+        this.parms.pageNo=1
+        this.getmsg()
+      },
+      onLoad() {      //上拉加载
+        setTimeout(() => {
+          this.loading = false;
+          // this.parms.pageNo++
+          if (this.parms.pageNo<this.totalpage){
+            this.getmsg()
+          } else {
+            this.finished = true;
+            this.$toast('已经加载完毕!');
+          }
+          //
+        }, 500);
+      },
+      onRefresh() {       //下拉刷新
+        setTimeout(() => {
+          this.finished = false;
+          this.isLoading = false;
+          this.parms.pageNo=1
+          this.users=[]
+          this.getmsg()
+        }, 500);
+      },
       getmsg(){
         let formdata;
         formdata=new FormData()
@@ -84,13 +177,13 @@
         }
         this.$axios.post("/house/list",formdata).then((res) => {
           if (res.data.code=="error"){
-            this.$message({
-              message:res.data.message,
-              type:"warning"
-            })
+            this.$toast.fail(res.data.message);
           } else {
-            console.log(res)
-            this.users = res.data.data.rows
+            this.totalpage=res.data.data.totalpage
+            res.data.data.rows.forEach((item)=>{
+              this.users.push(item)
+            })
+            console.log(this.users)
             this.users.forEach((item,index)=>{
               this.users[index].houseimg=item.houseimg.split(",")
             })
@@ -123,7 +216,12 @@
       top: 0px;
       z-index: 99;
       text-align: center;
-      line-height: 2rem;
+      .van-dropdown-menu{
+        background:#43b1c0 ;
+        border: none;
+        margin-top: 10/$sc+rem;
+        border: none;
+      }
     }
     span{
       line-height: 50px;
@@ -133,7 +231,7 @@
     .search{
       position: fixed;
       width: 100%;
-      top: 50/$sc+rem;
+      top: 50px;
       border-bottom: 1px solid #ddd;
       z-index: 6;
       font-size: 10px;
@@ -141,11 +239,12 @@
     }
     /deep/ .van-dropdown-menu{
       width: 100%;
-      height: 34/$sc+rem;
+      height: 34px;
       background: #eee;
     }
     .content{
-      margin-top: 84/$sc+rem;
+      margin-top: 84px;
+      overflow:scroll;
       padding-right: 15/$sc+rem;
       padding-left: 15/$sc+rem;
       .item{

@@ -21,7 +21,7 @@
           <span class="position" style="margin-top: -11px;"><van-icon name="location-o" /></span>
         </div>
         <div class="two">
-          <div v-for="(item,index) in users.housesInfo" class="per"  v-if="index<flag">
+          <div v-for="(item,index) in users.housesInfo" class="per"  v-if="index<flag" @click="checkitem(item)">
             <div class="left">
               <img :src="item.houseimg[0]">
             </div>
@@ -81,9 +81,20 @@
           </div>
         </div>
 <!--        <div class="five">-->
-<!--          <div class="names">大楼参数</div>-->
-<!--          <div class="btns">-->
-<!--            <span v-for="(item,index) in 5" :class="{'checked':'index>1'}">地铁</span>-->
+<!--          <div class="names">楼盘定位</div>-->
+<!--          <div>-->
+<!--          <baidu-map style="width: 100%;height: 5rem" class="map" ak="spNyXc3NqWLUDANXnht175z1igOjjsOe" :zoom="map.zoom" :center="{lng: map.center.lng, lat: map.center.lat}"-->
+<!--                     @ready="handler" :scroll-wheel-zoom="true">-->
+<!--            &lt;!&ndash;比例尺控件&ndash;&gt;-->
+<!--            <bm-scale anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-scale>-->
+<!--            &lt;!&ndash;缩放控件&ndash;&gt;-->
+<!--            <bm-navigation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" ></bm-navigation>-->
+<!--            &lt;!&ndash;聚合动态添加的点坐标&ndash;&gt;-->
+<!--            <bm-marker-clusterer :averageCenter="true">-->
+<!--              <bm-marker v-for="marker of markers" :key="marker.code" :position="{lng: marker.lng, lat: marker.lat}" @click="lookDetail(marker)"></bm-marker>-->
+<!--            </bm-marker-clusterer>-->
+<!--            &lt;!&ndash;信息窗体&ndash;&gt;-->
+<!--          </baidu-map>-->
 <!--          </div>-->
 <!--        </div>-->
       </div>
@@ -92,6 +103,11 @@
 </template>
 <script>
   import XImg from "vux/src/components/x-img/index";
+  // import BmScale from 'vue-baidu-map/components/controls/Scale'
+  // import BmNavigation from 'vue-baidu-map/components/controls/Navigation'
+  // import BmMarkerClusterer from  'vue-baidu-map/components/extra/MarkerClusterer'
+  // import BmMarker from 'vue-baidu-map/components/overlays/Marker'
+  // import BaiduMap from 'vue-baidu-map/components/map/Map.vue'
   export default {
     components: {XImg},
     data(){
@@ -114,10 +130,7 @@
           }
         }).then((res) => {
           if (res.data.code=="error"){
-            this.$message({
-              message:res.data.message,
-              type:"warning"
-            })
+            this.$toast.fail(res.data.message);
           } else {
             this.users = res.data.data
             this.users.buildimg=this.users.buildimg.split(",")
@@ -127,11 +140,12 @@
           }
         })
       },
-      pushlist(){
+      checkitem(item){
+        console.log(item)
         this.$router.push({
-          path:"/list",
+          path:"/details",
           query:{
-            name:"中渝都会首战1号"
+            id:item.pk_house
           }
         })
       }

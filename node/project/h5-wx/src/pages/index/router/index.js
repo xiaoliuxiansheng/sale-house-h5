@@ -24,7 +24,7 @@ const routers =new Router({
       meta:{
         title:'列表'
       },
-      name:'list',
+      name:'List.vue',
       component:resolve =>require.ensure([],() => resolve(require("../component/List.vue")))
     },
     {
@@ -32,7 +32,7 @@ const routers =new Router({
       meta:{
         title:'业主放盘'
       },
-      name:'list',
+      name:'List.vue',
       component:resolve =>require.ensure([],() => resolve(require("../component/new/add.vue")))
     }
   ]

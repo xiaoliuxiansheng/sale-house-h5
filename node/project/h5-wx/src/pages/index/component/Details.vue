@@ -28,16 +28,16 @@
         </div>
         <div class="four" v-if="msg">
           <div class="names">大楼参数</div>
-          <div class="box">
-            <div class="img">
-              <div class="left" v-if="msg.buildingimg&&msg.buildingimg.length>2">
+          <div class="box" >
+            <div class="img" v-if="msg.buildingimg">
+              <div class="left">
                 <img :src="msg.buildingimg[0]"/>
               </div>
-              <div class="right" v-if="msg.buildingimg&&msg.buildingimg.length>2">
+              <div class="right" v-if="msg.buildingimg.length>2">
                 <div class="top" >
                   <img :src="msg.buildingimg[1]"/>
                 </div>
-                <div class="bottom" v-if="msg.buildingimg&&msg.buildingimg.length>3">>
+                <div class="bottom" v-if="msg.buildingimg.length>3">>
                   <img :src="msg.buildingimg[2]"/>
                 </div>
               </div>
@@ -101,12 +101,11 @@
           id:this.$route.query.id
           }}).then((res)=>{
             if (res.data.code=="ok"){
-              console.log(res)
               this.title=res.data.data.subordinate
               this.msg=res.data.data
-                this.msg.houseimg=this.msg.houseimg.split(",")
+              this.msg.houseimg=this.msg.houseimg.split(",")
               this.msg.buildingimg=this.msg.buildingimg.split(",")
-              console.log(this.msg.buildingimg)
+              console.log(this.msg)
             }
         })
       },
