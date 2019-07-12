@@ -148,8 +148,8 @@
       onLoad() {      //上拉加载
         setTimeout(() => {
           this.loading = false;
-          // this.parms.pageNo++
           if (this.parms.pageNo<this.totalpage){
+            this.parms.pageNo++
             this.getmsg()
           } else {
             this.finished = true;

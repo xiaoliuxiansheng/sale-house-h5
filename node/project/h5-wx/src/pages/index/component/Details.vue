@@ -67,15 +67,16 @@
       </div>
       <div class="pers center">
         <div class="top">
-          <span class="namess">陈方旭</span>
+          <span class="namess">{{msg.leasername}}</span>
           <span class="spanss">招商经理</span>
         </div>
         <div class="phone">
-          18875150394
+          <span v-if="msg.phone">{{msg.phone}}</span>
+          <span v-else>暂无联系方式</span>
         </div>
       </div>
-      <div class="pers right">
-        <van-icon name="phone-o" />
+      <div class="pers right" v-if="msg.phone">
+        <a :href="msg.phone"><van-icon name="phone-o" /></a>
       </div>
     </div>
   </div>

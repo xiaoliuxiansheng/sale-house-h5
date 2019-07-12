@@ -47,10 +47,19 @@ export default {
         this.pastext=null
         if (this.parms.password&&this.parms.username){
           let formdata=new FormData()
-          formdata.append("phone",this.parms.password)
-          formdata.append("password",this.parms.username)
+          formdata.append("phone",this.parms.username)
+          formdata.append("password",this.parms.password)
           this.$axios.post("/leaser/login",formdata).then((res)=>{
-            console.log(res)
+            if (res.data.code=="ok") {
+              this.$router.push({
+                path:"/List",
+                query:{
+                  id:res.data.pk_leaser
+                }
+              })
+            } else {
+              this.$toast(res.data.message);
+            }
           })
         } else {
           if (this.parms.username==null){

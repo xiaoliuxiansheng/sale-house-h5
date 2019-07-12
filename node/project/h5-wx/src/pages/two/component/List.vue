@@ -1,18 +1,9 @@
 <template>
   <div class="box">
     <div class="head">
-      <van-dropdown-menu>
-        <van-dropdown-item v-model="parms.rors" :options="checkstyle" @change="changeoption()"/>
-      </van-dropdown-menu>
+      <span>所属房源</span>
     </div>
-    <div class="search">
-      <van-dropdown-menu>
-        <van-dropdown-item v-model="parms.region" :options="option1"  @change="changeoption()"/>
-        <van-dropdown-item v-model="parms.area" :options="option2" @change="changeoption()"/>
-        <van-dropdown-item v-model="parms.price" :options="option3" @change="changeoption()"/>
-      </van-dropdown-menu>
-    </div>
-    <div class="content"  v-if="users" id="list-content">
+    <div class="content"  v-if="users&&users.length>0" id="list-content">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -39,6 +30,9 @@
           </div>
         </van-list>
       </van-pull-refresh>
+    </div>
+    <div v-else class="none">
+      <img src="@/assets/none.jpg">
     </div>
   </div>
 </template>
@@ -129,7 +123,8 @@
         loading: false,   //是否处于加载状态
         finished: false,  //是否已加载完所有数据
         isLoading: false,   //是否处于下拉刷新状态
-        totalpage:null
+        totalpage:null,
+        id:this.$route.query.id,
       }
     },
     created() {
@@ -148,8 +143,8 @@
       onLoad() {      //上拉加载
         setTimeout(() => {
           this.loading = false;
-          // this.parms.pageNo++
           if (this.parms.pageNo<this.totalpage){
+            this.parms.pageNo++
             this.getmsg()
           } else {
             this.finished = true;
@@ -170,34 +165,22 @@
       getmsg(){
         let formdata;
         formdata=new FormData()
-        for (let k in this.parms){
-          if(this.parms[k]){
-            formdata.append(k,this.parms[k])
-          }
-        }
-        this.$axios.post("/house/list",formdata).then((res) => {
-          if (res.data.code=="error"){
-            this.$toast.fail(res.data.message);
-          } else {
-            this.totalpage=res.data.data.totalpage
-            res.data.data.rows.forEach((item)=>{
-              this.users.push(item)
-            })
-            console.log(this.users)
-            this.users.forEach((item,index)=>{
-              this.users[index].houseimg=item.houseimg.split(",")
-            })
-            console.log(this.users)
-          }
-        })
-      },
-      checkitem(item){
-        console.log(item)
-        this.$router.push({
-          path:"/details",
-          query:{
-            id:item.pk_house
-          }
+        formdata.append("pageno",this.parms.pageNo)
+        this.$axios.post("/house/oalist",formdata).then((res) => {
+          console.log(res)
+          // if (res.data.code=="error"){
+          //   this.$toast.fail(res.data.message);
+          // } else {
+          //   this.totalpage=res.data.data.totalpage
+          //   res.data.data.rows.forEach((item)=>{
+          //     this.users.push(item)
+          //   })
+          //   console.log(this.users)
+          //   this.users.forEach((item,index)=>{
+          //     this.users[index].houseimg=item.houseimg.split(",")
+          //   })
+          //   console.log(this.users)
+          // }
         })
       }
     }
@@ -221,6 +204,17 @@
         border: none;
         margin-top: 10/$sc+rem;
         border: none;
+      }
+    }
+    .none{
+      position:absolute;
+      left:0;
+      top:0px;
+      width:100%;
+      height:100%;
+      img{
+        width: 100%;
+        height: 100%;
       }
     }
     span{
