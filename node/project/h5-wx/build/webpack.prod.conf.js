@@ -25,17 +25,17 @@ const webpackConfig = merge(baseWebpackConfig, {
             usePostCSS: true
         })
     },
-    externals:{
-      "vue":"Vue",
-      "vue-router":"VueRouter",
-      "vuex":"Vuex",
-      "axios":"axios",
-      "fastclick":"FastClick",
-      "echarts":"echarts",
-      "babel-polyfill":"window",
-      "vue-amap":"VueAMap",
-      "vue-scroller":"VueScroller"
-    },
+    // externals:{
+    //   // "vue":"Vue",
+    //   "vue-router":"VueRouter",
+    //   "vuex":"Vuex",
+    //   "axios":"axios",
+    //   "fastclick":"FastClick",
+    //   "echarts":"echarts",
+    //   "babel-polyfill":"window",
+    //   "vue-amap":"VueAMap",
+    //   "vue-scroller":"VueScroller"
+    // },
     devtool: config.build.productionSourceMap ? config.build.devtool : false,
     output: {
         path: config.build.assetsRoot,
