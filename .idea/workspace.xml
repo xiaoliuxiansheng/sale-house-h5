@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5cc90aa4-0db4-4f56-91d4-3917756b136b" name="Default Changelist" comment="验证配置包">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -66,11 +66,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="webpack.prod.conf.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="webpack.prod.conf.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="35" column="30" lean-forward="true" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+            <state relative-caret-position="437">
+              <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/node/project/h5-wx/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -102,15 +111,6 @@
               <folding>
                 <element signature="n#style#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Login.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1216">
-              <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -161,6 +161,7 @@
         <option value="$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue" />
         <option value="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue" />
         <option value="$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/.gitignore" />
       </list>
     </option>
   </component>
@@ -224,7 +225,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../tcampus_service_area_big_data/node/area" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -269,7 +270,7 @@
       <workItem from="1562750250997" duration="118000" />
       <workItem from="1562750642739" duration="24000" />
       <workItem from="1562898161042" duration="2573000" />
-      <workItem from="1562909800512" duration="911000" />
+      <workItem from="1562909800512" duration="4257000" />
     </task>
     <task id="LOCAL-00001" summary="验证优化pc">
       <created>1562750338605</created>
@@ -285,15 +286,21 @@
       <option name="project" value="LOCAL" />
       <updated>1562899563795</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="验证配置包">
+      <created>1562910896767</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1562910896768</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62724000" />
+    <option name="totallyTimeSpent" value="66070000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10695469" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -301,7 +308,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.14830971" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.16139586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27153763" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -338,13 +345,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node/project/pc/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node/project/pc/src/routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -682,8 +682,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="35" column="30" lean-forward="true" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+        <state relative-caret-position="437">
+          <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
