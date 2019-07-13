@@ -102,9 +102,9 @@
       onLoad() {      //上拉加载
         setTimeout(() => {
           this.loading = false;
-          if (this.parms.pageNo<this.totalpage){
-            this.parms.pageNo++
+          if (this.parms.pageNo<=this.totalpage){
             this.getmsg()
+            this.parms.pageNo++
           } else {
             this.finished = true;
             this.$toast('已经加载完毕!');
@@ -131,12 +131,10 @@
           if (res.data.code=="error"){
             this.$toast.fail(res.data.message);
           } else {
-            this.totalpage=res.data.data.totalpage
+            this.totalpage=res.data.data.totalPages
             res.data.data.rows.forEach((item)=>{
+              item.houseimg=item.houseimg.split(",")
               this.users.push(item)
-            })
-            this.users.forEach((item,index)=>{
-              this.users[index].houseimg=item.houseimg.split(",")
             })
           }
         })

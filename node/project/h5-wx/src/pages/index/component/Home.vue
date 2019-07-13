@@ -12,7 +12,7 @@
       <van-dropdown-item v-model="parms.price" :options="option3" @change="changeoption()"/>
     </van-dropdown-menu>
     </div>
-    <div class="content"  v-if="users" id="list-content">
+    <div class="content"  id="list-content">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -137,7 +137,7 @@
     },
     mounted(){
       let winHeight = document.documentElement.clientHeight                          //视口大小
-      document.getElementById('list-content').style.height = (winHeight - 80) +'px'  //调整上拉加载框高度
+      document.getElementById('list-content').style.height = (winHeight - 84) +'px'  //调整上拉加载框高度
     },
     methods:{
       changeoption(){
@@ -146,11 +146,12 @@
         this.getmsg()
       },
       onLoad() {      //上拉加载
+        console.log("-----------------")
         setTimeout(() => {
           this.loading = false;
-          if (this.parms.pageNo<this.totalpage){
-            this.parms.pageNo++
+          if (this.parms.pageNo<=this.totalpage){
             this.getmsg()
+            this.parms.pageNo++
           } else {
             this.finished = true;
             this.$toast('已经加载完毕!');
@@ -179,20 +180,15 @@
           if (res.data.code=="error"){
             this.$toast.fail(res.data.message);
           } else {
-            this.totalpage=res.data.data.totalpage
+            this.totalpage=res.data.data.totalPages
             res.data.data.rows.forEach((item)=>{
+              item.houseimg=item.houseimg.split(",")
               this.users.push(item)
             })
-            console.log(this.users)
-            this.users.forEach((item,index)=>{
-              this.users[index].houseimg=item.houseimg.split(",")
-            })
-            console.log(this.users)
           }
         })
       },
       checkitem(item){
-        console.log(item)
           this.$router.push({
             path:"/details",
             query:{
