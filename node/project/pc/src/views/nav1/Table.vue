@@ -81,7 +81,7 @@
         <el-row>
           <el-col :span="10">
             <el-form-item label="密码" prop="repassword">
-              <el-input placeholder="请输入密码" v-model="addForm.password" clearable show-password></el-input>
+              <el-input placeholder="请输入密码" v-model="editForm.password" clearable show-password></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -327,6 +327,7 @@ export default {
     handleEdit: function (index, row) {
       this.editFormVisible = true
       this.editForm = Object.assign({}, row)
+      this.editForm.password=''
       console.log(row)
       // this.fileList[0].url=row.avatar
     },

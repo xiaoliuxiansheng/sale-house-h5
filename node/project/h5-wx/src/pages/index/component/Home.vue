@@ -150,7 +150,9 @@
         setTimeout(() => {
           this.loading = false;
           if (this.parms.pageNo<=this.totalpage){
-            this.getmsg()
+            if (this.parms.pageNo!==1){
+              this.getmsg()
+            }
             this.parms.pageNo++
           } else {
             this.finished = true;

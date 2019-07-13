@@ -44,34 +44,34 @@
         <div class="three">
           <div class="names">楼盘参数</div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">楼层：</span>：{{users.floorcount}}层</span>
+            <span class="name"><span style="color: #999;">楼层：</span>{{users.floorcount}}层</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">物管费：</span>：{{users.cost}}元/m²·月</span>
+            <span class="name"><span style="color: #999;">物管费：</span>{{users.cost}}元/m²·月</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">层高：</span>：{{users.buildheight}}米</span>
+            <span class="name"><span style="color: #999;">层高：</span>{{users.buildheight}}米</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">停车位：</span>：{{users.park}}个</span>
+            <span class="name"><span style="color: #999;">停车位：</span>{{users.park}}个</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">电梯：</span>：{{users.ebrand}}</span>
+            <span class="name"><span style="color: #999;">电梯：</span>{{users.ebrand}}</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">标准层面积：</span>：{{users.buildarea}}m²</span>
+            <span class="name"><span style="color: #999;">标准层面积：</span>{{users.buildarea}}m²</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">空调：</span>：{{users.airconditioning}}</span>
+            <span class="name"><span style="color: #999;">空调：</span>{{users.airconditioning}}</span>
           </div>
           <div class="pers">
-            <span class="name"><span style="color: #999;">地址：</span>：{{users.daddress}}</span>
+            <span class="name"><span style="color: #999;">地址：</span>{{users.daddress}}</span>
           </div>
           <div class="pers">
-          <span class="name"><span style="color: #999;">开发商：</span>：{{users.developer}}</span>
+          <span class="name"><span style="color: #999;">开发商：</span>{{users.developer}}</span>
         </div>
           <div class="pers">
-            <span class="name"><span  style="color: #999;">物管公司：</span>：{{users.company}}</span>
+            <span class="name"><span  style="color: #999;">物管公司：</span>{{users.company}}</span>
           </div>
         </div>
         <div class="four">
