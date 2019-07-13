@@ -80,23 +80,6 @@
             {{users.introduce}}
           </div>
         </div>
-<!--        <div class="five">-->
-<!--          <div class="names">楼盘定位</div>-->
-<!--          <div>-->
-<!--          <baidu-map style="width: 100%;height: 5rem" class="map" ak="spNyXc3NqWLUDANXnht175z1igOjjsOe" :zoom="map.zoom" :center="{lng: map.center.lng, lat: map.center.lat}"-->
-<!--                     @ready="handler" :scroll-wheel-zoom="true">-->
-<!--            &lt;!&ndash;比例尺控件&ndash;&gt;-->
-<!--            <bm-scale anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-scale>-->
-<!--            &lt;!&ndash;缩放控件&ndash;&gt;-->
-<!--            <bm-navigation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" ></bm-navigation>-->
-<!--            &lt;!&ndash;聚合动态添加的点坐标&ndash;&gt;-->
-<!--            <bm-marker-clusterer :averageCenter="true">-->
-<!--              <bm-marker v-for="marker of markers" :key="marker.code" :position="{lng: marker.lng, lat: marker.lat}" @click="lookDetail(marker)"></bm-marker>-->
-<!--            </bm-marker-clusterer>-->
-<!--            &lt;!&ndash;信息窗体&ndash;&gt;-->
-<!--          </baidu-map>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
     </div>
   </div>
