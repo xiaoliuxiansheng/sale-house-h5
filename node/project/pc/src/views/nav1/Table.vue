@@ -355,7 +355,13 @@ export default {
               let config = {
                 headers:{'Content-Type':'multipart/form-data'}
               }; //添加请求头
-              this.$axios.post("/leaser/mod",formdata,config).then((res) => {
+            let url;
+            if(this.editForm.file){
+              url="/leaser/mod"
+            } else{
+              url="/leaser/nofile"
+            }
+              this.$axios.post(url,formdata,config).then((res) => {
                 if (res.data.code=="ok"){
                   this.$message({
                     message: '修改成功',

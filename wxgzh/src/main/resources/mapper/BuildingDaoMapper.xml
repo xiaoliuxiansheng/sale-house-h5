@@ -145,6 +145,7 @@
 
 	<select id="queryByNames" resultMap="result">
 		select pk_builiding,name from wx_builiding
+		order by ts desc
 	</select>
 
 	<resultMap id="builddetail" type="com.example.wxgzh.entity.BuiHouEntity">
@@ -189,6 +190,7 @@
 		left join wx_house wh on wb.pk_builiding = wh.pk_building
 		where
 		wb.pk_builiding = #{id}
+		order by wb.ts desc
 	</select>
 
 </mapper>

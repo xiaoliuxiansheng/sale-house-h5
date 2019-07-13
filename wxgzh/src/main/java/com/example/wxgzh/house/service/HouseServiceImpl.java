@@ -338,6 +338,11 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public QueryResult<HouseEntity> queryOA(String id, String pageNo,String pageSize,String url) throws Exception {
+        LeaserEntity u = leaserDao.selectById(id);
+        if(u == null) {
+            id = null;
+        }
+
         int no = 1;
         if(pageNo!=null) {
             no = Integer.parseInt(pageNo);

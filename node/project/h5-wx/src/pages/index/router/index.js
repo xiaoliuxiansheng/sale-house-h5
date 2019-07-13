@@ -34,6 +34,14 @@ const routers =new Router({
       },
       name:'List.vue',
       component:resolve =>require.ensure([],() => resolve(require("../component/new/add.vue")))
+    },
+    {
+      path:'/test',
+      meta:{
+        title:'test'
+      },
+      name:'List.vue',
+      component:resolve =>require.ensure([],() => resolve(require("../component/test.vue")))
     }
   ]
 })

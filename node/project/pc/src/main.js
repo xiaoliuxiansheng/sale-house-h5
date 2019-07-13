@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import store from './vuex/store'
 import Vuex from 'vuex'
 import Axios from 'axios'
+// Axios.defaults.baseURL = 'http://111.230.43.181:8081/api'
 Axios.defaults.baseURL = 'http://111.230.43.181:8081/api'
 Vue.prototype.$axios=Axios
 // Mock.bootstrap()

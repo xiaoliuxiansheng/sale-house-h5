@@ -4,8 +4,8 @@
       <span class="left"  @click="$router.go(-1)"><van-icon name="arrow-left" /></span>业主放盘<span class="rigth"  @click="$router.push('/')"><van-icon name="home-o" /></span>
     </div>
     <div class="option" >
-      <div :class="{checked:flag==1}" @click="checked(1)">房屋出租</div>
-      <div :class="{ckecked:flag==2}" @click="checked(2)">房屋出售</div>
+      <div :class="{ckecked: flag==1}" @click="checked(1)">房屋出租</div>
+      <div :class="{ckecked: flag==2}" @click="checked(2)">房屋出售</div>
     </div>
     <div class="form">
       <van-cell-group>

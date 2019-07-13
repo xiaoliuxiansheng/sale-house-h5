@@ -35,7 +35,8 @@
         update wx_leaser
         set name     = #{name},
             phone    = #{phone},
-            password = #{password}
+            password = #{password},
+            avatar = #{avatar}
         where pk_leaser = #{pk_leaser}
     </update>
 
@@ -57,6 +58,7 @@
                 name like #{name}
             </if>
         </where>
+        order by ts desc
     </select>
 
 
@@ -66,6 +68,6 @@
     </insert>
 
     <select id="queryLeasers" resultType="com.example.wxgzh.entity.LeaserEntity">
-        select * from wx_leaser
+        select * from wx_leaser order by ts desc
     </select>
 </mapper>

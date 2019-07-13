@@ -15,6 +15,8 @@ public interface LeaserService {
 
 	public LeaserEntity modLeaser(LeaserEntity entity, MultipartFile file) throws Exception;
 
+	public LeaserEntity nofileLeaser(LeaserEntity entity) throws Exception;
+
 	public LeaserEntity query(String id) throws Exception;
 
 	public QueryResult<LeaserEntity> queryAll(String url,String name, String pageNo, String pageSize) throws Exception;

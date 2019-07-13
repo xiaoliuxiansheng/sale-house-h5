@@ -67,6 +67,20 @@ public class LeaserController {
 	}
 
 	/**
+	 * 修改招商经理信息
+	 * @param entity
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/nofile")
+	@ResponseBody
+	public JSONResponse nofileLeaser(LeaserEntity entity) throws Exception{
+		LeaserEntity e = service.nofileLeaser(entity);
+		return JSONResponse.ok(e);
+	}
+
+
+	/**
 	 * 查询招商经理列表
 	 * @param name
 	 * @return

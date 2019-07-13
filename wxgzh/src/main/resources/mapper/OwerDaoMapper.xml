@@ -23,6 +23,7 @@
 	<select id="query" parameterType="String" resultType="com.example.wxgzh.entity.OwerEntity">
 		select * from wx_ower
 		where rors = #{rors}
+		order by ts desc
 	</select>
 
 </mapper>

@@ -111,9 +111,46 @@ public class LeaserServiceImpl implements LeaserService {
 		}
 		if(password != null) {
 			if(!MD5.encode(password).equals(old.getPassword())) {
+
+
 				old.setPassword(MD5.encode(password));
 			}
 		}
+
+		dao.modify(old);
+
+		return old;
+	}
+
+	@Override
+	public LeaserEntity nofileLeaser(LeaserEntity entity) throws Exception {
+
+		String id = $("招商经理id不能为空",entity.getPk_leaser() );
+		String name = entity.getName();
+		String phone = entity.getPhone();
+		String password = entity.getPassword();
+		LeaserEntity old = dao.selectById(id);
+		if (old==null){
+			throw new WxgzhException("该招商经理不存在或已被删除！");
+		}
+
+		if(name != null) {
+			if(!name.equals(old.getName())) {
+				old.setName(name);
+			}
+		}
+		if(phone != null) {
+			if(!phone.equals(old.getPhone())) {
+				old.setPhone(phone);
+			}
+		}
+		if(password != null) {
+			if(!MD5.encode(password).equals(old.getPassword())) {
+				old.setPassword(MD5.encode(password));
+			}
+		}
+
+		old.setAvatar("");
 
 		dao.modify(old);
 

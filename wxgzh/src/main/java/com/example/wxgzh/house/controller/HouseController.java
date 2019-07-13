@@ -185,21 +185,11 @@ public class HouseController {
 	 */
 	@PostMapping("/oalist")
 	@ResponseBody
-	public JSONResponse queryHousesOA(HttpServletRequest req,HttpServletResponse resp, String pageNo,String pageSize) throws Exception{
+	public JSONResponse queryHousesOA(HttpServletRequest req,HttpServletResponse resp, String pageNo,String pageSize, String id) throws Exception{
 
 		String ip = req.getServerName();
 		int port = req.getServerPort();
 		String url = "http://"+ip+":"+port;
-
-		HttpSession session = req.getSession(false);
-		if (session == null) {
-			throw new WxgzhException("该用户未登录或已超时！");
-		}
-		ManagerEntity e= (ManagerEntity)session.getAttribute("leaser");
-		String id = "";
-		if(e != null) {
-			id = e.getPk_manager();
-		}
 
 		QueryResult<HouseEntity> entities = service.queryOA(id, pageNo, pageSize,url);
 

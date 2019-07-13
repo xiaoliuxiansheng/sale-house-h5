@@ -36,7 +36,7 @@ public class PictureController {
 			FileInputStream in=new FileInputStream(
 					new File(saveDir,url.replace("/photo/","")));
 		){
-			byte[] buf=new byte[10240];
+			byte[] buf=new byte[2097152];
 			int readed=0;
 			while((readed=in.read(buf))!=-1) {
 				out.write(buf,0,readed);
