@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="afe3939d-0a93-4d72-87cc-2b4fdd361d15" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/h5-wx/src/pages/index/component/Details.vue" beforeDir="false" afterPath="$PROJECT_DIR$/h5-wx/src/pages/index/component/Details.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/h5-wx/src/pages/index/component/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/h5-wx/src/pages/index/component/List.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -83,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/h5-wx/src/pages/index/component/Details.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
+            <state relative-caret-position="399">
+              <caret line="78" column="33" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="33" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#span#1;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -393,7 +391,7 @@
       <workItem from="1562766943087" duration="7309000" />
       <workItem from="1562850328345" duration="9200000" />
       <workItem from="1562937402593" duration="6736000" />
-      <workItem from="1562992660481" duration="1362000" />
+      <workItem from="1562992660481" duration="1914000" />
     </task>
     <task id="LOCAL-00001" summary="fx">
       <created>1562390621182</created>
@@ -465,11 +463,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562992765810</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="优化">
+      <created>1562994084210</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1562994084210</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106597000" />
+    <option name="totallyTimeSpent" value="107149000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -871,8 +876,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/h5-wx/src/pages/index/component/Details.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
+        <state relative-caret-position="399">
+          <caret line="78" column="33" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="33" />
           <folding>
             <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#span#1;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />

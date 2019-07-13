@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="pers right" v-if="msg.leaserphone">
-        <a :href="msg.phone"><van-icon name="phone-o" /></a>
+        <a :href="msg.leaserphone"><van-icon name="phone-o" /></a>
       </div>
     </div>
   </div>
