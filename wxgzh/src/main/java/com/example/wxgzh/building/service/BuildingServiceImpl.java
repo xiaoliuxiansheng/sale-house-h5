@@ -11,7 +11,9 @@ import com.example.wxgzh.common.exeption.WxgzhException;
 import com.example.wxgzh.common.util.CoordinatesUtil;
 import com.example.wxgzh.common.util.PictureUtil;
 import com.example.wxgzh.common.util.UUID;
+import com.example.wxgzh.entity.BuiHouEntity;
 import com.example.wxgzh.entity.BuildingEntity;
+import com.example.wxgzh.entity.HouseEntity;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -311,5 +313,43 @@ public class BuildingServiceImpl implements BuildingService {
         List<BuildingEntity> entities = dao.queryByNames();
 
         return entities;
+    }
+
+    @Override
+    public BuiHouEntity queryDetail(String id,String url) throws Exception {
+
+        BuiHouEntity entity = dao.selectDetail(id);
+
+        if (entity == null)
+            throw new WxgzhException("该楼盘不存在或已被删除！");
+        else{
+
+            String img = entity.getBuildimg().replaceAll("&",",");
+
+            List<String> lists = JSONArray.parseArray(img, String.class);
+
+            for(int i=0; i< lists.size(); i++) {
+                lists.set(i,url + lists.get(i));
+            }
+            //json数组把，转换为&
+            entity.setBuildimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+
+            List<HouseEntity> housesInfo = entity.getHousesInfo();
+
+            for (HouseEntity h: housesInfo
+            ) {
+                String houseimg = h.getHouseimg().replaceAll("&",",");
+                List<String> imglists = JSONArray.parseArray(houseimg, String.class);
+                for(int j=0; j< imglists.size(); j++) {
+                    imglists.set(j,url + imglists.get(j));
+                }
+                //json数组把，转换为&
+                h.setHouseimg(imglists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+            }
+
+            return entity;
+
+        }
+
     }
 }

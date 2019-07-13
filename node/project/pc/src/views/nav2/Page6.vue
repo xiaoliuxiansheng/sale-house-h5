@@ -62,7 +62,7 @@
       </el-table-column>
       <el-table-column prop="phone" label="业主联系方式" min-width="auto" >
       </el-table-column>
-      <el-table-column prop="isexist" label="是否出租" min-width="auto" >
+      <el-table-column prop="isexist" label="是否已出租" min-width="auto" >
         <template scope="scope">
           <span v-if="scope.row.isexist=='Y'">否</span>
           <span v-else>是</span>

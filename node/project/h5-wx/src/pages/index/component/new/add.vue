@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="head">
-      <span class="left"><van-icon name="arrow-left" /></span>业主放盘<span class="rigth"><van-icon name="home-o" /></span>
+      <span class="left"  @click="$router.go(-1)"><van-icon name="arrow-left" /></span>业主放盘<span class="rigth"  @click="$router.push('/')"><van-icon name="home-o" /></span>
     </div>
     <div class="option" >
       <div :class="{checked:flag==1}" @click="checked(1)">房屋出租</div>

@@ -5,13 +5,9 @@ const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const MinifyPlugin=require("babel-minify-webpack-plugin")
-var CompressionPlugin = require("compression-webpack-plugin"); //开启gzip压缩
 
 const env = process.env.NODE_ENV === 'testing' ?
     require('../config/test.env') :
@@ -25,17 +21,17 @@ const webpackConfig = merge(baseWebpackConfig, {
             usePostCSS: true
         })
     },
-    externals:{
-      "vue":"Vue",
-      "vue-router":"VueRouter",
-      "vuex":"Vuex",
-      "axios":"axios",
-      "fastclick":"FastClick",
-      "echarts":"echarts",
-      "babel-polyfill":"window",
-      "vue-amap":"VueAMap",
-      "vue-scroller":"VueScroller"
-    },
+    // externals:{
+    //   // "vue":"Vue",
+    //   "vue-router":"VueRouter",
+    //   "vuex":"Vuex",
+    //   "axios":"axios",
+    //   "fastclick":"FastClick",
+    //   "echarts":"echarts",
+    //   "babel-polyfill":"window",
+    //   "vue-amap":"VueAMap",
+    //   "vue-scroller":"VueScroller"
+    // },
     devtool: config.build.productionSourceMap ? config.build.devtool : false,
     output: {
         path: config.build.assetsRoot,

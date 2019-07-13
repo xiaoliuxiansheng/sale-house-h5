@@ -1,0 +1,1 @@
+{"version":3,"sources":["two.css"],"names":[],"mappings":"AACA,UACE,UAAW,CACX,WAAY,CACZ,QAAS,CACT,SACF","file":"two.css","sourcesContent":["\nbody,html{\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n}\n"]}

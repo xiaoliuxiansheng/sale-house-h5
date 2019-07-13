@@ -147,4 +147,48 @@
 		select pk_builiding,name from wx_builiding
 	</select>
 
+	<resultMap id="builddetail" type="com.example.wxgzh.entity.BuiHouEntity">
+		<id column="pk_builiding" property="pk_build"/>
+		<result column="buildname" property="buildname"/>
+		<result column="city" property="city"/>
+		<result column="region" property="region"/>
+		<result column="address" property="address"/>
+		<result column="daddress" property="daddress"/>
+		<result column="cost" property="cost"/>
+		<result column="floorcount" property="floorcount"/>
+		<result column="buildheight" property="buildheight"/>
+		<result column="park" property="park"/>
+		<result column="ebrand" property="ebrand"/>
+		<result column="ecount" property="ecount"/>
+		<result column="buildarea" property="buildarea"/>
+		<result column="airconditioning" property="airconditioning"/>
+		<result column="developer" property="developer"/>
+		<result column="company" property="company"/>
+		<result column="introduce" property="introduce"/>
+		<result column="typeimg" property="typeimg"/>
+		<result column="buildimg" property="buildimg"/>
+		<result column="lon" property="lon"/>
+		<result column="lat" property="lat"/>
+
+		<collection property="housesInfo" ofType="com.example.wxgzh.entity.HouseEntity" column="pk_builiding">
+		<id column="pk_house" property="pk_house"/>
+		<result column="area" property="area"/>
+		<result column="price" property="price"/>
+		<result column="trimstyle" property="trimstyle"/>
+		<result column="houseimg" property="houseimg"/>
+		<result column="rors" property="rors"/>
+		<result column="isexist" property="isexist"/>
+		</collection>
+
+	</resultMap>
+
+	<select id="selectDetail" parameterType="String" resultMap="builddetail">
+		select wb.pk_builiding,wb.name as buildname,wb.city,wb.region,wb.address,wb.daddress,wb.managecost as cost,wb.floors as floorcount,wb.height as buildheight,wb.parkspace as park,wb.elevatorbrand as ebrand,wb.elevatorcount as ecount,wb.area as buildarea,wb.airconditioning,wb.developer,wb.company,wb.introduce,wb.typeimg,wb.buildingimg as buildimg,wb.lon,wb.lat,
+		wh.pk_house,wh.area,wh.price,wh.trimstyle,wh.houseimg,wh.rors,wh.isexist
+		from wx_builiding wb
+		left join wx_house wh on wb.pk_builiding = wh.pk_building
+		where
+		wb.pk_builiding = #{id}
+	</select>
+
 </mapper>

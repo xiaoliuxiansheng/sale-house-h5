@@ -1,26 +1,19 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import routes from "./router/index"
-import Index from "./component/index.vue"
-Vue.use(VueRouter)
-
-const router=new VueRouter({
-    routes
-})
-
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+import router from './router/index'
+import Vant from 'vant'
+import Axios from 'axios'
+// Axios.defaults.baseURL ="http://111.230.43.181:8081/api"
+Vue.prototype.$axios=Axios
+Axios.defaults.baseURL = 'http://192.168.1.2:8081/api'
+Vue.use(Vant)
+Vue.config.productionTip = false
+/* eslint-disable no-new */
 new Vue({
-    router,
-    render:h=>h(Index)
-}).$mount("#app")
-
-/*const router = new VueRouter({
-    routes
-  })
-  
-  // 4. Create and mount the root instance.
-  // Make sure to inject the router with the router option to make the
-  // whole app router-aware.
-  const app = new Vue({
-    router,
-    render:h=>h(Index)
-  }).$mount('#app')*/
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})

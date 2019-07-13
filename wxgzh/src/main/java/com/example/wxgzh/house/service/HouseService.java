@@ -2,7 +2,6 @@ package com.example.wxgzh.house.service;
 
 
 import com.example.wxgzh.common.dto.QueryResult;
-import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.HouseEntity;
 import com.example.wxgzh.house.dto.HouseAo;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +19,7 @@ public interface HouseService {
 
 	public QueryResult<HouseEntity> selectByKey(String name, String region, String minprice, String maxprice, String minarea, String maxarea, String pageNo, String pageSize, String rors, String url)throws Exception;
 
-	public QueryResult<HouseEntity> queryOA(String id, String pageNo, String pageSize) throws Exception;
+	public QueryResult<HouseEntity> queryOA(String id, String pageNo, String pageSize,String url) throws Exception;
 
 	public HouseEntity queryDetail(String url,String id)throws Exception;
 

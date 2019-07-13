@@ -1,9 +1,9 @@
 <template>
   <div class="body">
     <div class="head">
-      <span class="left"><van-icon name="arrow-left" /></span>{{title}}<span class="rigth"><van-icon name="home-o" /></span>
+      <span class="left"  @click="$router.go(-1)" ><van-icon name="arrow-left" /></span>{{title}}<span class="rigth" @click="$router.push('/')"><van-icon name="home-o" /></span>
     </div>
-    <div class="content" >
+    <div class="content" v-if="msg">
       <div class="swiper">
       <van-swipe :autoplay="3000" indicator-color="red">
         <van-swipe-item v-for="(item,index) in msg.houseimg">
@@ -26,18 +26,18 @@
             {{msg.describe}}
           </span>
         </div>
-        <div class="four">
+        <div class="four" v-if="msg">
           <div class="names">大楼参数</div>
-          <div class="box">
-            <div class="img">
+          <div class="box" >
+            <div class="img" v-if="msg.buildingimg">
               <div class="left">
                 <img :src="msg.buildingimg[0]"/>
               </div>
-              <div class="right">
-                <div class="top" v-if="msg.buildingimg[1]">
+              <div class="right" v-if="msg.buildingimg.length>2">
+                <div class="top" >
                   <img :src="msg.buildingimg[1]"/>
                 </div>
-                <div class="bottom" v-if="msg.buildingimg[2]">>
+                <div class="bottom" v-if="msg.buildingimg.length>3">>
                   <img :src="msg.buildingimg[2]"/>
                 </div>
               </div>
@@ -59,12 +59,6 @@
             </div>
           </div>
         </div>
-<!--        <div class="five">-->
-<!--          <div class="names">大楼参数</div>-->
-<!--          <div class="btns">-->
-<!--            <span v-for="(item,index) in 5" :class="{'checked':'index>1'}">地铁</span>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
     </div>
     <div class="footer">
@@ -73,15 +67,16 @@
       </div>
       <div class="pers center">
         <div class="top">
-          <span class="namess">陈方旭</span>
+          <span class="namess">{{msg.leasername}}</span>
           <span class="spanss">招商经理</span>
         </div>
         <div class="phone">
-          18875150394
+          <span v-if="msg.phone">{{msg.phone}}</span>
+          <span v-else>暂无联系方式</span>
         </div>
       </div>
-      <div class="pers right">
-        <van-icon name="phone-o" />
+      <div class="pers right" v-if="msg.phone">
+        <a :href="msg.phone"><van-icon name="phone-o" /></a>
       </div>
     </div>
   </div>
@@ -107,12 +102,11 @@
           id:this.$route.query.id
           }}).then((res)=>{
             if (res.data.code=="ok"){
-              console.log(res)
               this.title=res.data.data.subordinate
               this.msg=res.data.data
-              console.log(this.msg.houseimg)
-                this.msg.houseimg=this.msg.houseimg.split(",")
+              this.msg.houseimg=this.msg.houseimg.split(",")
               this.msg.buildingimg=this.msg.buildingimg.split(",")
+              console.log(this.msg)
             }
         })
       },
@@ -120,6 +114,7 @@
         this.$router.push({
           path:"/list",
           query:{
+            title:this.title,
             buildid:this.msg.pk_building
           }
         })
@@ -152,8 +147,8 @@
       vertical-align: middle;
       padding: 5/$sc+rem;
       img{
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
       }
     }
@@ -192,6 +187,9 @@
     line-height: 50/$sc+rem;
     text-align: center;
     font-size: 18/$sc+rem;
+    span{
+      cursor: pointer;
+    }
     .left{
       display: inline-block;
       font-size: 22/$sc+rem;

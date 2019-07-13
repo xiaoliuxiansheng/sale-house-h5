@@ -2,6 +2,7 @@ package com.example.wxgzh.building.service;
 
 
 import com.example.wxgzh.common.dto.QueryResult;
+import com.example.wxgzh.entity.BuiHouEntity;
 import com.example.wxgzh.entity.BuildingEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,4 +24,6 @@ public interface BuildingService {
 	public QueryResult<BuildingEntity> queryAll(String url, String name, String region, String pageNo,String pageSize) throws Exception;
 
 	public List<BuildingEntity> queryNames()throws  Exception;
+
+	public BuiHouEntity queryDetail(String id,String url)throws Exception;
 }

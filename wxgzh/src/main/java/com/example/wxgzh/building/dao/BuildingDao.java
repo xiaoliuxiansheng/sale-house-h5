@@ -1,6 +1,7 @@
 package com.example.wxgzh.building.dao;
 
 import com.example.wxgzh.common.dao.TemplateDao;
+import com.example.wxgzh.entity.BuiHouEntity;
 import com.example.wxgzh.entity.BuildingEntity;
 import com.example.wxgzh.entity.LeaserEntity;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,6 @@ public interface BuildingDao extends TemplateDao<BuildingEntity, String> {
     List<BuildingEntity> selectByKey(String name, String region) throws Exception;
 
     List<BuildingEntity> queryByNames()throws  Exception;
+
+    BuiHouEntity selectDetail(String id)throws  Exception;
 }

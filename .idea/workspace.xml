@@ -4,9 +4,137 @@
     <bookmark url="file://$PROJECT_DIR$/node/project/pc/src/views/nav4/Page8.vue" line="299" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cc90aa4-0db4-4f56-91d4-3917756b136b" name="Default Changelist" comment="">
+    <list default="true" id="5cc90aa4-0db4-4f56-91d4-3917756b136b" name="Default Changelist" comment="验证配置包">
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/css/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/css/index.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/css/two.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/css/two.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/img/timg.ef4a31f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/0.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/0.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/1.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/2.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/3.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/4.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/4.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/index.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/manifest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/manifest.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/two.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/two.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/vendor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/static/js/vendor.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/dist/two.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/src/assets/none.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/src/assets/timg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/List.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/Login.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/entity/BuiHouEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/build/webpack.dev.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/build/webpack.dev.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/Details.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/Details.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/new/add.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/new/add.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/a.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/two.html" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/two.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node/project/pc/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/app.436bdf11.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-161072a8.c72e6d06.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-1a52b296.ec70d645.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-1f027c52.d67af3d6.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-3b3c56a6.8617f90c.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-54ab279e.0cb8dd19.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-7189fbfa.3e84446b.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-77de852c.3e84446b.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-7b027492.20f65cb3.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-849c9648.1b22ec87.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-f82f73e2.8617f90c.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/css/chunk-vendors.a50097d4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/fonts/element-icons.535877f5.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/fonts/element-icons.732389de.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/fonts/fontawesome-webfont.674f50d2.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/fonts/fontawesome-webfont.af7ae505.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/fonts/fontawesome-webfont.b06871f2.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/fonts/fontawesome-webfont.fee66e71.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/img/default.78bf0e03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/img/fontawesome-webfont.912ec66d.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/app.58d77270.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/app.58d77270.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-161072a8.4eb3ddd2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-161072a8.4eb3ddd2.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-1a52b296.f8e1a024.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-1a52b296.f8e1a024.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-1f027c52.0ac38ed8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-1f027c52.0ac38ed8.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-28b9cbde.aded40fd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-28b9cbde.aded40fd.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-2d221fb8.f1e46c58.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-2d221fb8.f1e46c58.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-3b3c56a6.7291c3bb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-3b3c56a6.7291c3bb.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-54ab279e.939344d8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-54ab279e.939344d8.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-7189fbfa.ccfaa3e2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-7189fbfa.ccfaa3e2.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-77de852c.d2dfb600.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-77de852c.d2dfb600.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-7b027492.3565f8f0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-7b027492.3565f8f0.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-849c9648.e5a6ffaa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-849c9648.e5a6ffaa.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-f82f73e2.cd2b2466.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-f82f73e2.cd2b2466.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-vendors.0655efb1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/dist/js/chunk-vendors.0655efb1.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/api/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/nav1/Table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/nav1/Table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/nav1/user.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/nav1/user.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page5.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page5.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page6.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page6.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue" beforeDir="false" afterPath="$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/patch/数据库脚本/createtable.sql" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/patch/数据库脚本/createtable.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/WxgzhApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/WxgzhApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/controller/BuildingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/controller/BuildingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/dao/BuildingDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/dao/BuildingDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/service/BuildingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/service/BuildingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/service/BuildingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/building/service/BuildingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/house/controller/HouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/house/controller/HouseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/house/service/HouseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/house/service/HouseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/house/service/HouseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/house/service/HouseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/leaser/controller/LeaserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/leaser/controller/LeaserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/leaser/service/LeaserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/leaser/service/LeaserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/leaser/service/LeaserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/java/com/example/wxgzh/leaser/service/LeaserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/resources/mapper/BuildingDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/resources/mapper/BuildingDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxgzh/src/main/resources/mapper/HouseDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wxgzh/src/main/resources/mapper/HouseDaoMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,90 +148,53 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue">
+        <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/List.vue">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/Login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4004">
-              <caret line="182" column="18" selection-start-line="182" selection-start-column="10" selection-end-line="182" selection-end-column="18" />
+            <state relative-caret-position="383">
+              <caret line="90" column="7" selection-start-line="90" selection-start-column="2" selection-end-line="90" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav3/Page6.vue">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/main.js">
+        <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
+            <state relative-caret-position="110">
+              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="49" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#186#232#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/.gitignore">
+        <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/List.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page6.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5720">
-              <caret line="261" column="26" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
+            <state relative-caret-position="176">
+              <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#van-col#1;n#van-row#0;n#div#0;n#van-list#0;n#van-pull-refresh#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#div#2;n#van-col#1;n#van-row#0;n#div#0;n#van-list#0;n#van-pull-refresh#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#span#1;n#div#2;n#van-col#1;n#van-row#0;n#div#0;n#van-list#0;n#van-pull-refresh#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/.editorconfig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/.eslintignore">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/babel.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav4/Page8.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6996">
-              <caret line="318" column="39" selection-start-line="318" selection-start-column="25" selection-end-line="318" selection-end-column="39" />
-              <folding>
-                <element signature="n#style#0;n#el-col#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#el-pagination#0;n#el-col#1;n#section#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/charts/echarts.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6666">
-              <caret line="304" column="25" selection-start-line="304" selection-start-column="25" selection-end-line="304" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -117,11 +208,28 @@
       <find>getUser</find>
       <find>addForm</find>
       <find>editForm</find>
-      <find>validate</find>
       <find>addLoading</find>
       <find>dialogFormVisible</find>
       <find>name</find>
+      <find>developer</find>
+      <find>introduce</find>
+      <find>height</find>
+      <find>airconditioning</find>
+      <find>area</find>
+      <find>company</find>
+      <find>elevatorcount</find>
+      <find>elevatorbrand</find>
+      <find>parkspace</find>
+      <find>managecost</find>
+      <find>floors</find>
+      <find>validate</find>
+      <find>external</find>
+      <find>111.230.43.181:808</find>
+      <find>style</find>
     </findStrings>
+    <dirStrings>
+      <dir>E:\waibao\wxproject</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -130,16 +238,24 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/node/project/pc/src/views/nav4/Page8.vue" />
-        <option value="$PROJECT_DIR$/node/project/pc/src/views/nav1/Table.vue" />
-        <option value="$PROJECT_DIR$/node/project/pc/src/views/Login.vue" />
         <option value="$PROJECT_DIR$/node/project/pc/src/views/Home.vue" />
-        <option value="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue" />
         <option value="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page6.vue" />
         <option value="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page5.vue" />
-        <option value="$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue" />
         <option value="$PROJECT_DIR$/node/project/pc/src/views/charts/echarts.vue" />
         <option value="$PROJECT_DIR$/node/project/pc/src/main.js" />
         <option value="$PROJECT_DIR$/node/project/pc/.gitignore" />
+        <option value="$PROJECT_DIR$/node/project/pc/src/views/Login.vue" />
+        <option value="$PROJECT_DIR$/node/project/pc/src/views/nav1/Table.vue" />
+        <option value="$PROJECT_DIR$/node/project/pc/src/routes.js" />
+        <option value="$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue" />
+        <option value="$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/.gitignore" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/Login.vue" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/index.js" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/Home.vue" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/index.js" />
+        <option value="$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/List.vue" />
       </list>
     </option>
   </component>
@@ -187,6 +303,68 @@
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+              <item name="component" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="two" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="two" type="462c0819:PsiDirectoryNode" />
+              <item name="component" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="h5-wx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="two" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wxproject" type="b2602c69:ProjectViewProjectNode" />
@@ -291,7 +469,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/node/project/h5-wx" />
+    <property name="last_opened_file_path" value="E:/tcampus_service_area_big_data/node/area" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -330,13 +508,40 @@
       <updated>1562424559098</updated>
       <workItem from="1562424563607" duration="24596000" />
       <workItem from="1562473303862" duration="18817000" />
-      <workItem from="1562501521122" duration="5270000" />
-      <workItem from="1562978822916" duration="582000" />
+      <workItem from="1562501521122" duration="4672000" />
+      <workItem from="1562722293706" duration="8679000" />
+      <workItem from="1562742296965" duration="2334000" />
+      <workItem from="1562750250997" duration="118000" />
+      <workItem from="1562750642739" duration="24000" />
+      <workItem from="1562898161042" duration="2573000" />
+      <workItem from="1562909800512" duration="4257000" />
     </task>
+    <task id="LOCAL-00001" summary="验证优化pc">
+      <created>1562750338605</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1562750338605</updated>
+    </task>
+    <task id="LOCAL-00002" summary="验证配置包">
+      <created>1562899563795</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1562899563795</updated>
+    </task>
+    <task id="LOCAL-00003" summary="验证配置包">
+      <created>1562910896767</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1562910896768</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49265000" />
+    <option name="totallyTimeSpent" value="72268000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -352,11 +557,11 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.33606556" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Thumbnails" order="11" visible="true" weight="0.3295082" />
+      <window_info anchor="bottom" id="Thumbnails" order="7" visible="true" weight="0.3295082" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.16065574" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3114754" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -364,6 +569,21 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="验证优化pc" />
+    <MESSAGE value="验证配置包" />
+    <option name="LAST_COMMIT_MESSAGE" value="验证配置包" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue</url>
+          <line>197</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/404.vue">
@@ -373,95 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="12" column="96" selection-start-line="12" selection-start-column="90" selection-end-line="12" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav1/Table.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-902">
-          <caret line="31" column="19" selection-start-line="27" selection-start-column="7" selection-end-line="31" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-pagination#0;n#el-col#1;n#section#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Home.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="84" selection-start-line="16" selection-start-column="84" selection-end-line="16" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page5.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="968">
-          <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="47" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Login.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Main.vue">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="37" column="36" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4004">
-          <caret line="182" column="18" selection-start-line="182" selection-start-column="10" selection-end-line="182" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav3/Page6.vue">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#186#232#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page6.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5720">
-          <caret line="261" column="26" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/.editorconfig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/.eslintignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/project/pc/babel.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -483,10 +614,205 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/.editorconfig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/.eslintignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/babel.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#186#232#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/node/project/pc/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Main.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1216">
+          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav3/Page6.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/Home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2584">
+          <caret line="136" column="4" selection-start-line="136" selection-start-column="4" selection-end-line="136" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav1/Table.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2166">
+          <caret line="114" column="54" selection-start-line="114" selection-start-column="20" selection-end-line="114" selection-end-column="54" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-pagination#0;n#el-col#1;n#section#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav4/Page7.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4048">
+          <caret line="184" column="18" selection-start-line="184" selection-start-column="18" selection-end-line="184" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page4.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2356">
+          <caret line="124" column="19" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#el-form#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-817">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/index/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/Home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page5.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="444" column="48" selection-start-line="444" selection-start-column="27" selection-end-line="444" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/build/build.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/build/webpack.dev.conf.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/build/webpack.prod.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="11" column="48" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/pc/src/views/nav2/Page6.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5317">
+          <caret line="432" column="36" selection-start-line="432" selection-start-column="36" selection-end-line="432" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/index/component/List.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="49" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="90" column="7" selection-start-line="90" selection-start-column="2" selection-end-line="90" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/project/h5-wx/src/pages/two/component/List.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#2;n#van-col#1;n#van-row#0;n#div#0;n#van-list#0;n#van-pull-refresh#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#2;n#van-col#1;n#van-row#0;n#div#0;n#van-list#0;n#van-pull-refresh#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#1;n#div#2;n#van-col#1;n#van-row#0;n#div#0;n#van-list#0;n#van-pull-refresh#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -337,7 +337,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public QueryResult<HouseEntity> queryOA(String id, String pageNo,String pageSize) throws Exception {
+    public QueryResult<HouseEntity> queryOA(String id, String pageNo,String pageSize,String url) throws Exception {
         int no = 1;
         if(pageNo!=null) {
             no = Integer.parseInt(pageNo);
@@ -352,6 +352,14 @@ public class HouseServiceImpl implements HouseService {
         PageInfo<HouseEntity> pageinfo= new PageInfo<>(e);
         List<HouseEntity> rows = new ArrayList<>();
         for (HouseEntity houseEntity : pageinfo.getList()) {
+            String img = houseEntity.getHouseimg().replaceAll("&",",");
+            List<String> lists = JSONArray.parseArray(img, String.class);
+            for(int i=0; i< lists.size(); i++) {
+                lists.set(i,url + lists.get(i));
+            }
+            //json数组把，转换为&
+            houseEntity.setHouseimg(lists.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+
             rows.add(houseEntity);
         }
         QueryResult<HouseEntity> m = new QueryResult<>();

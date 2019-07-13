@@ -125,4 +125,4 @@ create table wx_ower
 
 --超级管理员账号初始化
 insert into wx_manager (pk_manager, account, password)
-values ('cncqyuzhongdap20190707pkmanagerl','admin','admin');
+values ('cncqyuzhongdap20190707pkmanagerl','admin','2ea1cd0405ab06baeb761e863ff199e4');
