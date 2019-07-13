@@ -71,11 +71,11 @@
           <span class="spanss">招商经理</span>
         </div>
         <div class="phone">
-          <span v-if="msg.phone">{{msg.phone}}</span>
+          <span v-if="msg.leaserphone">{{msg.leaserphone}}</span>
           <span v-else>暂无联系方式</span>
         </div>
       </div>
-      <div class="pers right" v-if="msg.phone">
+      <div class="pers right" v-if="msg.leaserphone">
         <a :href="msg.phone"><van-icon name="phone-o" /></a>
       </div>
     </div>

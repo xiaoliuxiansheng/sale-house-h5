@@ -118,8 +118,9 @@
             this.users = res.data.data
             this.users.buildimg=this.users.buildimg.split(",")
             this.users.housesInfo.forEach((item,index)=>{
-              this.users.housesInfo[index].houseimg.split(",")
+              this.users.housesInfo[index].houseimg=item.houseimg.split(",")
             })
+            console.log(this.users)
           }
         })
       },
