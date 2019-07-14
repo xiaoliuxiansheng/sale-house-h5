@@ -29,6 +29,15 @@ public class HouseEntity {
     private String elevatorcount;
     private String standardarea;
     private String buildingimg;
+    private String buildaddress;
+
+    public String getBuildaddress() {
+        return buildaddress;
+    }
+
+    public void setBuildaddress(String buildaddress) {
+        this.buildaddress = buildaddress;
+    }
 
     public String getManagecost() {
         return managecost;

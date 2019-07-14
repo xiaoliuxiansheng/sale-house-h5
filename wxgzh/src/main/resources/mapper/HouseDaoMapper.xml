@@ -74,7 +74,7 @@
 
 
 	<select id="selectByKey" resultType="com.example.wxgzh.entity.HouseEntity">
-		select wh.pk_building,wh.pk_house,wh.buildingname,wh.floor,wh.area,wh.price,wh.rent,wh.trimstyle,wh.houseimg,wh.describe,wh.name,wh.phone,wh.rors,wh.isexist,wl.name as leasername,wl.phone as leaserphone,wl.avatar,wb.name as subordinate from wx_house wh
+		select wh.pk_building,wh.pk_house,wh.buildingname,wh.floor,wh.area,wh.price,wh.rent,wh.trimstyle,wh.houseimg,wh.describe,wh.name,wh.phone,wh.rors,wh.isexist,wl.name as leasername,wl.phone as leaserphone,wl.avatar,wb.name as subordinate,wb.address as buildaddress from wx_house wh
 	    left join wx_leaser_rela wlr on wlr.pk_house = wh.pk_house
 	    left join wx_leaser wl on wlr.pk_leaser = wl.pk_leaser
 		left join wx_builiding wb on wb.pk_builiding = wh.pk_building
