@@ -13,7 +13,7 @@ public interface HouseDao extends TemplateDao<HouseEntity, String> {
     void modify(HouseEntity entity)throws Exception;
 
     List<HouseEntity> query(String id)throws Exception;
-    List<HouseEntity> queryOA(String id) throws Exception;
+    List<HouseEntity> queryOA(@Param("id")String id) throws Exception;
 
     List<HouseEntity> selectByKey(@Param("name")String name, @Param("region")String region, @Param("minprice")String minprice, @Param("maxprice")String maxprice, @Param("minarea")String minarea, @Param("maxarea")String maxarea, @Param("rors") String rors)throws  Exception;
 
