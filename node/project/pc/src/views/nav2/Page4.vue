@@ -2,7 +2,7 @@
   <el-form ref="ruleForm" :model="parms" :rules="rules" label-width="130px" @submit.prevent="onSubmit"
            style="margin:20px;width:600px;">
     <el-form-item label="方式"  >
-      <el-radio-group v-model="parms.rors">
+      <el-radio-group v-model="parms.rors" @change="stylechange(parms.rors)">
         <el-radio class="radio" :label="1">出租</el-radio>
         <el-radio class="radio" :label="2">出售</el-radio>
       </el-radio-group>
@@ -42,7 +42,7 @@
       <el-col :span="2">
       </el-col>
       <el-col :span="12">
-      <el-form-item label="租金/售价（元/m²·月)" prop="price">
+      <el-form-item :label="styletext" prop="price">
         <el-input v-model="parms.price"></el-input>
       </el-form-item>
       </el-col>
@@ -176,7 +176,8 @@
           phone: [
             {validator: checkPhone, trigger: 'blur'}
           ]
-        }
+        },
+        styletext:"租金（元/m²·月)"
       }
     },
     created(){
@@ -184,6 +185,14 @@
       this.getmanager()
     },
     methods: {
+      //方式改变
+      stylechange(item){
+        if (item=='2'){
+          this.styletext="售价（元/m²）"
+        } else {
+          this.styletext="租金（元/m²·月）"
+        }
+      },
       cancel(){
         this.$refs['ruleForm'].resetFields();
         this.parms={

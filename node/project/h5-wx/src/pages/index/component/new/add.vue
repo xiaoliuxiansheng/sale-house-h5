@@ -34,7 +34,7 @@
           v-model="parms.price"
           required
           clearable
-          label="出租价格（元/月·m²）"
+          :label="styletxt"
           placeholder="请输入价格"
         />
         <van-field
@@ -70,35 +70,46 @@ export default {
           name:null,
           phone:null,
           rors:1
-        }
+        },
+        styletxt:"出租价格（元/月·m²）"
       }
     },
     methods:{
       checked(item){
         this.flag=item
         this.parms.rors=item
+        if (item=="2"){
+          this.styletxt="出售价格（元/·m²）"
+        } else {
+          this.styletxt="出租价格（元/月·m²）"
+        }
       },
       submit(){
-        let formdata=new FormData()
-        for (let k in this.parms){
-          formdata.append(k,this.parms[k])
-        }
-        this.$axios.post("/ower/add",formdata).then((res)=>{
-          if (res.data.code=='ok'){
-            Toast.success('放盘成功！');
-            this.parms={
-              buildingname:null,
-              floor:null,
-              area:null,
-              price:null,
-              name:null,
-              phone:null,
-              rors:1
-            }
-          } else {
-            Toast.fail('放盘失败！');
+        if (this.parms.buildingname&&this.parms.floor&&this.parms.area&&this.parms.price&&this.parms.name&&this.parms.phone){
+          let formdata=new FormData()
+          for (let k in this.parms){
+            formdata.append(k,this.parms[k])
           }
-        })
+          this.$axios.post("/ower/add",formdata).then((res)=>{
+            if (res.data.code=='ok'){
+              this.$toast.success('放盘成功！');
+              this.parms={
+                buildingname:null,
+                floor:null,
+                area:null,
+                price:null,
+                name:null,
+                phone:null,
+                rors:1
+              }
+            } else {
+              Toast.fail('放盘失败！');
+            }
+          })
+        } else {
+          this.$toast('请完善所有信息！');
+        }
+
       },
       onSave() {
         Toast('save');

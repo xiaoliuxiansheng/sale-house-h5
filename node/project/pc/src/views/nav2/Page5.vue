@@ -4,7 +4,7 @@
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
       <el-form :inline="true" :model="filters">
         <el-form-item>
-          <el-input v-model="filters.name" placeholder="大楼名称"></el-input>
+          <el-input v-model="parms.name" placeholder="大楼名称"></el-input>
         </el-form-item>
         <el-form-item>
           <el-select v-model="value" placeholder="选择区域">
@@ -44,7 +44,9 @@
       </el-table-column>
       <el-table-column prop="area" label="面积（m²）" width="auto" >
       </el-table-column>
-      <el-table-column prop="price" label="价格元/m²·月" width="auto" >
+      <el-table-column prop="price" label="价格（元/m²）" width="auto" >
+    </el-table-column>
+      <el-table-column prop="rent" label="总价（元）" width="auto" >
       </el-table-column>
       <el-table-column prop="describe" label="描述" min-width="auto" >
       </el-table-column>

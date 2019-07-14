@@ -10,6 +10,16 @@
       <van-dropdown-item v-model="parms.region" :options="option1"  @change="changeoption()"/>
       <van-dropdown-item v-model="parms.area" :options="option2" @change="changeoption()"/>
       <van-dropdown-item v-model="parms.price" :options="option3" @change="changeoption()"/>
+      <van-dropdown-item title="筛选" ref="item">
+        <van-search
+          v-model="parms.name"
+          placeholder="请输入楼盘名字"
+          show-action
+          shape="round"
+        >
+          <div slot="action" @click="changeoption()">搜索</div>
+        </van-search>
+      </van-dropdown-item>
     </van-dropdown-menu>
     </div>
     <div class="content"  id="list-content">
